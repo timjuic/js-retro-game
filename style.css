@@ -1,0 +1,20 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: content-box;
+}
+
+#game-container {
+    position: relative;
+    background-color: gray;
+    width: 100%;
+    height: 100vh;
+}
+
+.game-canvas {
+    background-color: black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

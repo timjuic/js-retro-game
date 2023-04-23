@@ -4,6 +4,7 @@ export default class Game {
     constructor() {
         this.canvasManager = new CanvasManager();
         this.generateCanvases()
+        console.log(this);
     }
 
 
