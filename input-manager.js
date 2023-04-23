@@ -24,7 +24,6 @@ export default class InputManager {
             this.pressedControls[control] = true;
             this.game.events.emit('playerInput', control)
         })
-
         window.addEventListener('keyup', (event) => {
             let control = this.#getPressedControl(event)
             if (!control) return
@@ -43,10 +42,6 @@ export default class InputManager {
             if (!control) return
             this.pressedControls[control] = false;
             this.game.events.emit('playerInput', control)
-        })
-
-        this.game.events.on('playerInput', (control) => {
-            console.log(this.pressedControls);
         })
     }
 
