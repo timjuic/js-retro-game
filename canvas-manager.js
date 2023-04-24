@@ -1,6 +1,7 @@
 export default class CanvasManager {
     constructor() {
         this.canvases = {}
+        this.contexts = {};
         window.addEventListener('resize', () => this.resizeCanvases())
     }
 
@@ -14,6 +15,12 @@ export default class CanvasManager {
 
         gameContainer.append(newCanvas)
         this.canvases[canvasName] = newCanvas;
+    }
+
+    loadContexts() {
+        for (let [name, canvas] of Object.entries(this.canvases)) {
+            this.contexts[name] = canvas.getContext('2d');
+        }
     }
 
     resizeCanvas(canvas) {
@@ -40,7 +47,11 @@ export default class CanvasManager {
         })
     }
 
-    
+    clearCanvases() {
+        for (let [name, ctx] of this.contexts) {
+            ctx.clearRect(0, 0, this.canvases[name].width, this.canvases[name].height)
+        }
+    }
 
 
 }

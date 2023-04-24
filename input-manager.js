@@ -22,26 +22,26 @@ export default class InputManager {
             if (!control) return
             if (this.pressedControls[control]) return;
             this.pressedControls[control] = true;
-            this.game.events.emit('playerInput', control)
+            this.game.events.emit('playerInput', control, true)
         })
         window.addEventListener('keyup', (event) => {
             let control = this.#getPressedControl(event)
             if (!control) return
             this.pressedControls[control] = false;
-            this.game.events.emit('playerInput', control)
+            this.game.events.emit('playerInput', control, false)
         })
         window.addEventListener('mousedown', (event) => {
             let control = this.#getPressedControl(event)
             if (!control) return
             if (this.pressedControls[control]) return;
             this.pressedControls[control] = true;
-            this.game.events.emit('playerInput', control)
+            this.game.events.emit('playerInput', control, true)
         })
         window.addEventListener('mouseup', (event) => {
             let control = this.#getPressedControl(event)
             if (!control) return
             this.pressedControls[control] = false;
-            this.game.events.emit('playerInput', control)
+            this.game.events.emit('playerInput', control, false)
         })
     }
 
