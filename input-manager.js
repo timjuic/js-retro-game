@@ -8,10 +8,10 @@ export default class InputManager {
 
     loadDefaultControls() {
         this.controls = {
-            moveUp: ['w'],
-            moveRight: ['d'],
-            moveDown: ['s'],
-            moveLeft: ['a'],
+            moveUp: ['w', 'ArrowUp'],
+            moveRight: ['d', 'ArrowRight'],
+            moveDown: ['s', 'ArrowDown'],
+            moveLeft: ['a', 'ArrowLeft'],
             shoot: [0]
         }
     }

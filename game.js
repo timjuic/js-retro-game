@@ -19,20 +19,32 @@ export default class Game {
         // Instantiate and show the player
         // Start the game loop
         console.log(this);
+        this.play()
     }
 
 
+    getInputManager() {
+      return this.inputManager;
+    }
+
+    getCanvasManager() {
+      return this.canvasManager;
+    }
+
     generateCanvases() {
         this.canvasManager.generateCanvas('playerCanvas')
-        this.canvasManager.generateCanvas('enemiesCanvas')
-        this.canvasManager.generateCanvas('projectileCanvas')
+      //   this.canvasManager.generateCanvas('enemiesCanvas')
+      //   this.canvasManager.generateCanvas('projectileCanvas')
     }
 
     tick() {
         // TODO
         if (this.isPaused) return
 
+        
         this.canvasManager.clearCanvases()
+        this.player.updatePosition()
+        this.player.draw()
         // Calculate game logic
         // Update all element positions
         // Draw elements on canvas
@@ -41,9 +53,9 @@ export default class Game {
     }
 
     play() {
-        if (this.isPaused) {
+        if (this.isPaused || !this.loopId) {
             this.isPaused = false;
-            this.loopId = setInterval(() => this.tick(), 20);
+            this.loopId = setInterval(() => this.tick(), 10);
         }
     }
 

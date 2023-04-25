@@ -12,10 +12,13 @@
 }
 
 .game-canvas {
-    background-color: black;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
+}
+
+.game-canvas:first-of-type {
+   background-color: black;
 }

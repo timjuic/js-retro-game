@@ -5,6 +5,14 @@ export default class CanvasManager {
         window.addEventListener('resize', () => this.resizeCanvases())
     }
 
+    getCanvas(canvasName) {
+      return this.canvases[canvasName]
+    }
+
+    getContext(canvasName) {
+      return this.contexts[canvasName]
+    }
+
     generateCanvas(canvasName) {
         let gameContainer = document.getElementById('game-container');
         let newCanvas = document.createElement('canvas')
@@ -48,7 +56,7 @@ export default class CanvasManager {
     }
 
     clearCanvases() {
-        for (let [name, ctx] of this.contexts) {
+        for (let [name, ctx] of Object.entries(this.contexts)) {
             ctx.clearRect(0, 0, this.canvases[name].width, this.canvases[name].height)
         }
     }
