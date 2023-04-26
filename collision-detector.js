@@ -1,4 +1,5 @@
 import { CircleEntity, RectangleEntity } from "./entity.js";
+import settings from "./game-settings.js";
 
 export default class CollisionDetector {
    constructor(game) {
@@ -14,29 +15,39 @@ export default class CollisionDetector {
 
    collidesWithTopBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         console.log(entity.posY + velocity,  this.topBorder);
-         return entity.posY + velocity < this.topBorder
+         let distanceFromBorder = entity.posY - this.topBorder
+         if (distanceFromBorder >= Math.abs(velocity)) return false
+         else if (distanceFromBorder > 0) {
+            entity.posY += -distanceFromBorder
+         }
+         return true
       }
    }
 
    collidesWithRightBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         console.log(entity.posX + entity.width + velocity, this.rightBorder);
-         return entity.posX + entity.width + velocity > this.rightBorder
+         let distanceFromBorder = this.canvas.width - settings.BORDER_SIZE - (entity.posX + entity.width)
+         if (distanceFromBorder >= Math.abs(velocity)) return false
+         if (distanceFromBorder > 0) entity.posX += distanceFromBorder
+         return true
       }
    }
 
    collidesWithBottomBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         console.log(entity.posY + entity.height, this.bottomBorder);
-         return entity.posY + entity.height + velocity > this.bottomBorder
+         let distanceFromBorder = this.canvas.height - settings.BORDER_SIZE - (entity.posY + entity.height)
+         if (distanceFromBorder >= Math.abs(velocity)) return false
+         if (distanceFromBorder > 0) entity.posY += distanceFromBorder
+         return true
       }
    }
 
    collidesWithLeftBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         console.log(entity.posX + velocity, this.leftBorder);
-         return entity.posX + velocity < this.leftBorder
+         let distanceFromBorder = entity.posX - this.leftBorder
+         if (distanceFromBorder >= Math.abs(velocity)) return false
+         if (distanceFromBorder > 0) entity.posX -= distanceFromBorder
+         return true
       }
    }
 }

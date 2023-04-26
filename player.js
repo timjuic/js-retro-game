@@ -45,7 +45,15 @@ export default class Player extends RectangleEntity {
       let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
       let ctx = this.game.getCanvasManager().getContext('playerCanvas')
 
+      ctx.fillStyle = 'white'
+      ctx.fillRect(0, 0, canvas.width, 10)
+      ctx.fillRect(canvas.width - 10, 0, 10, canvas.height)
+      ctx.fillRect(0, canvas.height - 10, canvas.width, 10)
+      ctx.fillRect(0, 0, 10, canvas.height)
+
       ctx.fillStyle = 'blue';
       ctx.fillRect(this.posX, this.posY, this.width, this.height)
+
+
     }
 }
