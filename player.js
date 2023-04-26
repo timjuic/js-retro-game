@@ -1,3 +1,5 @@
+import CollisionDetector from "./collision-detector";
+
 export default class Player {
     constructor(game, nickname, health) {
         this.game = game;
@@ -20,10 +22,19 @@ export default class Player {
 
     updatePosition() {
         let inputManager = this.game.getInputManager()
-        if (inputManager.pressedControls['moveUp']) this.posY -= this.speed;
-        if (inputManager.pressedControls['moveRight']) this.posX += this.speed;
-        if (inputManager.pressedControls['moveDown']) this.posY += this.speed;
-        if (inputManager.pressedControls['moveLeft']) this.posX -= this.speed;
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
+        if (inputManager.pressedControls['moveUp']) {
+            if (!CollisionDetector.collidesWithTopBorder(this)) this.posY -= this.speed;
+        }
+        if (inputManager.pressedControls['moveRight']) {
+            if (!CollisionDetector.collidesWithRightBorder(this)) this.posX += this.speed;
+        }
+        if (inputManager.pressedControls['moveDown']) {
+            if (!CollisionDetector.collidesWithBottomBorder(this)) this.posY += this.speed;
+        }
+        if (inputManager.pressedControls['moveLeft']) {
+            if (!CollisionDetector.collidesWithLeftBorder(this)) this.posX -= this.speed;
+        }
     }
 
     draw() {
