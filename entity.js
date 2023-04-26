@@ -9,11 +9,11 @@ class Entity {
 }
 
 class RectangleEntity extends Entity {
-   constructor(posX, posY, width, height, velX, velY, image) {
+   constructor(posX, posY, width, height, angle, velX, velY, image) {
       super(posX, posY, velX, velY, image)
       this.width = width;
       this.height = height
-
+      this.angle = angle
    }
 }
 
