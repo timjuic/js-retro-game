@@ -1,39 +1,43 @@
-import CollisionDetector from "./collision-detector";
+import { CircleEntity, RectangleEntity } from "./entity.js";
 
-export default class Player {
+export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
-        this.game = game;
-        this.nickname = nickname;
-        this.width = 2 * this.game.objectScaleFactor
-        this.height = 2 * this.game.objectScaleFactor
-        this.speed = 2
-        console.log(this.height);
-        this.health = health;
-        this.maxHealth = health;
-        let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas')
-        console.log(playerCanvas);
-        this.posX = playerCanvas.width / 2;
-        this.posY = playerCanvas.height / 2
-        this.velX;
-        this.velY;
-        this.gun
+      let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
+      let posX = playerCanvas.width / 2;
+      let posY = playerCanvas.height / 2;
+      let width = 2 * game.settings.OBJECT_SCALE_FACTOR;
+      let height = 2 * game.settings.OBJECT_SCALE_FACTOR;
+      let angle = 0
+      let velX = 0;
+      let velY = 0;
+      console.log(posX);
+      super(posX, posY, width, height, angle, velX, velY)
+      console.log(this.posX);
+
+      this.game = game;
+      this.nickname = nickname;
+      this.speed = 2
+      this.health = health;
+      this.maxHealth = health;
+      this.gun
 
     }
 
     updatePosition() {
         let inputManager = this.game.getInputManager()
-        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
+         let collisionDetector = this.game.collisionDetector
+
         if (inputManager.pressedControls['moveUp']) {
-            if (!CollisionDetector.collidesWithTopBorder(this)) this.posY -= this.speed;
+            if (!collisionDetector.collidesWithTopBorder(this, -this.speed)) this.posY -= this.speed;
         }
         if (inputManager.pressedControls['moveRight']) {
-            if (!CollisionDetector.collidesWithRightBorder(this)) this.posX += this.speed;
+            if (!collisionDetector.collidesWithRightBorder(this, this.speed)) this.posX += this.speed;
         }
         if (inputManager.pressedControls['moveDown']) {
-            if (!CollisionDetector.collidesWithBottomBorder(this)) this.posY += this.speed;
+            if (!collisionDetector.collidesWithBottomBorder(this, this.speed)) this.posY += this.speed;
         }
         if (inputManager.pressedControls['moveLeft']) {
-            if (!CollisionDetector.collidesWithLeftBorder(this)) this.posX -= this.speed;
+            if (!collisionDetector.collidesWithLeftBorder(this, -this.speed)) this.posX -= this.speed;
         }
     }
 
@@ -42,10 +46,6 @@ export default class Player {
       let ctx = this.game.getCanvasManager().getContext('playerCanvas')
 
       ctx.fillStyle = 'blue';
-      ctx.beginPath();
-      ctx.arc(this.posX, this.posY, this.width, 0, 2 * Math.PI);
-      ctx.fill();
-      // ctx.stroke()
-        
+      ctx.fillRect(this.posX, this.posY, this.width, this.height)
     }
 }
