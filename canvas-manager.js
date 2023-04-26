@@ -1,8 +1,13 @@
 export default class CanvasManager {
-    constructor() {
-        this.canvases = {}
-        this.contexts = {};
-        window.addEventListener('resize', () => this.resizeCanvases())
+    constructor(game) {
+      this.game = game;
+      this.canvases = {}
+      this.contexts = {};
+      this.previousCanvasWidth
+      this.previousCanvasHeight
+      this.newCanvasWidth
+      this.newCanvasHeight
+      window.addEventListener('resize', () => this.resizeCanvases())
     }
 
     getCanvas(canvasName) {
@@ -32,9 +37,10 @@ export default class CanvasManager {
     }
 
     resizeCanvas(canvas) {
+         this.previousCanvasWidth = canvas.width
+         this.previousCanvasHeight = canvas.height
+
         let widthHeightRatio = 16 / 9;
-        let previousWidth = canvas.width;
-        let previousHeight = canvas.height;
 
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
@@ -47,6 +53,32 @@ export default class CanvasManager {
             canvas.width = windowWidth
             canvas.height = windowWidth * 9 / 16
         }
+
+        let widthChangedPercentage = (canvas.width - this.previousCanvasWidth) / this.previousCanvasWidth * 100
+        let heightChangedPercentage = (canvas.height - this.previousCanvasHeight) / this.previousCanvasHeight * 100
+        let percentChange = (widthChangedPercentage + heightChangedPercentage) / 2
+        console.log("changedpercentage", widthChangedPercentage, heightChangedPercentage, percentChange);
+
+        this.resizeGameElements(percentChange)
+    }
+
+    resizeGameElements(percentChange) {
+      let canvas = this.canvases['playerCanvas']
+      if (this.game.player) {
+         this.game.player.width = this.game.player.width + this.game.player.width * percentChange / 100
+         this.game.player.posX = this.game.player.posX + this.game.player.posX * percentChange / 100
+         this.game.player.posY = this.game.player.posY + this.game.player.posY * percentChange / 100
+         console.log('playersize', this.game.player.width);
+      }
+    }
+
+    scaleEntities() {
+      let canvas = this.canvases['playerCanvas']
+      this.game.player.width = this.game.player.width * canvas.width / 100
+      this.game.player.height = this.game.player.height * canvas.height / 100
+      // this.game.player.posX = this.game.player.posX * canvas.width / 100
+      // this.game.player.posY = this.game.player.posY * canvas.height / 100
+      console.log(this.game.player.width);
     }
 
     resizeCanvases() {

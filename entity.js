@@ -13,6 +13,7 @@ class RectangleEntity extends Entity {
       super(posX, posY, velX, velY, image)
       this.width = width;
       this.height = height
+
    }
 }
 
@@ -22,3 +23,5 @@ class CircleEntity extends Entity {
       this.radius = radius
    }
 }
+
+export { Entity, RectangleEntity, CircleEntity }

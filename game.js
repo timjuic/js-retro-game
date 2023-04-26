@@ -11,10 +11,16 @@ export default class Game {
         this.generateCanvases()
         this.canvasManager.loadContexts();
         this.level = 1;
+        this.objectScaleFactor = 1
         this.player = new Player(this, 'test', 100);
+        this.entities = []
         this.player.draw();
         this.isPaused = false;
         this.loopId = null;
+
+        // Take canvas size into account and adjust entity sizes accordingly
+        this.canvasManager.scaleEntities()
+
         // Generate the level
         // Instantiate and show the player
         // Start the game loop
@@ -65,6 +71,11 @@ export default class Game {
             clearInterval(this.loopId)
             this.loopId = null;
         }
+    }
+
+    // Resizes game elements to keep proportion to the canvas size
+    resizeGameElements() {
+      
     }
 
 }

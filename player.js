@@ -2,9 +2,10 @@ export default class Player {
     constructor(game, nickname, health) {
         this.game = game;
         this.nickname = nickname;
-        this.width = 20;
-        this.height = 20;
+        this.width = 2 * this.game.objectScaleFactor
+        this.height = 2 * this.game.objectScaleFactor
         this.speed = 2
+        console.log(this.height);
         this.health = health;
         this.maxHealth = health;
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas')
