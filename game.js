@@ -1,4 +1,5 @@
 import CanvasManager from "./canvas-manager.js";
+import CollisionDetector from "./collision-detector.js";
 import settings from "./game-settings.js";
 import EventEmmiter from "./helpers/event-emmiter.js";
 import InputManager from "./input-manager.js";
@@ -6,13 +7,15 @@ import Player from "./player.js";
 
 export default class Game {
     constructor() {
+        this.settings = settings
         this.events = new EventEmmiter();
         this.canvasManager = new CanvasManager(this);
-        this.inputManager = new InputManager(this);
         this.generateCanvases()
         this.canvasManager.loadContexts();
+        
+        this.inputManager = new InputManager(this);
+        this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
-        this.settings = settings
         this.player = new Player(this, 'test', 100);
         this.entities = []
         this.player.draw();

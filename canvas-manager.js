@@ -75,7 +75,7 @@ export default class CanvasManager {
     scaleEntities() {
       let canvas = this.canvases['playerCanvas']
       this.game.player.width = this.game.player.width * canvas.width / 100
-      this.game.player.height = this.game.player.height * canvas.height / 100
+      this.game.player.height = this.game.player.height * canvas.width / 100
       // this.game.player.posX = this.game.player.posX * canvas.width / 100
       // this.game.player.posY = this.game.player.posY * canvas.height / 100
       console.log(this.game.player.width);
