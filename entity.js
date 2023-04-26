@@ -1,10 +1,10 @@
 class Entity {
    constructor(posX, posY, velX, velY, image) {
-      this.posX
-      this.posY
-      this.velX
-      this.velY
-      this.image
+      this.posX = posX
+      this.posY = posY
+      this.velX = velX
+      this.velY = velY
+      this.image = image
    }
 }
 
