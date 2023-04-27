@@ -57,7 +57,7 @@ export default class Game {
         this.canvasManager.clearCanvases()
         this.borders.draw('playerCanvas')
         this.player.updatePosition()
-        this.player.draw('playerCanvas', "player")
+        this.player.draw('playerCanvas')
 
          
     }

@@ -18,8 +18,7 @@ class RectangleEntity extends Entity {
       this.angle = angle
    }
 
-   draw(canvasName, player) {
-      // console.log(player, this.posX, this.posY, this.width, this.height, this.color);
+   draw(canvasName) {
       let canvas = this.game.getCanvasManager().getCanvas(canvasName)
       let ctx = this.game.getCanvasManager().getContext(canvasName)
       ctx.fillStyle = this.color

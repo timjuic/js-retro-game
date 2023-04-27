@@ -12,6 +12,10 @@ export default class Border{
         };
     }
 
+    getBorders() {
+        return this.borders
+    }
+
     draw(canvasName) {
         Array.from(Object.values(this.borders)).forEach(border => border.draw(canvasName));
     }

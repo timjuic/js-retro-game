@@ -65,25 +65,41 @@ export default class CanvasManager {
     resizeGameElements(percentChange) {
       let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
-         this.game.player.width = this.game.player.width + this.game.player.width * percentChange / 100
-         this.game.player.height = this.game.player.height + this.game.player.height * percentChange / 100
-         this.game.player.posX = this.game.player.posX + this.game.player.posX * percentChange / 100
-         this.game.player.posY = this.game.player.posY + this.game.player.posY * percentChange / 100
+         this.resizeEntity(this.game.player, percentChange)
          console.log('playersize', this.game.player.width);
       }
 
-      if (this.game.border) {
-        
+      if (this.game.borders) {
+        let gameBorders = this.game.borders.getBorders()
+        Array.from(Object.values(gameBorders)).forEach(border => {
+            this.resizeEntity(border, percentChange)
+        })
       }
     }
 
-    scaleEntities() {
+    resizeEntity(entity, percentChange) {
+        console.log(entity);
+        entity.width = entity.width + entity.width * percentChange / 100
+        entity.height = entity.height + entity.height * percentChange / 100
+        entity.posX = entity.posX + entity.posX * percentChange / 100
+        entity.posY = entity.posY + entity.posY * percentChange / 100
+    }
+
+    scaleEntities() { // Scaling entities according to starting screen size
       let canvas = this.canvases['playerCanvas']
-      this.game.player.width = this.game.player.width * canvas.width / 100
-      this.game.player.height = this.game.player.height * canvas.width / 100
-      // this.game.player.posX = this.game.player.posX * canvas.width / 100
-      // this.game.player.posY = this.game.player.posY * canvas.height / 100
+      this.scaleEntity(canvas, this.game.player)
+      
+      let gameBorders = this.game.borders.getBorders()
+      Array.from(Object.values(gameBorders)).forEach(border => {
+        this.scaleEntity(canvas, border)
+    })
+      
       console.log(this.game.player.width);
+    }
+
+    scaleEntity(canvas, entity) {
+        entity.width = entity.width * canvas.width / 100
+        entity.height = entity.height * canvas.height / 100
     }
 
     resizeCanvases() {
