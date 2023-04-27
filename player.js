@@ -5,17 +5,14 @@ export default class Player extends RectangleEntity {
       let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
       let posX = playerCanvas.width / 2;
       let posY = playerCanvas.height / 2;
-      let width = 2 * game.settings.OBJECT_SCALE_FACTOR;
-      let height = 2 * game.settings.OBJECT_SCALE_FACTOR;
-      console.log("IN PLAYER", posX, posY, width, height);
+      let width = 5 * game.settings.OBJECT_SCALE_FACTOR;
+      let height = 5 * game.settings.OBJECT_SCALE_FACTOR;
       let angle = 0
       let velX = 0;
       let velY = 0;
       let color = 'blue'
-      super(posX, posY, width, height, angle, velX, velY, color)
-      console.log(this.posX);
+      super(game, posX, posY, width, height, angle, velX, velY, color)
 
-      this.game = game;
       this.nickname = nickname;
       this.speed = 2
       this.health = health;

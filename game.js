@@ -58,9 +58,6 @@ export default class Game {
         this.borders.draw('playerCanvas')
         this.player.updatePosition()
         this.player.draw('playerCanvas', "player")
-        // Calculate game logic
-        // Update all element positions
-        // Draw elements on canvas
 
          
     }
@@ -68,7 +65,7 @@ export default class Game {
     play() {
         if (this.isPaused || !this.loopId) {
             this.isPaused = false;
-            this.loopId = setInterval(() => this.tick(), 10);
+            this.loopId = setInterval(() => this.tick(), 20);
         }
     }
 

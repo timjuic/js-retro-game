@@ -19,11 +19,11 @@ class RectangleEntity extends Entity {
    }
 
    draw(canvasName, player) {
-      console.log(player, this.posX, this.posY, this.width, this.height);
+      // console.log(player, this.posX, this.posY, this.width, this.height, this.color);
       let canvas = this.game.getCanvasManager().getCanvas(canvasName)
       let ctx = this.game.getCanvasManager().getContext(canvasName)
       ctx.fillStyle = this.color
-      ctx.fillRect(this.posX, this.posY, this.posX + this.width, this.posY + this.height)
+      ctx.fillRect(this.posX, this.posY, this.width, this.height)
    }
 }
 

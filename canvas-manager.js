@@ -73,7 +73,7 @@ export default class CanvasManager {
       }
 
       if (this.game.border) {
-
+        
       }
     }
 
