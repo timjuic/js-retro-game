@@ -66,9 +66,14 @@ export default class CanvasManager {
       let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
          this.game.player.width = this.game.player.width + this.game.player.width * percentChange / 100
+         this.game.player.height = this.game.player.height + this.game.player.height * percentChange / 100
          this.game.player.posX = this.game.player.posX + this.game.player.posX * percentChange / 100
          this.game.player.posY = this.game.player.posY + this.game.player.posY * percentChange / 100
          console.log('playersize', this.game.player.width);
+      }
+
+      if (this.game.border) {
+
       }
     }
 
@@ -92,6 +97,4 @@ export default class CanvasManager {
             ctx.clearRect(0, 0, this.canvases[name].width, this.canvases[name].height)
         }
     }
-
-
 }

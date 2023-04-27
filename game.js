@@ -4,6 +4,7 @@ import settings from "./game-settings.js";
 import EventEmmiter from "./helpers/event-emmiter.js";
 import InputManager from "./input-manager.js";
 import Player from "./player.js";
+import Border from "./border.js";
 
 export default class Game {
     constructor() {
@@ -12,13 +13,13 @@ export default class Game {
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
         this.canvasManager.loadContexts();
-        
+        this.borders = new Border(this, settings.BORDER_SIZE);
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
         this.player = new Player(this, 'test', 100);
         this.entities = []
-        this.player.draw();
+        this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
 
@@ -51,10 +52,12 @@ export default class Game {
         // TODO
         if (this.isPaused) return
 
-        
+        let playerCtx = this.getCanvasManager().getContext('playerCanvas')
+
         this.canvasManager.clearCanvases()
+        this.borders.draw('playerCanvas')
         this.player.updatePosition()
-        this.player.draw()
+        this.player.draw('playerCanvas', "player")
         // Calculate game logic
         // Update all element positions
         // Draw elements on canvas

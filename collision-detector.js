@@ -1,5 +1,4 @@
 import { CircleEntity, RectangleEntity } from "./entity.js";
-import settings from "./game-settings.js";
 
 export default class CollisionDetector {
    constructor(game) {
@@ -17,16 +16,14 @@ export default class CollisionDetector {
       if (entity instanceof RectangleEntity) {
          let distanceFromBorder = entity.posY - this.topBorder
          if (distanceFromBorder >= Math.abs(velocity)) return false
-         else if (distanceFromBorder > 0) {
-            entity.posY += -distanceFromBorder
-         }
+         if (distanceFromBorder > 0) entity.posY += -distanceFromBorder
          return true
       }
    }
 
    collidesWithRightBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         let distanceFromBorder = this.canvas.width - settings.BORDER_SIZE - (entity.posX + entity.width)
+         let distanceFromBorder = this.canvas.width - this.game.settings.BORDER_SIZE - (entity.posX + entity.width)
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posX += distanceFromBorder
          return true

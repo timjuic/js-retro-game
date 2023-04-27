@@ -7,11 +7,12 @@ export default class Player extends RectangleEntity {
       let posY = playerCanvas.height / 2;
       let width = 2 * game.settings.OBJECT_SCALE_FACTOR;
       let height = 2 * game.settings.OBJECT_SCALE_FACTOR;
+      console.log("IN PLAYER", posX, posY, width, height);
       let angle = 0
       let velX = 0;
       let velY = 0;
-      console.log(posX);
-      super(posX, posY, width, height, angle, velX, velY)
+      let color = 'blue'
+      super(posX, posY, width, height, angle, velX, velY, color)
       console.log(this.posX);
 
       this.game = game;
@@ -41,19 +42,19 @@ export default class Player extends RectangleEntity {
         }
     }
 
-    draw() {
-      let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
-      let ctx = this.game.getCanvasManager().getContext('playerCanvas')
+    // draw() {
+    //   let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
+    //   let ctx = this.game.getCanvasManager().getContext('playerCanvas')
 
-      ctx.fillStyle = 'white'
-      ctx.fillRect(0, 0, canvas.width, this.game.settings.BORDER_SIZE)
-      ctx.fillRect(canvas.width - this.game.settings.BORDER_SIZE, 0, this.game.settings.BORDER_SIZE, canvas.height)
-      ctx.fillRect(0, canvas.height - this.game.settings.BORDER_SIZE, canvas.width, this.game.settings.BORDER_SIZE)
-      ctx.fillRect(0, 0, this.game.settings.BORDER_SIZE, canvas.height)
+    //   ctx.fillStyle = 'white'
+    //   ctx.fillRect(0, 0, canvas.width, this.game.settings.BORDER_SIZE)
+    //   ctx.fillRect(canvas.width - this.game.settings.BORDER_SIZE, 0, this.game.settings.BORDER_SIZE, canvas.height)
+    //   ctx.fillRect(0, canvas.height - this.game.settings.BORDER_SIZE, canvas.width, this.game.settings.BORDER_SIZE)
+    //   ctx.fillRect(0, 0, this.game.settings.BORDER_SIZE, canvas.height)
 
-      ctx.fillStyle = 'blue';
-      ctx.fillRect(this.posX, this.posY, this.width, this.height)
+    //   ctx.fillStyle = 'blue';
+    //   ctx.fillRect(this.posX, this.posY, this.width, this.height)
 
 
-    }
+    // }
 }
