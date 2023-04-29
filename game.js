@@ -4,7 +4,7 @@ import settings from "./game-settings.js";
 import EventEmmiter from "./helpers/event-emmiter.js";
 import InputManager from "./input-manager.js";
 import Player from "./player.js";
-import Border from "./border.js";
+import BorderManager from "./border-manager.js";
 
 export default class Game {
     constructor() {
@@ -13,7 +13,7 @@ export default class Game {
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
         this.canvasManager.loadContexts();
-        this.borders = new Border(this, settings.BORDER_SIZE);
+        this.borders = new BorderManager(this, settings.BORDER_SIZE);
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;

@@ -99,7 +99,7 @@ export default class CanvasManager {
 
     scaleEntity(canvas, entity) {
         entity.width = entity.width * canvas.width / 100
-        entity.height = entity.height * canvas.height / 100
+        entity.height = entity.height * canvas.width / 100
     }
 
     resizeCanvases() {

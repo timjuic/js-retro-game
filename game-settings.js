@@ -1,5 +1,5 @@
 const settings = {
-   BORDER_SIZE: 10,
+   BORDER_SIZE: 1,
    OBJECT_SCALE_FACTOR: 0.5
 }
 
