@@ -17,13 +17,11 @@ export default class BorderManager{
         return this.borders
     }
 
-    draw(canvasName) {
+    drawBorders(canvasName) {
       let canvas = this.game.getCanvasManager().getCanvas(canvasName)
       let ctx = this.game.getCanvasManager().getContext(canvasName)
       ctx.fillStyle = this.borders.top.color
     
-      console.log(this.borders.top.height, this.borders.left.width);
-
       // draw the top and bottom borders
       let borderThickness = this.borders.top.height;
       let halfCanvasWidth = canvas.width / 2;

@@ -13,7 +13,7 @@ export default class Game {
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
         this.canvasManager.loadContexts();
-        this.borders = new BorderManager(this, settings.BORDER_SIZE);
+        this.borderManager = new BorderManager(this, settings.BORDER_SIZE);
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
@@ -42,6 +42,10 @@ export default class Game {
       return this.canvasManager;
     }
 
+    getBorderManager() {
+      return this.borderManager;
+    }
+
     generateCanvases() {
         this.canvasManager.generateCanvas('playerCanvas')
       //   this.canvasManager.generateCanvas('enemiesCanvas')
@@ -55,7 +59,7 @@ export default class Game {
         let playerCtx = this.getCanvasManager().getContext('playerCanvas')
 
         this.canvasManager.clearCanvases()
-        this.borders.draw('playerCanvas')
+        this.borderManager.drawBorders('playerCanvas')
         this.player.updatePosition()
         this.player.draw('playerCanvas')
 
@@ -65,7 +69,7 @@ export default class Game {
     play() {
         if (this.isPaused || !this.loopId) {
             this.isPaused = false;
-            this.loopId = setInterval(() => this.tick(), 20);
+            this.loopId = setInterval(() => this.tick(), 2);
         }
     }
 

@@ -69,8 +69,8 @@ export default class CanvasManager {
          console.log('playersize', this.game.player.width);
       }
 
-      if (this.game.borders) {
-        let gameBorders = this.game.borders.getBorders()
+      if (this.game.borderManager) {
+        let gameBorders = this.game.borderManager.getBorders()
         Array.from(Object.values(gameBorders)).forEach(border => {
             this.resizeEntity(border, percentChange)
         })
@@ -89,7 +89,7 @@ export default class CanvasManager {
       let canvas = this.canvases['playerCanvas']
       this.scaleEntity(canvas, this.game.player)
       
-      let gameBorders = this.game.borders.getBorders()
+      let gameBorders = this.game.borderManager.getBorders()
       Array.from(Object.values(gameBorders)).forEach(border => {
         this.scaleEntity(canvas, border)
     })

@@ -5,16 +5,33 @@ export default class CollisionDetector {
       this.game = game
       this.canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
       let settings = this.game.settings
-      console.log(settings);
-      this.topBorder = settings.BORDER_SIZE
-      this.rightBorder = this.canvas.width - settings.BORDER_SIZE
-      this.bottomBorder = this.canvas.height - settings.BORDER_SIZE
-      this.leftBorder = settings.BORDER_SIZE
+   }
+
+   #getTopBorder() {
+      let borders = this.game.getBorderManager().getBorders()
+      return borders.top.height
+   }
+
+   #getRightBorder() {
+      let borders = this.game.getBorderManager().getBorders()
+      return this.canvas.width - borders.right.width
+   }
+
+   #getBottomBorder() {
+      let borders = this.game.getBorderManager().getBorders()
+      return this.canvas.height - borders.bottom.height
+   }
+
+   #getLeftBorder() {
+      let borders = this.game.getBorderManager().getBorders()
+      return borders.left.width
    }
 
    collidesWithTopBorder(entity, velocity = 0) {
+      console.log(this.topBorder, this.rightBorder, this.bottomBorder, this.leftBorder, this.game.borderManager.borders);
+
       if (entity instanceof RectangleEntity) {
-         let distanceFromBorder = entity.posY - this.topBorder
+         let distanceFromBorder = entity.posY - this.#getTopBorder()
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posY += -distanceFromBorder
          return true
@@ -23,7 +40,7 @@ export default class CollisionDetector {
 
    collidesWithRightBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         let distanceFromBorder = this.canvas.width - this.game.settings.BORDER_SIZE - (entity.posX + entity.width)
+         let distanceFromBorder = this.#getRightBorder() - (entity.posX + entity.width)
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posX += distanceFromBorder
          return true
@@ -32,7 +49,7 @@ export default class CollisionDetector {
 
    collidesWithBottomBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         let distanceFromBorder = this.canvas.height - this.game.settings.BORDER_SIZE - (entity.posY + entity.height)
+         let distanceFromBorder = this.#getBottomBorder() - (entity.posY + entity.height)
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posY += distanceFromBorder
          return true
@@ -41,7 +58,7 @@ export default class CollisionDetector {
 
    collidesWithLeftBorder(entity, velocity = 0) {
       if (entity instanceof RectangleEntity) {
-         let distanceFromBorder = entity.posX - this.leftBorder
+         let distanceFromBorder = entity.posX - this.#getLeftBorder()
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posX -= distanceFromBorder
          return true
