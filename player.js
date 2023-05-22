@@ -1,3 +1,4 @@
+import Bullet from "./bullet.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
 
 export default class Player extends RectangleEntity {
@@ -37,6 +38,14 @@ export default class Player extends RectangleEntity {
         if (inputManager.pressedControls['moveLeft']) {
             if (!collisionDetector.collidesWithLeftBorder(this, -this.speed)) this.posX -= this.speed;
         }
+    }
+
+    addGun(gun) {
+        this.gun = gun;
+    }
+
+    shoot() {
+        let bullet = new Bullet()
     }
 
     // draw() {

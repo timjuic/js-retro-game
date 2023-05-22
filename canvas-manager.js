@@ -110,6 +110,7 @@ export default class CanvasManager {
 
     clearCanvases() {
         for (let [name, ctx] of Object.entries(this.contexts)) {
+          if (name === "crosshairCanvas") continue;
             ctx.clearRect(0, 0, this.canvases[name].width, this.canvases[name].height)
         }
     }

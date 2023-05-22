@@ -5,6 +5,7 @@ import EventEmmiter from "./helpers/event-emmiter.js";
 import InputManager from "./input-manager.js";
 import Player from "./player.js";
 import BorderManager from "./border-manager.js";
+import CrosshairManager from "./crosshair-manager.js";
 
 export default class Game {
     constructor() {
@@ -12,13 +13,17 @@ export default class Game {
         this.events = new EventEmmiter();
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
+        console.log(this.canvasManager.canvases);
         this.canvasManager.loadContexts();
         this.borderManager = new BorderManager(this, settings.BORDER_SIZE);
+        this.crosshairManager = new CrosshairManager(this)
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
         this.player = new Player(this, 'test', 100);
-        this.entities = []
+        this.enemies = []
+        this.playerBullets = []
+        this.enemyBullets = []
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
@@ -45,9 +50,14 @@ export default class Game {
     getBorderManager() {
       return this.borderManager;
     }
+    getCrosshair() {
+      return this.crosshairManager;
+    }
+    
 
     generateCanvases() {
         this.canvasManager.generateCanvas('playerCanvas')
+        this.canvasManager.generateCanvas('crosshairCanvas')
       //   this.canvasManager.generateCanvas('enemiesCanvas')
       //   this.canvasManager.generateCanvas('projectileCanvas')
     }
