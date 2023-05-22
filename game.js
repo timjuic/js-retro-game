@@ -13,7 +13,6 @@ export default class Game {
         this.events = new EventEmmiter();
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
-        console.log(this.canvasManager.canvases);
         this.canvasManager.loadContexts();
         this.borderManager = new BorderManager(this, settings.BORDER_SIZE);
         this.crosshairManager = new CrosshairManager(this)

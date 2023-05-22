@@ -21,6 +21,9 @@ export default class Player extends RectangleEntity {
       this.maxHealth = health;
       this.gun
 
+      this.bulletImg = new Image()
+      this.bulletImg.src = './assets/bullet.png'
+
       this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
         this.shoot()
       })
@@ -31,8 +34,11 @@ export default class Player extends RectangleEntity {
         // this.gun.shoot()
         let crosshair = this.game.getCrosshair();
         let angle = calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-        console.log(angle);
-        let bullet = new RectangleEntity(this.game, this.posX, this.posY, 20, 40, 0, 10, 10, "blue")
+        let distanceFromCrosshair = calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+        let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / 5);
+        let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / 5);
+        
+        let bullet = new RectangleEntity(this.game, this.posX, this.posY, 40, 80, angle, bulletVectorX, bulletVectorY, "blue", this.bulletImg)
         this.game.playerBullets.push(bullet);
     }
 
@@ -78,14 +84,19 @@ export default class Player extends RectangleEntity {
 
 function calculateAngle(posx1, posy1, posx2, posy2) {
     var deltaX = posx2 - posx1;
-    var deltaY = posy1 - posy2; // Subtract posy2 from posy1
-    var radians = Math.atan2(deltaY, deltaX);
-    var degrees = radians * (180 / Math.PI);
+    var deltaY = posy2 - posy1;
+    var angleRadians = Math.atan2(deltaY, deltaX);
+    var angleDegrees = angleRadians * (180 / Math.PI);
   
-    // Ensure the angle is positive and within the range of 0-359 degrees
-    if (degrees < 0) {
-      degrees += 360;
-    }
-  
-    return degrees;
+    // Adjust angle to be between 0 and 359 degrees
+    var adjustedAngle = (angleDegrees + 90 + 360) % 360;
+    return adjustedAngle;
   }
+
+  function calculateDistance(posx1, posy1, posx2, posy2) {
+    var deltaX = posx2 - posx1;
+    var deltaY = posy2 - posy1;
+    var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
+    return distance;
+  }
+  

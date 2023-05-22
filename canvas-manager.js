@@ -57,7 +57,6 @@ export default class CanvasManager {
         let widthChangedPercentage = (canvas.width - this.previousCanvasWidth) / this.previousCanvasWidth * 100
         let heightChangedPercentage = (canvas.height - this.previousCanvasHeight) / this.previousCanvasHeight * 100
         let percentChange = (widthChangedPercentage + heightChangedPercentage) / 2
-        console.log("changedpercentage", widthChangedPercentage, heightChangedPercentage, percentChange);
 
         this.resizeGameElements(percentChange)
     }
@@ -66,7 +65,6 @@ export default class CanvasManager {
       let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
          this.resizeEntity(this.game.player, percentChange)
-         console.log('playersize', this.game.player.width);
       }
 
       if (this.game.borderManager) {
@@ -94,7 +92,6 @@ export default class CanvasManager {
         this.scaleEntity(canvas, border)
     })
       
-      console.log(this.game.player.width);
     }
 
     scaleEntity(canvas, entity) {
