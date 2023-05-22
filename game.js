@@ -42,6 +42,9 @@ export default class Game {
     getInputManager() {
       return this.inputManager;
     }
+    getEventEmmiter() {
+      return this.events;
+    }
 
     getCanvasManager() {
       return this.canvasManager;
@@ -53,13 +56,13 @@ export default class Game {
     getCrosshair() {
       return this.crosshairManager;
     }
-    
+
 
     generateCanvases() {
         this.canvasManager.generateCanvas('playerCanvas')
         this.canvasManager.generateCanvas('crosshairCanvas')
       //   this.canvasManager.generateCanvas('enemiesCanvas')
-      //   this.canvasManager.generateCanvas('projectileCanvas')
+        this.canvasManager.generateCanvas('projectileCanvas')
     }
 
     tick() {
@@ -74,6 +77,10 @@ export default class Game {
         this.player.draw('playerCanvas')
 
          
+        this.playerBullets.forEach(bullet => {
+          bullet.updatePosition()
+          bullet.draw("projectileCanvas");
+        })
     }
 
     play() {

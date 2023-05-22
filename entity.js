@@ -18,6 +18,11 @@ class RectangleEntity extends Entity {
       this.angle = angle
    }
 
+   updatePosition() {
+      this.posX = this.posX + this.velX;
+      this.posY = this.posY + this.velY;
+   }
+
    draw(canvasName) {
       let canvas = this.game.getCanvasManager().getCanvas(canvasName)
       let ctx = this.game.getCanvasManager().getContext(canvasName)

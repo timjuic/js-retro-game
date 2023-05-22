@@ -14,9 +14,8 @@ export default class CrosshairManager {
         let crosshairCanvas = this.game.getCanvasManager().getCanvas("crosshairCanvas")
         let crosshairCtx = this.game.getCanvasManager().getContext("crosshairCanvas")
         window.addEventListener('mousemove', (e) => {
-            console.log("mousemove");
-            let upperBorderHeight = (window.innerHeight - this.game.getCanvasManager().getCanvas('crosshairCanvas').height) / 2
-            let leftBorderWidth = (window.innerWidth - this.game.getCanvasManager().getCanvas('crosshairCanvas').width) / 2
+            let upperBorderHeight = (window.innerHeight - crosshairCanvas.height) / 2
+            let leftBorderWidth = (window.innerWidth - crosshairCanvas.width) / 2
             this.posX = e.pageX - leftBorderWidth - this.width / 2;
             this.posY = e.pageY - upperBorderHeight - this.height / 2;
             this.aimX = this.posX + this.width / 2;

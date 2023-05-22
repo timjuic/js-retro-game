@@ -1,4 +1,5 @@
 import Bullet from "./bullet.js";
+import Gun from "./gun.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
 
 export default class Player extends RectangleEntity {
@@ -20,6 +21,19 @@ export default class Player extends RectangleEntity {
       this.maxHealth = health;
       this.gun
 
+      this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
+        this.shoot()
+      })
+
+    }
+
+    shoot() {
+        // this.gun.shoot()
+        let crosshair = this.game.getCrosshair();
+        let angle = calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+        console.log(angle);
+        let bullet = new RectangleEntity(this.game, this.posX, this.posY, 20, 40, 0, 10, 10, "blue")
+        this.game.playerBullets.push(bullet);
     }
 
     updatePosition() {
@@ -41,11 +55,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gun;
-    }
-
-    shoot() {
-        let bullet = new Bullet()
+        this.gun = new Gun(this.game, 50, 100, true, 100);
     }
 
     // draw() {
@@ -64,3 +74,18 @@ export default class Player extends RectangleEntity {
 
     // }
 }
+
+
+function calculateAngle(posx1, posy1, posx2, posy2) {
+    var deltaX = posx2 - posx1;
+    var deltaY = posy1 - posy2; // Subtract posy2 from posy1
+    var radians = Math.atan2(deltaY, deltaX);
+    var degrees = radians * (180 / Math.PI);
+  
+    // Ensure the angle is positive and within the range of 0-359 degrees
+    if (degrees < 0) {
+      degrees += 360;
+    }
+  
+    return degrees;
+  }
