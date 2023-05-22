@@ -2,6 +2,7 @@ import Bullet from "./bullet.js";
 import Gun from "./gun.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
 import gunsData from "./guns-data.js";
+import MathUtil from "./math-util.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -33,8 +34,8 @@ export default class Player extends RectangleEntity {
 
     shoot() {
         let crosshair = this.game.getCrosshair();
-        let angle = calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-        let distanceFromCrosshair = calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+        let angle = MathUtil.calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+        let distanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
         let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
         let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
         
@@ -82,21 +83,4 @@ export default class Player extends RectangleEntity {
 }
 
 
-function calculateAngle(posx1, posy1, posx2, posy2) {
-    var deltaX = posx2 - posx1;
-    var deltaY = posy2 - posy1;
-    var angleRadians = Math.atan2(deltaY, deltaX);
-    var angleDegrees = angleRadians * (180 / Math.PI);
-  
-    // Adjust angle to be between 0 and 359 degrees
-    var adjustedAngle = (angleDegrees + 90 + 360) % 360;
-    return adjustedAngle;
-  }
-
-  function calculateDistance(posx1, posy1, posx2, posy2) {
-    var deltaX = posx2 - posx1;
-    var deltaY = posy2 - posy1;
-    var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
-    return distance;
-  }
   
