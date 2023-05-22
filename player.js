@@ -1,6 +1,7 @@
 import Bullet from "./bullet.js";
 import Gun from "./gun.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
+import gunsData from "./guns-data.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -25,18 +26,17 @@ export default class Player extends RectangleEntity {
       this.bulletImg.src = './assets/bullet.png'
 
       this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
+        // Handle shooting depending on current gun
         this.shoot()
       })
-
     }
 
     shoot() {
-        // this.gun.shoot()
         let crosshair = this.game.getCrosshair();
         let angle = calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
         let distanceFromCrosshair = calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-        let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / 5);
-        let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / 5);
+        let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+        let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
         
         let bullet = new RectangleEntity(this.game, this.posX, this.posY, 40, 80, angle, bulletVectorX, bulletVectorY, "blue", this.bulletImg)
         this.game.playerBullets.push(bullet);
@@ -61,7 +61,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = new Gun(this.game, 50, 100, true, 100);
+        this.gun = gunsData[0]
     }
 
     // draw() {

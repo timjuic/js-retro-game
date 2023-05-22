@@ -25,7 +25,6 @@ export default class CrosshairManager {
     }
 
     draw(canvasName) {
-        console.log('canvasname', canvasName);
         let canvas = this.game.getCanvasManager().getCanvas(canvasName)
         let ctx = this.game.getCanvasManager().getContext(canvasName)
         ctx.fillStyle = this.color
