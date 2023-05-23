@@ -10,5 +10,26 @@ export default class Gun {
         this.damage = damage
         this.bulletImg = new Image()
         this.bulletImg.src = bulletImgPath;
+
+        this.lastShotTimestamp = null;
     }
+
+    isAutomatic() {
+        return this.automatic;
+    }
+
+    getFireRate() {
+        return this.fireRate;
+    }
+
+    saveShotTimestamp() {
+        this.lastShotTimestamp = Date.now();
+    }
+
+    canShoot() {
+        console.log((Date.now() - this.lastShotTimestamp), this.fireRate);
+        return (Date.now() - this.lastShotTimestamp) > this.fireRate;
+    }
+
+    
 }

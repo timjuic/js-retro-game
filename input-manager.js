@@ -1,3 +1,5 @@
+import InputType from "./enums/input-type.js";
+
 export default class InputManager {
     constructor(game) {
         this.game = game;
@@ -7,13 +9,22 @@ export default class InputManager {
     }
 
     loadDefaultControls() {
-        this.controls = {
-            moveUp: ['w', 'ArrowUp'],
-            moveRight: ['d', 'ArrowRight'],
-            moveDown: ['s', 'ArrowDown'],
-            moveLeft: ['a', 'ArrowLeft'],
-            shoot: [0]
-        }
+        // this.controls = {
+        //     moveUp: ['w', 'ArrowUp'],
+        //     moveRight: ['d', 'ArrowRight'],
+        //     moveDown: ['s', 'ArrowDown'],
+        //     moveLeft: ['a', 'ArrowLeft'],
+        //     shoot: [0]
+        // }
+        this.controls = {};
+        this.controls[`${InputType.UP}`] = ['w', 'ArrowUp'];
+        this.controls[`${InputType.RIGHT}`] = ['d', 'ArrowRight'];
+        this.controls[`${InputType.DOWN}`] = ['s', 'ArrowDown'];
+        this.controls[`${InputType.LEFT}`] = ['a', 'ArrowLeft'];
+        this.controls[`${InputType.SHOOT}`] = [0]
+
+        console.log(this.controls);
+
     }
 
     registerListeners() {

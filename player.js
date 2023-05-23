@@ -2,7 +2,8 @@ import Bullet from "./bullet.js";
 import Gun from "./gun.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
 import gunsData from "./guns-data.js";
-import MathUtil from "./math-util.js";
+import MathUtil from "./helpers/math-util.js";
+import InputType from "./enums/input-type.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -21,18 +22,51 @@ export default class Player extends RectangleEntity {
       this.speed = 2
       this.health = health;
       this.maxHealth = health;
-      this.gun
+      this.addGun();
 
       this.bulletImg = new Image()
       this.bulletImg.src = './assets/bullet.png'
 
+      this.shootingInterval = null;
+
       this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
         // Handle shooting depending on current gun
-        this.shoot()
+        console.log(control, pressed);
+        if (control !== InputType.SHOOT) return;
+        this.handleShoot(pressed)
+        // this.shoot()
       })
     }
 
+    handleShoot(pressed) {
+        if (!this.gun) {
+            console.log("You cant shoot, you dont have a gun!");
+            return;
+        }
+
+        if (this.gun.isAutomatic()) {
+            if (pressed) this.startShooting();
+            else this.stopShooting();
+        }
+
+    }
+
+    startShooting() {
+        if (this.shootingInterval !== null) return;
+
+        if (this.gun.canShoot()) this.shoot(); // Initial shot
+        this.shootingInterval = setInterval(() => {
+            this.shoot();
+        }, this.gun.getFireRate());
+    }
+
+    stopShooting() {
+        clearInterval(this.shootingInterval);
+        this.shootingInterval = null;
+    }
+
     shoot() {
+        this.gun.saveShotTimestamp();
         let crosshair = this.game.getCrosshair();
         let angle = MathUtil.calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
         let distanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
@@ -62,7 +96,8 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[0]
+        this.gun = gunsData[1]
+        console.log(this.gun);
     }
 
     // draw() {

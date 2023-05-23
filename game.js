@@ -44,11 +44,9 @@ export default class Game {
     getEventEmmiter() {
       return this.events;
     }
-
     getCanvasManager() {
       return this.canvasManager;
     }
-
     getBorderManager() {
       return this.borderManager;
     }
