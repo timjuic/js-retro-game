@@ -47,6 +47,8 @@ export default class Player extends RectangleEntity {
         if (this.gun.isAutomatic()) {
             if (pressed) this.startShooting();
             else this.stopShooting();
+        } else {
+            if (this.gun.canShoot()) this.shoot();
         }
 
     }
@@ -96,7 +98,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[1]
+        this.gun = gunsData[0]
         console.log(this.gun);
     }
 

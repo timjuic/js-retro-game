@@ -27,7 +27,6 @@ export default class Gun {
     }
 
     canShoot() {
-        console.log((Date.now() - this.lastShotTimestamp), this.fireRate);
         return (Date.now() - this.lastShotTimestamp) > this.fireRate;
     }
 
