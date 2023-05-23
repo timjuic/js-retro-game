@@ -1,16 +1,16 @@
 import { RectangleEntity } from "./entity.js"
 
 export default class Gun {
-    constructor(name, fireRate, maxAmmo, automatic, damage, bulletImgPath) {
+    constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, bulletImgPath) {
         this.name = name;
         this.fireRate = fireRate
         this.automatic = automatic
         this.remainingAmmo = maxAmmo
         this.maxAmmo = maxAmmo
         this.damage = damage
+        this.grains = grainsAmount;
         this.bulletImg = new Image()
         this.bulletImg.src = bulletImgPath;
-
         this.lastShotTimestamp = null;
     }
 
@@ -28,6 +28,10 @@ export default class Gun {
 
     canShoot() {
         return (Date.now() - this.lastShotTimestamp) > this.fireRate;
+    }
+
+    getGrainsAmount() {
+        return this.grains;
     }
 
     

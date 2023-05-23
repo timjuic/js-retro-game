@@ -70,13 +70,35 @@ export default class Player extends RectangleEntity {
     shoot() {
         this.gun.saveShotTimestamp();
         let crosshair = this.game.getCrosshair();
-        let angle = MathUtil.calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-        let distanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-        let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
-        let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+        let grainsAmount = this.gun.getGrainsAmount();
+
+        if (grainsAmount === 1) {
+            let angle = MathUtil.calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+            let distanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
+            let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+            let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+            let bullet = new RectangleEntity(this.game, this.posX, this.posY, 40, 80, angle, bulletVectorX, bulletVectorY, "blue", this.bulletImg)
+            this.game.playerBullets.push(bullet);
+        } else {
+            for (let i = 0; i < grainsAmount; i++) {
+                const MAX_GRAIN_DEVIATION = 50;
+                const MIN_GRAIN_DEVIATION = 3;
+                let deviationX = MathUtil.generateRandomNumber(MIN_GRAIN_DEVIATION, MAX_GRAIN_DEVIATION);
+                let deviationY = MathUtil.generateRandomNumber(MIN_GRAIN_DEVIATION, MAX_GRAIN_DEVIATION);
+                let directionX = MathUtil.getRandomSign();
+                let directionY = MathUtil.getRandomSign();
+                let grainTargetPointX = crosshair.posX + directionX * deviationX;
+                let grainTargetPointY = crosshair.posY + directionY * deviationY;
+
+                let grainAngle = MathUtil.calculateAngle(this.posX, this.posY, grainTargetPointX, grainTargetPointY);
+                let grainDistanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, grainTargetPointX, grainTargetPointY)
+                let grainVectorX = (grainTargetPointX - this.posX) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+                let grainVectorY = (grainTargetPointY - this.posY) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+                let bullet = new RectangleEntity(this.game, this.posX, this.posY, 40, 80, grainAngle, grainVectorX, grainVectorY, "blue", this.bulletImg)
+                this.game.playerBullets.push(bullet);
+            }
+        }
         
-        let bullet = new RectangleEntity(this.game, this.posX, this.posY, 40, 80, angle, bulletVectorX, bulletVectorY, "blue", this.bulletImg)
-        this.game.playerBullets.push(bullet);
     }
 
     updatePosition() {

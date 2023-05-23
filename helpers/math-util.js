@@ -17,4 +17,13 @@ export default class MathUtil {
         var distance = Math.sqrt(deltaX * deltaX + deltaY * deltaY);
         return distance;
       }
+
+    static generateRandomNumber(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    static getRandomSign() {
+      const randomNumber = Math.random();
+      return randomNumber < 0.5 ? -1 : 1;
+    }
 }
