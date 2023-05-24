@@ -62,4 +62,12 @@ export default class CollisionDetector {
          return true
       }
    }
+
+   isInsideCanvas(entity) {
+      if (entity.posX < 0) return false;
+      if (entity.posY < 0) return false;
+      if (entity.posX > this.canvas.width) return false;
+      if (entity.posY > this.canvas.height) return false;
+      return true;
+   }
 }

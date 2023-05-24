@@ -53,6 +53,9 @@ export default class Game {
     getCrosshair() {
       return this.crosshairManager;
     }
+    getCollisionDetector() {
+      return this.collisionDetector;
+    }
 
 
     generateCanvases() {
@@ -73,9 +76,13 @@ export default class Game {
         this.player.updatePosition()
         this.player.draw('playerCanvas')
 
-         
-        this.playerBullets.forEach(bullet => {
+        console.log(this.playerBullets.length);
+        this.playerBullets.forEach((bullet, i) => {
           bullet.updatePosition()
+          if (!this.collisionDetector.isInsideCanvas(bullet)) {
+              this.playerBullets.splice(i, 1);
+              return;
+          }
           bullet.draw("projectileCanvas");
         })
     }

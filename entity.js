@@ -14,8 +14,8 @@ class RectangleEntity extends Entity {
    constructor(game, posX, posY, width, height, angle, velX, velY, color, image) {
       super(game, posX, posY, velX, velY, color, image)
       this.width = width;
-      this.height = height
-      this.angle = angle
+      this.height = height;
+      this.angle = angle;
    }
 
    updatePosition() {
@@ -26,7 +26,6 @@ class RectangleEntity extends Entity {
    draw(canvasName) {
       let canvas = this.game.getCanvasManager().getCanvas(canvasName);
       let ctx = this.game.getCanvasManager().getContext(canvasName);
-   
 
       ctx.save(); // Save the current state of the canvas
     
@@ -58,7 +57,6 @@ class RectangleEntity extends Entity {
    
       ctx.restore(); // Restore the original state of the canvas
     }
-    
 }
 
 class CircleEntity extends Entity {
