@@ -19,7 +19,7 @@ export default class Player extends RectangleEntity {
       super(game, posX, posY, width, height, angle, velX, velY, color)
 
       this.nickname = nickname;
-      this.speed = 2
+      this.speed = 1
       this.health = health;
       this.maxHealth = health;
       this.addGun();
@@ -72,12 +72,16 @@ export default class Player extends RectangleEntity {
         let crosshair = this.game.getCrosshair();
         let grainsAmount = this.gun.getGrainsAmount();
 
+        let centerX = this.posX + this.width / 2;
+        let centerY = this.posY + this.height / 2
+
         if (grainsAmount === 1) {
-            let angle = MathUtil.calculateAngle(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-            let distanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, crosshair.aimX, crosshair.aimY)
-            let bulletVectorX = (crosshair.aimX - this.posX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
-            let bulletVectorY = (crosshair.aimY - this.posY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
-            let bullet = new Bullet(this.game, this.posX, this.posY, 40, 80, angle, bulletVectorX, bulletVectorY, this.gun.damage, "blue", this.bulletImg)
+            console.log("POSITION", this.posX, this.posY);
+            let angle = MathUtil.calculateAngle(centerX, centerY, crosshair.aimX, crosshair.aimY)
+            let distanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY)
+            let bulletVectorX = (crosshair.aimX - centerX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+            let bulletVectorY = (crosshair.aimY - centerY) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+            let bullet = new Bullet(this.game, centerX, centerY, 40, 80, angle, bulletVectorX, bulletVectorY, this.gun.damage, "blue", this.bulletImg)
             this.game.playerBullets.push(bullet);
         } else {
             for (let i = 0; i < grainsAmount; i++) {
@@ -90,11 +94,11 @@ export default class Player extends RectangleEntity {
                 let grainTargetPointX = crosshair.posX + directionX * deviationX;
                 let grainTargetPointY = crosshair.posY + directionY * deviationY;
 
-                let grainAngle = MathUtil.calculateAngle(this.posX, this.posY, grainTargetPointX, grainTargetPointY);
-                let grainDistanceFromCrosshair = MathUtil.calculateDistance(this.posX, this.posY, grainTargetPointX, grainTargetPointY)
-                let grainVectorX = (grainTargetPointX - this.posX) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
-                let grainVectorY = (grainTargetPointY - this.posY) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
-                let bullet = new Bullet(this.game, this.posX, this.posY, 40, 80, grainAngle, grainVectorX, grainVectorY, this.gun.damage, "blue", this.bulletImg)
+                let grainAngle = MathUtil.calculateAngle(centerX, centerY, grainTargetPointX, grainTargetPointY);
+                let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
+                let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+                let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
+                let bullet = new Bullet(this.game, centerX, centerY, 40, 80, grainAngle, grainVectorX, grainVectorY, this.gun.damage, "blue", this.bulletImg)
                 this.game.playerBullets.push(bullet);
             }
         }

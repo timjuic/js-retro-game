@@ -76,7 +76,6 @@ export default class Game {
         this.player.updatePosition()
         this.player.draw('playerCanvas')
 
-        console.log(this.playerBullets.length);
         this.playerBullets.forEach((bullet, i) => {
           bullet.updatePosition()
           if (!this.collisionDetector.isInsideCanvas(bullet)) {

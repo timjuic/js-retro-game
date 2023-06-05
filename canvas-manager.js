@@ -57,6 +57,7 @@ export default class CanvasManager {
         let widthChangedPercentage = (canvas.width - this.previousCanvasWidth) / this.previousCanvasWidth * 100
         let heightChangedPercentage = (canvas.height - this.previousCanvasHeight) / this.previousCanvasHeight * 100
         let percentChange = (widthChangedPercentage + heightChangedPercentage) / 2
+        
 
         this.resizeGameElements(percentChange)
     }
@@ -76,7 +77,6 @@ export default class CanvasManager {
     }
 
     resizeEntity(entity, percentChange) {
-        console.log(entity);
         entity.width = entity.width + entity.width * percentChange / 100
         entity.height = entity.height + entity.height * percentChange / 100
         entity.posX = entity.posX + entity.posX * percentChange / 100

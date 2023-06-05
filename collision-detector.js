@@ -28,8 +28,10 @@ export default class CollisionDetector {
    }
 
    collidesWithTopBorder(entity, velocity = 0) {
+      console.log(entity.posY, this.#getTopBorder());
       if (entity instanceof RectangleEntity) {
          let distanceFromBorder = entity.posY - this.#getTopBorder()
+         console.log(distanceFromBorder);
          if (distanceFromBorder >= Math.abs(velocity)) return false
          if (distanceFromBorder > 0) entity.posY += -distanceFromBorder
          return true

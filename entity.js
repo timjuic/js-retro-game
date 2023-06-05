@@ -47,8 +47,8 @@ class RectangleEntity extends Entity {
       } else {
          ctx.fillStyle = this.color;
       ctx.fillRect(
-        this.posX - this.width / 2,
-        this.posY - this.height / 2,
+        this.posX,
+        this.posY,
         this.width,
         this.height
       );
