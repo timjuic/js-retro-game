@@ -23,3 +23,50 @@
 .game-canvas:first-of-type {
    background-color: black;
 }
+
+
+.pause-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    user-select: none;
+  }
+  
+  .button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  button {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 12px;
+    width: 200px; /* Adjust the width as desired */
+  }
+  
+  .resume-button {
+    background-color: #4287f5;
+    color: #fff;
+  }
+  
+  .quit-button {
+    background-color: #f54242;
+    color: #fff;
+  }
+  
+  button:hover {
+    /* Apply your preferred hover effect styles here */
+  }
+  

@@ -30,11 +30,8 @@ export default class Player extends RectangleEntity {
       this.shootingInterval = null;
 
       this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
-        // Handle shooting depending on current gun
-        console.log(control, pressed);
         if (control !== InputType.SHOOT) return;
         this.handleShoot(pressed)
-        // this.shoot()
       })
     }
 
@@ -76,7 +73,6 @@ export default class Player extends RectangleEntity {
         let centerY = this.posY + this.height / 2
 
         if (grainsAmount === 1) {
-            console.log("POSITION", this.posX, this.posY);
             let angle = MathUtil.calculateAngle(centerX, centerY, crosshair.aimX, crosshair.aimY)
             let distanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY)
             let bulletVectorX = (crosshair.aimX - centerX) / (distanceFromCrosshair / this.game.settings.BULLET_SPEED_MODIFIER);
@@ -124,7 +120,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[0]
+        this.gun = gunsData[1]
         console.log(this.gun);
     }
 

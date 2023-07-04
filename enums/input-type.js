@@ -4,4 +4,5 @@ export default class InputType {
     static UP = 'moveUp';
     static RIGHT = 'moveRight';
     static DOWN = 'moveDown';
+    static TOGGLEPAUSE = 'togglePause'
 }

@@ -22,6 +22,7 @@ export default class InputManager {
         this.controls[`${InputType.DOWN}`] = ['s', 'ArrowDown'];
         this.controls[`${InputType.LEFT}`] = ['a', 'ArrowLeft'];
         this.controls[`${InputType.SHOOT}`] = [0]
+        this.controls[`${InputType.TOGGLEPAUSE}`] = ['Escape']
 
         console.log(this.controls);
 

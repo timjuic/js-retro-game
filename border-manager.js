@@ -10,7 +10,6 @@ export default class BorderManager{
             bottom: new RectangleEntity(game, 0, canvas.height - thickness, canvas.width, thickness, 0,0,0, "white"),
             left: new RectangleEntity(game, 0, 0, thickness, canvas.height, 0,0,0, "white")
         };
-        console.log(this.borders.top.height, this.borders.left.width);
     }
 
     getBorders() {

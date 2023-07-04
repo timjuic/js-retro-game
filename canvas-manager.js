@@ -74,6 +74,16 @@ export default class CanvasManager {
             this.resizeEntity(border, percentChange)
         })
       }
+
+      if (this.game.playerBullets) {
+        this.game.playerBullets.forEach(bulletEntity => {
+            this.resizeEntity(bulletEntity, percentChange);
+        })
+      }
+
+      if (this.game.crosshairManager) {
+
+      }
     }
 
     resizeEntity(entity, percentChange) {
@@ -90,8 +100,7 @@ export default class CanvasManager {
       let gameBorders = this.game.borderManager.getBorders()
       Array.from(Object.values(gameBorders)).forEach(border => {
         this.scaleEntity(canvas, border)
-    })
-      
+      })      
     }
 
     scaleEntity(canvas, entity) {
@@ -100,9 +109,11 @@ export default class CanvasManager {
     }
 
     resizeCanvases() {
+      this.game.pause();
         Array.from(Object.values(this.canvases)).forEach(canvas => {
             this.resizeCanvas(canvas)
         })
+        this.game.drawGameElements();
     }
 
     clearCanvases() {

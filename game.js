@@ -6,6 +6,10 @@ import InputManager from "./input-manager.js";
 import Player from "./player.js";
 import BorderManager from "./border-manager.js";
 import CrosshairManager from "./crosshair-manager.js";
+import InputType from "./enums/input-type.js";
+
+const pauseModal = document.querySelector(".pause-modal");
+
 
 export default class Game {
     constructor() {
@@ -33,8 +37,8 @@ export default class Game {
         // Generate the level
         // Instantiate and show the player
         // Start the game loop
-        console.log(this);
         this.play()
+        this.activatePauseListener();
     }
 
 
@@ -74,21 +78,43 @@ export default class Game {
         this.canvasManager.clearCanvases()
         this.borderManager.drawBorders('playerCanvas')
         this.player.updatePosition()
-        this.player.draw('playerCanvas')
 
-        this.playerBullets.forEach((bullet, i) => {
-          bullet.updatePosition()
-          if (!this.collisionDetector.isInsideCanvas(bullet)) {
-              this.playerBullets.splice(i, 1);
-              return;
-          }
-          bullet.draw("projectileCanvas");
-        })
+        this.drawGameElements();
+    }
+
+    drawGameElements() {
+      this.player.draw('playerCanvas')
+
+      this.playerBullets.forEach((bullet, i) => {
+        bullet.updatePosition()
+        if (!this.collisionDetector.isInsideCanvas(bullet)) {
+            this.playerBullets.splice(i, 1);
+            return;
+        }
+        bullet.draw("projectileCanvas");
+      })
+    }
+
+    activatePauseListener() {
+      this.getEventEmmiter().on('playerInput', (control, pressed) => {
+        if (control !== InputType.TOGGLEPAUSE) return;
+        if (!pressed) return;
+        this.togglePause();
+      })
+    }
+
+    togglePause() {
+      if (this.isPaused || !this.loopId) {
+        this.play();
+      } else {
+        this.pause();
+      }
     }
 
     play() {
         if (this.isPaused || !this.loopId) {
             this.isPaused = false;
+            pauseModal.style.display = 'none'
             this.loopId = setInterval(() => this.tick(), 2);
         }
     }
@@ -98,6 +124,7 @@ export default class Game {
             this.isPaused = true;
             clearInterval(this.loopId)
             this.loopId = null;
+            pauseModal.style.display = 'flex'
         }
     }
 
