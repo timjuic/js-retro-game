@@ -1,7 +1,7 @@
 import { RectangleEntity } from "./entity.js"
 
 export default class Gun {
-    constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, bulletImgPath) {
+    constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, accuracy, bulletImgPath) {
         this.name = name;
         this.fireRate = fireRate
         this.automatic = automatic
@@ -9,6 +9,7 @@ export default class Gun {
         this.maxAmmo = maxAmmo
         this.damage = damage
         this.grains = grainsAmount;
+        this.accuracy = accuracy
         this.bulletImg = new Image()
         this.bulletImg.src = bulletImgPath;
         this.lastShotTimestamp = null;
