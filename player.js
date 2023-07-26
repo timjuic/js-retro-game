@@ -12,17 +12,19 @@ export default class Player extends RectangleEntity {
       let posY = playerCanvas.height / 2;
       let width = 5 / 100 // Percentage of the canvas width. Canvas width is appended later in canvas-manager
       let height = 5 / 100
-      console.log(playerCanvas.width, width);
       let angle = 0
       let velX = 0;
       let velY = 0;
       let color = 'blue'
-      super(game, posX, posY, width, height, angle, velX, velY, color)
+      let image = new Image()
+      image.src = './assets/enemy1.png'
+      super(game, posX, posY, width, height, angle, velX, velY, color, image)
 
       this.nickname = nickname;
       this.speed = 1
       this.health = health;
       this.maxHealth = health;
+      this.lastMovedDirection = 1;
       this.addGun();
 
       this.bulletImg = new Image()
@@ -70,8 +72,9 @@ export default class Player extends RectangleEntity {
         let crosshair = this.game.getCrosshair();
         let grainsAmount = this.gun.getGrainsAmount();
 
-        let centerX = this.posX + this.width / 2;
+        let centerX = this.posX + this.width / 2
         let centerY = this.posY + this.height / 2
+        console.log(centerX, centerY);
 
         if (grainsAmount === 1) {
             let angle = MathUtil.calculateAngle(centerX, centerY, crosshair.aimX, crosshair.aimY)
@@ -110,13 +113,19 @@ export default class Player extends RectangleEntity {
             if (!collisionDetector.collidesWithTopBorder(this, -this.speed)) this.posY -= this.speed;
         }
         if (inputManager.pressedControls['moveRight']) {
-            if (!collisionDetector.collidesWithRightBorder(this, this.speed)) this.posX += this.speed;
+            if (!collisionDetector.collidesWithRightBorder(this, this.speed)) {
+                this.posX += this.speed;
+                this.lastMovedDirection = 1;
+            }
         }
         if (inputManager.pressedControls['moveDown']) {
             if (!collisionDetector.collidesWithBottomBorder(this, this.speed)) this.posY += this.speed;
         }
         if (inputManager.pressedControls['moveLeft']) {
-            if (!collisionDetector.collidesWithLeftBorder(this, -this.speed)) this.posX -= this.speed;
+            if (!collisionDetector.collidesWithLeftBorder(this, -this.speed)) {
+                this.posX -= this.speed;
+                this.lastMovedDirection = -1;
+            }
         }
     }
 
