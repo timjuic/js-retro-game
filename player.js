@@ -10,8 +10,9 @@ export default class Player extends RectangleEntity {
       let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
       let posX = playerCanvas.width / 2;
       let posY = playerCanvas.height / 2;
-      let width = 5 * game.settings.OBJECT_SCALE_FACTOR;
-      let height = 5 * game.settings.OBJECT_SCALE_FACTOR;
+      let width = 5 / 100 // Percentage of the canvas width. Canvas width is appended later in canvas-manager
+      let height = 5 / 100
+      console.log(playerCanvas.width, width);
       let angle = 0
       let velX = 0;
       let velY = 0;

@@ -127,10 +127,4 @@ export default class Game {
             pauseModal.style.display = 'flex'
         }
     }
-
-    // Resizes game elements to keep proportion to the canvas size
-    resizeGameElements() {
-      
-    }
-
 }
