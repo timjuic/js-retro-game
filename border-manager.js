@@ -16,6 +16,28 @@ export default class BorderManager{
         return this.borders
     }
 
+    getTopBorder() {
+        let borders = this.getBorders()
+        return borders.top.height
+     }
+  
+    getRightBorder() {
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
+        let borders = this.getBorders()
+        return canvas.width - borders.right.width
+     }
+  
+    getBottomBorder() {
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas')
+        let borders = this.getBorders()
+        return canvas.height - borders.bottom.height
+     }
+  
+    getLeftBorder() {
+        let borders = this.getBorders()
+        return borders.left.width
+     }
+
     drawBorders(canvasName) {
       let canvas = this.game.getCanvasManager().getCanvas(canvasName)
       let ctx = this.game.getCanvasManager().getContext(canvasName)
