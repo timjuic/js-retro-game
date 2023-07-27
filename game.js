@@ -7,11 +7,12 @@ import Player from "./player.js";
 import BorderManager from "./border-manager.js";
 import CrosshairManager from "./crosshair-manager.js";
 import InputType from "./enums/input-type.js";
-import Wave from "./corner-wave.js";
+import Wave from "./waves/corner-wave.js";
 import WaveType from "./enums/wave-type.js";
-import CornerWave from "./corner-wave.js";
+import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
-import SideWave from "./side-wave.js";
+import SideWave from "./waves/side-wave.js";
+import RandomWave from "./waves/random-wave.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -41,7 +42,8 @@ export default class Game {
 
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
-          new SideWave(this, 3);
+          // new SideWave(this, 3);
+          new RandomWave(this, 20);
         }, 1000);
 
         // Generate the level

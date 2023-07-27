@@ -1,22 +1,24 @@
-import Enemy from "./enemies/enemy.js";
-import Sides from "./enums/sides.js";
+import Enemy from "../enemies/enemy.js";
+import Sides from "../enums/sides.js";
+import Wave from "./wave.js";
 
-export default class SideWave {
+export default class SideWave extends Wave {
     constructor(game, waveSize) {
-        this.game = game;
+        super(game);
+        this.waveSize = waveSize;
 
         let side = this.getFurthestSideFromPlayer()
-        this.createLineWave(waveSize, side)
+        this.createLineWave(side)
     }
 
-    createLineWave(numEnemies, side) {
+    createLineWave(side) {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         let borderGap = playerCanvas.width / 150;
-        let gap = (side === Sides.TOP || side === Sides.BOTTOM) ? playerCanvas.width / numEnemies : playerCanvas.height / numEnemies;
+        let gap = (side === Sides.TOP || side === Sides.BOTTOM) ? playerCanvas.width / this.waveSize : playerCanvas.height / this.waveSize;
         let startPos = gap / 2;  // start from the center of the gap
         let borderManager = this.game.getBorderManager();
 
-        for (let i = 0; i < numEnemies; i++) {
+        for (let i = 0; i < this.waveSize; i++) {
           let posX, posY;
       
           switch (side) {
@@ -67,24 +69,5 @@ export default class SideWave {
         }
       
         return furthestSide;
-      }
-
-      createEnemy(x, y) {
-        let newEnemy = new Enemy(
-          this.game,
-          x,
-          y,
-          20,
-          20,
-          50,
-          5,
-          100,
-          0,
-          0,
-          0,
-          "blue"
-        );
-      
-        this.game.enemies.push(newEnemy);
       }
 }
