@@ -7,8 +7,10 @@ import Player from "./player.js";
 import BorderManager from "./border-manager.js";
 import CrosshairManager from "./crosshair-manager.js";
 import InputType from "./enums/input-type.js";
-import Wave from "./wave.js";
+import Wave from "./corner-wave.js";
 import WaveType from "./enums/wave-type.js";
+import CornerWave from "./corner-wave.js";
+import CornerWaveSize from "./enums/corner-wave-size.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -36,7 +38,9 @@ export default class Game {
         // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
 
-        new Wave(this, WaveType.CORNER_SMALL);
+        setTimeout(() => {
+          new CornerWave(this, CornerWaveSize.BIG);
+        }, 1000);
 
         // Generate the level
         // Instantiate and show the player
