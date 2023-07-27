@@ -63,6 +63,15 @@ export default class CollisionDetector {
       }
    }
 
+   collidesWithEntity(entity1, entity2) {
+      return (
+         entity1.posX < entity2.posX + entity2.width &&
+         entity1.posX + entity1.width > entity2.posX &&
+         entity1.posY < entity2.posY + entity2.height &&
+         entity1.posY + entity1.height > entity2.posY
+      );
+    }
+
    isInsideCanvas(entity) {
       if (entity.posX < 0) return false;
       if (entity.posY < 0) return false;
