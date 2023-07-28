@@ -16,9 +16,9 @@ export default class RandomWave extends Wave {
         // Define the spawn area
         let spawnArea = {
             minX: borderWidth + gapFromBorder,
-            maxX: playerCanvas.width - borderWidth - gapFromBorder  - 20,
+            maxX: playerCanvas.width - borderWidth - gapFromBorder - this.enemyDummy.width,
             minY: borderWidth + gapFromBorder,
-            maxY: playerCanvas.height - borderWidth - gapFromBorder - 20
+            maxY: playerCanvas.height - borderWidth - gapFromBorder - this.enemyDummy.height
           };
       
         // Generate the enemies
