@@ -11,8 +11,9 @@ import Wave from "./waves/corner-wave.js";
 import WaveType from "./enums/wave-type.js";
 import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
-import SideWave from "./waves/side-wave.js";
+import SideWave from "./waves/line-wave.js";
 import RandomWave from "./waves/random-wave.js";
+import SquareWave from "./waves/square-wave.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -43,7 +44,7 @@ export default class Game {
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
           // new SideWave(this, 3);
-          new RandomWave(this, 20);
+          new SquareWave(this, 5);
         }, 1000);
 
         // Generate the level

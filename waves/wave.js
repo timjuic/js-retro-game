@@ -1,3 +1,4 @@
+import BasicEnemy from "../enemies/basic-enemy.js";
 import Enemy from "../enemies/enemy.js";
 
 export default class Wave {
@@ -6,15 +7,10 @@ export default class Wave {
     }
 
     createEnemy(x, y) {
-        let newEnemy = new Enemy(
+        let newEnemy = new BasicEnemy(
           this.game,
           x,
           y,
-          20,
-          20,
-          50,
-          5,
-          100,
           0,
           0,
           0,

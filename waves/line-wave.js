@@ -2,7 +2,7 @@ import Enemy from "../enemies/enemy.js";
 import Sides from "../enums/sides.js";
 import Wave from "./wave.js";
 
-export default class SideWave extends Wave {
+export default class LineWave extends Wave {
     constructor(game, waveSize) {
         super(game);
         this.waveSize = waveSize;
