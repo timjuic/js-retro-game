@@ -2,10 +2,9 @@ import Enemy from "../enemies/enemy.js";
 import Wave from "./wave.js";
 
 export default class RandomWave extends Wave {
-    constructor(game, waveSize) {
-        super(game)
-        this.waveSize = waveSize;
-        this.spawnEnemiesNearBorder(waveSize)
+    constructor(game, waveSize, enemyType) {
+        super(game, waveSize, enemyType)
+        this.spawnEnemiesNearBorder(this.waveSize)
     }
 
     spawnEnemiesNearBorder() {

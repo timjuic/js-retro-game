@@ -2,14 +2,13 @@ import Sides from "../enums/sides.js";
 import Wave from "./wave.js";
 
 export default class SquareWave extends Wave {
-    constructor(game, waveSize) {
-        super(game);
-        this.waveSize = waveSize;
-        this.createSquareWave(Sides.TOP);
-        this.createSquareWave(Sides.RIGHT);
-        this.createSquareWave(Sides.BOTTOM);
-        this.createSquareWave(Sides.LEFT);
-        console.log("SQUARE WAVE CALLED");
+    constructor(game, waveSize, enemyType) {
+        super(game, waveSize, enemyType);
+        console.log(enemyType);
+        console.log(new enemyType);
+
+        let side = this.getFurthestSideFromPlayer()
+        this.createSquareWave(side)
     }
 
      createSquareWave(side) {
@@ -21,20 +20,20 @@ export default class SquareWave extends Wave {
         let startX, startY;
         switch (side) {
           case Sides.TOP:
-            startX = (playerCanvas.width - this.waveSize * (20 + gap) + gap) / 2;
+            startX = (playerCanvas.width - this.waveSize * (this.enemyDummy.width + gap) + gap) / 2;
             startY = borderWidth + distanceFromSide;
             break;
           case Sides.LEFT:
             startX = borderWidth + distanceFromSide;
-            startY = (playerCanvas.height - this.waveSize * (20 + gap) + gap) / 2;
+            startY = (playerCanvas.height - this.waveSize * (this.enemyDummy.height + gap) + gap) / 2;
             break;
           case Sides.RIGHT:
-            startX = playerCanvas.width - borderWidth - distanceFromSide - this.waveSize * (20 + gap) + gap;
-            startY = (playerCanvas.height - this.waveSize * (20 + gap) + gap) / 2;
+            startX = playerCanvas.width - borderWidth - distanceFromSide - this.waveSize * (this.enemyDummy.width + gap) + gap;
+            startY = (playerCanvas.height - this.waveSize * (this.enemyDummy.height + gap) + gap) / 2;
             break;
           case Sides.BOTTOM:
-            startX = (playerCanvas.width - this.waveSize * (20 + gap) + gap) / 2;
-            startY = playerCanvas.height - distanceFromSide - borderWidth - this.waveSize * (20 + gap) + gap;
+            startX = (playerCanvas.width - this.waveSize * (this.enemyDummy.width + gap) + gap) / 2;
+            startY = playerCanvas.height - distanceFromSide - borderWidth - this.waveSize * (this.enemyDummy.height + gap) + gap;
             break;
           default:
             throw new Error("Invalid side provided.");
@@ -45,11 +44,11 @@ export default class SquareWave extends Wave {
             let posX, posY;
             if (side === Sides.RIGHT || side === Sides.BOTTOM) {
               // Reverse the order of enemy creation for RIGHT and BOTTOM sides
-              posX = startX + col * (20 + gap);
-              posY = startY + row * (20 + gap);
+              posX = startX + col * (this.enemyDummy.width + gap);
+              posY = startY + row * (this.enemyDummy.height + gap);
             } else {
-              posX = startX + col * (20 + gap);
-              posY = startY + row * (20 + gap);
+              posX = startX + col * (this.enemyDummy.width + gap);
+              posY = startY + row * (this.enemyDummy.height + gap);
             }
             this.createEnemy(posX, posY);
           }
@@ -58,7 +57,31 @@ export default class SquareWave extends Wave {
       
       
       
-    
+      getFurthestSideFromPlayer() {
+        let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
+        let player = this.game.player
+
+        // Calculate the distances to each side
+        let distances = {
+          [Sides.TOP]: player.posY,
+          [Sides.BOTTOM]: playerCanvas.height - player.posY,
+          [Sides.LEFT]: player.posX,
+          [Sides.RIGHT]: playerCanvas.width - player.posX
+        };
+      
+        // Find the side with the maximum distance
+        let furthestSide = Sides.TOP;
+        let maxDistance = distances[Sides.TOP];
+      
+        for (let side in distances) {
+          if (distances[side] > maxDistance) {
+            maxDistance = distances[side];
+            furthestSide = side;
+          }
+        }
+      
+        return furthestSide;
+      }
     
     
 }

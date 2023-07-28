@@ -4,8 +4,7 @@ import Wave from "./wave.js";
 
 export default class LineWave extends Wave {
     constructor(game, waveSize) {
-        super(game);
-        this.waveSize = waveSize;
+        super(game, waveSize);
 
         let side = this.getFurthestSideFromPlayer()
         this.createLineWave(side)
