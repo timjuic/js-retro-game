@@ -47,7 +47,7 @@ export default class Game {
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
           // new SideWave(this, 3);
-          new LineWave(this, 10, BasicEnemy);
+          new CornerWave(this, CornerWaveSize.BIG, Basic2Enemy);
         }, 1000);
 
         // Generate the level
