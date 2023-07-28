@@ -10,11 +10,13 @@ export default class Enemy extends RectangleEntity {
     }
 
     move() {
-        this.ticksPassed++;
-      
-        if (this.ticksPassed % this.moveInterval !== 0) {
-          return; // Skip moving on this tick
-        }
+      const randomOffset = Math.floor(Math.random() * this.moveInterval);
+  
+      this.ticksPassed++;
+    
+      if ((this.ticksPassed + randomOffset) % this.moveInterval !== 0) {
+        return; // Skip moving on this tick
+      }
       
         // Calculate the direction vector towards the player
         const playerX = this.game.player.posX;
