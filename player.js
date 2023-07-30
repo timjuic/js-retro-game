@@ -110,7 +110,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[2]
+        this.gun = gunsData[0]
         console.log(this.gun);
     }
 
@@ -122,14 +122,16 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let deviationY = MathUtil.generateRandomNumber(0, entity.gun.accuracy);
     let directionX = MathUtil.getRandomSign();
     let directionY = MathUtil.getRandomSign();
-    let grainTargetPointX = crosshair.aimX + directionX * deviationX;
-    let grainTargetPointY = crosshair.aimY + directionY * deviationY;
+    let playerDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY);
+    let grainTargetPointX = crosshair.aimX + directionX * deviationX * playerDistanceFromCrosshair / 1000;
+    let grainTargetPointY = crosshair.aimY + directionY * deviationY * playerDistanceFromCrosshair / 1000;
 
 
     let grainAngle = MathUtil.calculateAngle(centerX, centerY, grainTargetPointX, grainTargetPointY);
     let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
+
     let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, entity.gun.piercing, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
 }
