@@ -14,9 +14,6 @@ export default class CornerWave extends Wave {
         else if (corner === Corners.UPPER_RIGHT) this.createTopRightWave(waveSize);
         else if (corner === Corners.BOTTOM_LEFT) this.createBottomLeftWave(waveSize);
         else if (corner === Corners.BOTTOM_RIGHT) this.createBottomRightWave(waveSize);
-
-
-        console.log(this.game.enemies);
     }
 
     createTopLeftWave() {
