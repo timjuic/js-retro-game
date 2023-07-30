@@ -18,12 +18,15 @@ export default class MathUtil {
 
   static calculateAngle(x1, y1, x2, y2) {
     const deltaX = x2 - x1;
-    const deltaY = y2 - y1;
-  
-    // Calculate the angle using Math.atan2
-    const angleRadians = Math.atan2(deltaY, deltaX);
-  
-    return angleRadians;
+  const deltaY = y2 - y1;
+
+  // Calculate the angle using Math.atan2
+  const angleRadians = Math.atan2(deltaY, deltaX);
+
+  // Add π/2 (90 degrees in radians) to the angle for a 90-degree increment
+  const adjustedAngle = angleRadians + Math.PI / 2;
+
+  return adjustedAngle;
   }
   
 

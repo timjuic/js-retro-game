@@ -130,7 +130,6 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
-    let bullet = new Bullet(entity.game, centerX - 10, centerY - 10, 20, 20, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, "blue", entity.bulletImg)
+    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
-    console.log(bullet.angle);
 }
