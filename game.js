@@ -47,7 +47,7 @@ export default class Game {
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
           // new SideWave(this, 3);
-          new CornerWave(this, CornerWaveSize.BIG, Basic2Enemy);
+          new CornerWave(this, CornerWaveSize.BIG, BasicEnemy);
         }, 1000);
 
         // Generate the level
@@ -79,10 +79,11 @@ export default class Game {
 
 
     generateCanvases() {
-        this.canvasManager.generateCanvas('playerCanvas')
-        this.canvasManager.generateCanvas('crosshairCanvas')
+      this.canvasManager.generateCanvas('projectileCanvas')
+      this.canvasManager.generateCanvas('playerCanvas')
+      this.canvasManager.generateCanvas('crosshairCanvas')
       //   this.canvasManager.generateCanvas('enemiesCanvas')
-        this.canvasManager.generateCanvas('projectileCanvas')
+        
     }
 
     tick() {
@@ -93,8 +94,10 @@ export default class Game {
 
         this.canvasManager.clearCanvases()
         this.borderManager.drawBorders('playerCanvas')
-        this.player.updatePosition()
+        this.player.updatePosition();
+        this.playerBullets.forEach(bullet => bullet.updatePosition());
         this.enemies.forEach(enemy => enemy.move())
+        this.runHitDetection()
 
         this.drawGameElements();
     }
@@ -104,7 +107,6 @@ export default class Game {
       this.enemies.forEach(enemy => enemy.draw('playerCanvas'))
 
       this.playerBullets.forEach((bullet, i) => {
-        bullet.updatePosition()
         if (!this.collisionDetector.isInsideCanvas(bullet)) {
             this.playerBullets.splice(i, 1);
             return;
@@ -144,5 +146,30 @@ export default class Game {
             this.loopId = null;
             pauseModal.style.display = 'flex'
         }
+    }
+
+    runHitDetection() {
+        this.enemies.forEach((enemy, i) => {
+          if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
+            this.enemies.splice(i, 1)
+          }
+        })
+
+        this.playerBullets.forEach((bullet, i) => {
+          // console.log(bullet.posX, bullet.posY, bullet.angle);
+          this.enemies.forEach((enemy, j) => {
+            
+            if (this.getCollisionDetector().collidesWithEntityRotated(bullet, enemy)) {
+              // Implement ability for bullet to kill multiple enemies if its strong enough
+              
+
+              this.playerBullets.splice(i, 1);
+              if (bullet.damage >= enemy.health) {
+                this.enemies.splice(j, 1);
+              }
+
+            }
+          })
+        })
     }
 }

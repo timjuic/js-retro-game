@@ -1,3 +1,4 @@
+import MathUtil from "./helpers/math-util.js"
 
 class Entity {
    constructor(game, posX, posY, velX, velY, color, image) {
@@ -32,11 +33,11 @@ class RectangleEntity extends Entity {
     
       ctx.save(); // Save the current state of the canvas
         
-      let centerX = this.posX;
-      let centerY = this.posY;
+      let centerX = this.posX + this.width / 2;
+      let centerY = this.posY + this.height / 2;
         
       ctx.translate(centerX, centerY);
-      ctx.rotate(this.angle * (Math.PI / 180));
+      ctx.rotate(this.angle);
       ctx.translate(-centerX, -centerY);
       
       if (this.image !== undefined) {
@@ -52,8 +53,8 @@ class RectangleEntity extends Entity {
          if (this.angle !== 0) {
             ctx.drawImage(
                this.image,
-               (this.posX - this.width / 2) * flip, // Flip back the image if scaleX is -1
-               (this.posY - this.height / 2),
+               (this.posX) * flip, // Flip back the image if scaleX is -1
+               (this.posY),
                this.width * flip, // Flip back the width if scaleX is -1
                this.height
              );
