@@ -46,7 +46,10 @@ export default class Game {
 
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
-          // new SideWave(this, 3);
+          new SideWave(this, 3, Basic2Enemy);
+          new SideWave(this, 10, BasicEnemy);
+          new SideWave(this, 3, BasicEnemy);
+
           new CornerWave(this, CornerWaveSize.BIG, BasicEnemy);
         }, 1000);
 
@@ -162,11 +165,17 @@ export default class Game {
             if (this.getCollisionDetector().collidesWithEntityRotated(bullet, enemy)) {
               // Implement ability for bullet to kill multiple enemies if its strong enough
               
-
-              this.playerBullets.splice(i, 1);
               if (bullet.damage >= enemy.health) {
                 this.enemies.splice(j, 1);
+                if (bullet.piercing) {
+                  bullet.damage -= enemy.health;
+                } else this.playerBullets.splice(i, 1);
+              } else {
+                enemy.health -= bullet.damage;
+                this.playerBullets.splice(i, 1);
               }
+
+              
 
             }
           })

@@ -2,9 +2,10 @@ import { RectangleEntity } from "./entity.js";
 import MathUtil from "./helpers/math-util.js";
 
 export default class Bullet extends RectangleEntity {
-    constructor(game, posX, posY, width, height, angle, velX, velY, damage, color, image) {
+    constructor(game, posX, posY, width, height, angle, velX, velY, damage, piercing, color, image) {
         super(game, posX, posY, width, height, angle, velX, velY, color, image)
         this.damage = damage;
+        this.piercing = piercing;
     }
 
     draw(canvasName) {

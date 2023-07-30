@@ -110,7 +110,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[1]
+        this.gun = gunsData[2]
         console.log(this.gun);
     }
 
@@ -130,6 +130,6 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
-    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, "blue", entity.bulletImg)
+    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, entity.gun.piercing, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
 }
