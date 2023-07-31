@@ -47,7 +47,6 @@ export default class Player extends RectangleEntity {
         } else {
             if (this.gun.canShoot()) this.shoot();
         }
-
     }
 
     startShooting() {
@@ -79,7 +78,6 @@ export default class Player extends RectangleEntity {
                 createBullet(this, crosshair, centerX, centerY);
             }
         }
-        
     }
 
     updatePosition() {
@@ -107,10 +105,9 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[0]
+        this.gun = gunsData[1]
         console.log(this.gun);
     }
-
 }
 
 
@@ -129,6 +126,6 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
 
-    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, entity.gun.piercing, "blue", entity.bulletImg)
+    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
 }

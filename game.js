@@ -173,12 +173,38 @@ export default class Game {
               } else {
                 enemy.health -= bullet.damage;
                 this.playerBullets.splice(i, 1);
+                enemy.isBeingHit = true;
+                let tries = 5;
+                let newEnemyPosX, newEnemyPosY, validPosition = false;
+                for (let i = 1; i <= tries; i++) {
+                  console.log("iteration", i, bullet.velX * bullet.knockbackMultiplier / i);
+                  newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / i;
+                  newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / i;
+                  if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
+                    console.log("collides with enemy");
+                    continue;
+                  }
+                  if (!this.getCollisionDetector().isInsideCanvasBorders({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height }))  {
+                    console.log("collides with border");
+                    continue;
+                  }
+                  validPosition = true;
+                }
+                
+                
+                if (!validPosition) return;
+                enemy.posX = newEnemyPosX;
+                enemy.posY = newEnemyPosY
               }
-
-              
-
             }
           })
         })
+    }
+
+    collidesWithAnEnemy(entity) {
+      for (let enemy of this.enemies) {
+        if (this.getCollisionDetector().collidesWithEntity(entity, enemy)) return true;
+      }
+      return false;
     }
 }

@@ -57,6 +57,9 @@ export default class Enemy extends RectangleEntity {
           }
         }
       
+        if (newX < this.posX) this.lastMovedDirection = -1;
+        if (newX > this.posX) this.lastMovedDirection = 1;
+
         // Update the enemy position based on collision detection results
         if (canMoveX) {
           this.posX = newX;

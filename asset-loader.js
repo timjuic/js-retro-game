@@ -20,12 +20,10 @@ export default class AssetLoader {
 
     loadImages(assetNames, assetType) {
         assetNames.forEach(assetName => {
-            console.log(assetName);
             let assetImage = new Image();
             assetImage.src = `./assets/${assetName}`;
             assetType[assetName.split('.')[0]] = assetImage;
         });
-        console.log(this.bulletAssets, this.enemyAssets);
     }
 
     loadPlayer() {

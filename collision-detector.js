@@ -77,6 +77,22 @@ export default class CollisionDetector {
    isInsideCanvas(entity) {
       if (entity.posX < 0) return false;
       if (entity.posY < 0) return false;
+      if (entity.posX + entity.width > this.canvas.width) return false;
+      if (entity.posY + entity.height > this.canvas.height) return false;
+      return true;
+   }
+
+   isInsideCanvasBorders(entity) {
+      if (entity.posX < this.#getLeftBorder()) return false;
+      if (entity.posY < this.#getTopBorder()) return false;
+      if (entity.posX + entity.width > this.#getRightBorder()) return false;
+      if (entity.posY + entity.height > this.#getBottomBorder()) return false;
+      return true;
+   }
+
+   isFullyInsideCanvas() {
+      if (entity.posX + entity.width < 0) return false;
+      if (entity.posY + entity.height < 0) return false;
       if (entity.posX > this.canvas.width) return false;
       if (entity.posY > this.canvas.height) return false;
       return true;

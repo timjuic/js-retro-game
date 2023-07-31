@@ -7,6 +7,7 @@ class Entity {
       this.posY = posY
       this.velX = velX
       this.velY = velY
+      this.lastMovedDirection;
       this.color = color
       this.image = image
    }
@@ -20,6 +21,10 @@ class RectangleEntity extends Entity {
       this.width = width;
       this.height = height;
       this.angle = angle;
+
+      this.isBeingHit = false;
+      this.hitMarkerTicks = 0;
+
    }
 
    updatePosition() {
@@ -28,10 +33,9 @@ class RectangleEntity extends Entity {
    }
 
    draw(canvasName) {
-      let canvas = this.game.getCanvasManager().getCanvas(canvasName);
       let ctx = this.game.getCanvasManager().getContext(canvasName);
     
-      ctx.save(); // Save the current state of the canvas
+      ctx.save();
         
       let centerX = this.posX + this.width / 2;
       let centerY = this.posY + this.height / 2;
@@ -49,25 +53,33 @@ class RectangleEntity extends Entity {
          }
 
          ctx.scale(flip, 1);
-    
-         if (this.angle !== 0) {
+   
+         if (this.isBeingHit) {
+            ctx.filter = 'brightness(800%)';
+            ctx.drawImage(
+               this.image,
+               (this.posX) * flip,
+               (this.posY),
+               this.width * flip,
+               this.height
+            );
+
+          
+            this.hitMarkerTicks++;
+            if (this.hitMarkerTicks >= this.game.settings.HITMARKER_TICKS) {
+               this.isBeingHit = false;
+               this.hitMarkerTicks = 0;
+            }
+         } else {
             ctx.drawImage(
                this.image,
                (this.posX) * flip, // Flip back the image if scaleX is -1
                (this.posY),
                this.width * flip, // Flip back the width if scaleX is -1
                this.height
-             );
-           } else {
-            ctx.drawImage(
-               this.image,
-               this.posX * flip, // Flip back the image if scaleX is -1
-               this.posY,
-               this.width * flip, // Flip back the width if scaleX is -1
-               this.height
-             );
-           }
-        
+            );
+         }
+      
       } else {
         ctx.fillStyle = this.color;
         ctx.fillRect(
@@ -79,8 +91,7 @@ class RectangleEntity extends Entity {
       }
        
       ctx.restore(); // Restore the original state of the canvas
-    }
-    
+    } 
 }
 
 class CircleEntity extends Entity {
