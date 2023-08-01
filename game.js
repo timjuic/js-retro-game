@@ -39,7 +39,7 @@ export default class Game {
         this.enemies = []
         this.playerBullets = []
         this.enemyBullets = []
-        this.particles = [];
+        this.particleManagers = [];
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
@@ -101,7 +101,9 @@ export default class Game {
         this.player.updatePosition();
         this.playerBullets.forEach(bullet => bullet.updatePosition());
         this.enemies.forEach(enemy => enemy.move())
-        this.particles.forEach(particle => particle.updatePosition());
+        this.particleManagers.forEach(pm => pm.particles.forEach(particle => {
+          particle.updatePosition();
+        }));
         this.runHitDetection()
 
         this.drawGameElements();
@@ -120,8 +122,8 @@ export default class Game {
       })
 
       // console.log(this.particles);
-      this.particles.forEach(particle => {
-        particle.draw('playerCanvas');
+      this.particleManagers.forEach(pm => {
+        pm.particles.forEach(particle => particle.draw('playerCanvas'));
       })
     }
 

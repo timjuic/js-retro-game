@@ -6,8 +6,17 @@ export default class ParticleManager {
         this.game = game;
         this.entity = entity;
         this.particleBaseSize = particleBaseSize;
-        this.pixelGroupingAmount = pixelGroupingModifier;
+        this.pixelGroupingModifier = pixelGroupingModifier;
         this.explosionStrength = explosionStrength;
+        this.particles = [];
+        this.particleClearTimer = setInterval(() => this.clearParticles(), 500);
+    }
+
+    clearParticles() {
+        if (this.particles.some(particle => particle.opacity < 0.01)) {
+            console.log('Clearing them');
+            this.particles.length = 0;
+        }
     }
 
     getEntityImage() {
@@ -24,22 +33,20 @@ export default class ParticleManager {
         let image = this.getEntityImage();
         let data = image.data;
         
-        let particleSize = 2;
-        let pixelGroupingAmount = 10;
         let centerX = this.entity.posX + this.entity.width / 2;
         let centerY = this.entity.posY + this.entity.height / 2;
-        let imageHalfX = image.width / 2 / particleSize;
-        let imageHalfY = image.height / 2 / particleSize;
-        for (let y = 0; y < image.height; y += pixelGroupingAmount) {
-          for (let x = 0; x < image.width; x += pixelGroupingAmount) {
-              const i = (x + y * image.width) * particleSize;
+        let imageHalfX = image.width * this.particleBaseSize / this.pixelGroupingModifier / 2;
+        let imageHalfY = image.height * this.particleBaseSize / this.pixelGroupingModifier / 2;
+        for (let y = 0; y < image.height; y += this.pixelGroupingModifier) {
+          for (let x = 0; x < image.width; x += this.pixelGroupingModifier) {
+              const i = (x + y * image.width) * 4;
               const color = `rgba(${data[i]}, ${data[i+1]}, ${data[i+2]}, ${data[i+3] / 255})`;
 
-              const particlePosX = centerX + x / particleSize - imageHalfX;
-              const particlePosY = centerY + y / particleSize - imageHalfY;
+              const particlePosX = centerX + x * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfX;
+              const particlePosY = centerY + y * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfY;
 
-              const sizeRandomizer = MathUtil.generateRandomInteger(-particleSize+1, particleSize-1);
-              const finalParticleSize = particleSize + sizeRandomizer
+              const sizeRandomizer = MathUtil.generateRandomInteger(-this.particleBaseSize+1, this.particleBaseSize)
+              const finalParticleSize = this.particleBaseSize + sizeRandomizer
 
               const xVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
               const yVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
@@ -47,8 +54,8 @@ export default class ParticleManager {
               const velX = ((x / image.width) * this.explosionStrength) - (this.explosionStrength / 2) + xVelAmplifyAmount * extraAmplifier;
               const velY = ((y / image.height) * this.explosionStrength) - (this.explosionStrength / 2) + yVelAmplifyAmount * extraAmplifier;
       
-              const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 100, velX, velY, 0, color, 1);
-              this.game.particles.push(particle);
+              const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, 90, color, 1);
+              this.particles.push(particle);
             
           }
       }
