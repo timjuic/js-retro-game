@@ -18,6 +18,7 @@ export default class Wave {
           0,
           0,
           0,
+          0,
           "blue"
         );
 

@@ -17,7 +17,7 @@ export default class Player extends RectangleEntity {
       let velY = 0;
       let color = 'blue'
       let image = game.assetLoader.enemyAssets.enemy1
-      super(game, posX, posY, width, height, angle, velX, velY, color, image)
+      super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
       this.nickname = nickname;
       this.speed = 1
@@ -112,8 +112,8 @@ export default class Player extends RectangleEntity {
 
 
 function createBullet(entity, crosshair, centerX, centerY) {
-    let deviationX = MathUtil.generateRandomNumber(0, entity.gun.accuracy);
-    let deviationY = MathUtil.generateRandomNumber(0, entity.gun.accuracy);
+    let deviationX = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
+    let deviationY = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
     let directionX = MathUtil.getRandomSign();
     let directionY = MathUtil.getRandomSign();
     let playerDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY);
@@ -126,6 +126,6 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
 
-    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
+    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
 }

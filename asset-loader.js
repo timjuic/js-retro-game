@@ -2,10 +2,14 @@ export default class AssetLoader {
     constructor() {
         this.bulletAssets = {};
         this.enemyAssets = {}
+        this.enemyImageDataObjects = {};
         this.playerAsset;
 
         this.loadBulletAssets();
         this.loadEnemyAssets()
+        this.loadEnemyImagesData(); // Preloading image data for each enemy as cache for explosion effects
+        
+
     }
 
     loadBulletAssets() {
@@ -25,6 +29,22 @@ export default class AssetLoader {
             assetType[assetName.split('.')[0]] = assetImage;
         });
     }
+
+    loadEnemyImagesData() {
+        let testCanvas = document.createElement('canvas');
+        let testContext = testCanvas.getContext('2d');
+        Array.from(Object.keys(this.enemyAssets)).forEach(enemyAssetName => {
+            console.log(enemyAssetName);
+            let img = this.enemyAssets[enemyAssetName];
+            img.onload = () => {
+                testCanvas.width = img.width;
+                testCanvas.height = img.height;
+                testContext.drawImage(img, 0, 0, img.width, img.height);
+                this.enemyImageDataObjects[enemyAssetName] = testContext.getImageData(0, 0, img.width, img.height)
+            }
+        })
+    }
+    
 
     loadPlayer() {
 

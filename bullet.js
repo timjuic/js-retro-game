@@ -2,8 +2,8 @@ import { RectangleEntity } from "./entity.js";
 import MathUtil from "./helpers/math-util.js";
 
 export default class Bullet extends RectangleEntity {
-    constructor(game, posX, posY, width, height, angle, velX, velY, damage, piercing, knockbackMultiplier, color, image) {
-        super(game, posX, posY, width, height, angle, velX, velY, color, image)
+    constructor(game, posX, posY, width, height, angle, velX, velY, velRotation, damage, piercing, knockbackMultiplier, color, image) {
+        super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.damage = damage;
         this.piercing = piercing;
         this.knockbackMultiplier = knockbackMultiplier;
@@ -20,8 +20,6 @@ export default class Bullet extends RectangleEntity {
         ctx.translate(centerX, centerY);
         ctx.rotate(this.angle);
         ctx.translate(-centerX, -centerY);
-        
-       
 
         if (this.image !== undefined) {
             let bulletScale = 2;

@@ -39,6 +39,7 @@ export default class Game {
         this.enemies = []
         this.playerBullets = []
         this.enemyBullets = []
+        this.particles = [];
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
@@ -100,6 +101,7 @@ export default class Game {
         this.player.updatePosition();
         this.playerBullets.forEach(bullet => bullet.updatePosition());
         this.enemies.forEach(enemy => enemy.move())
+        this.particles.forEach(particle => particle.updatePosition());
         this.runHitDetection()
 
         this.drawGameElements();
@@ -115,6 +117,11 @@ export default class Game {
             return;
         }
         bullet.draw("projectileCanvas");
+      })
+
+      // console.log(this.particles);
+      this.particles.forEach(particle => {
+        particle.draw('playerCanvas');
       })
     }
 
@@ -167,6 +174,7 @@ export default class Game {
               
               if (bullet.damage >= enemy.health) {
                 this.enemies.splice(j, 1);
+                enemy.particleDeath()
                 if (bullet.piercing) {
                   bullet.damage -= enemy.health;
                 } else this.playerBullets.splice(i, 1);
@@ -177,15 +185,12 @@ export default class Game {
                 let tries = 5;
                 let newEnemyPosX, newEnemyPosY, validPosition = false;
                 for (let i = 1; i <= tries; i++) {
-                  console.log("iteration", i, bullet.velX * bullet.knockbackMultiplier / i);
                   newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / i;
                   newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / i;
                   if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
-                    console.log("collides with enemy");
                     continue;
                   }
                   if (!this.getCollisionDetector().isInsideCanvasBorders({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height }))  {
-                    console.log("collides with border");
                     continue;
                   }
                   validPosition = true;

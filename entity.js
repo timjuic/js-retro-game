@@ -14,13 +14,14 @@ class Entity {
 }
 
 class RectangleEntity extends Entity {
-   constructor(game, posX, posY, width, height, angle, velX, velY, color, image) {
+   constructor(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image) {
       super(game, posX, posY, velX, velY, color, image)
       this.baseWidth = width;
       this.baseHeight = height;
       this.width = width;
       this.height = height;
       this.angle = angle;
+      this.velRotation = MathUtil.degreesToRadians(velRotation);
 
       this.isBeingHit = false;
       this.hitMarkerTicks = 0;

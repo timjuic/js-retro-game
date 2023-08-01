@@ -1,8 +1,11 @@
 import { RectangleEntity } from "../entity.js"
+import MathUtil from "../helpers/math-util.js";
+import ParticleManager from "../particle-manager.js";
+import Particle from "../particle.js";
 
 export default class Enemy extends RectangleEntity {
-    constructor(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, color, image) {
-        super(game, posX, posY, width, height, angle, velX, velY, color, image)
+    constructor(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, color, image) {
+        super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.moveInterval = moveInterval;
         this.speed = speed;
         this.health = health;
@@ -71,5 +74,9 @@ export default class Enemy extends RectangleEntity {
       }
       
 
-
+      async particleDeath() {
+        let particleManager = new ParticleManager(this.game, this, 2, 10, 2);
+        particleManager.createParticleExplosion(); 
+      console.log(this.game.particles);
+      };
 }
