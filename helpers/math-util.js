@@ -58,4 +58,8 @@ export default class MathUtil {
     const randomNumber = Math.random();
     return randomNumber < 0.5 ? -1 : 1;
   }
+
+  static calculateDiameterOfEntity(entity) {
+    return Math.sqrt(entity.width * entity.width + entity.height * entity.height);
+  }
 }

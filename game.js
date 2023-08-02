@@ -15,6 +15,8 @@ import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
 import PufPufEnemy from "./enemies/pufpuf-enemy.js";
 import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
+import MathUtil from "./helpers/math-util.js";
+import LineWave from "./waves/line-wave.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -41,6 +43,7 @@ export default class Game {
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
+        this.canvas = this.canvasManager.getCanvas('playerCanvas');
 
         // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
@@ -49,7 +52,7 @@ export default class Game {
             // new CornerWave(this, CornerWaveSize.BIG);
             // new SideWave(this, 3, BasicEnemy);
 
-            new CornerWave(this, 3, PufPufEnemy);
+            new LineWave(this, 5, PufPufEnemy);
         }, 1000);
 
 
@@ -221,9 +224,10 @@ export default class Game {
 
             let tries = 5;
             let newEnemyPosX, newEnemyPosY, validPosition = false;
+            let enemyDiameter = MathUtil.calculateDiameterOfEntity(enemy);
             for (let i = 1; i <= tries; i++) {
-                newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / i;
-                newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / i;
+                newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / enemyDiameter / i * this.canvas.width / 100;
+                newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / enemyDiameter / i * this.canvas.width / 100;
                 if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
                     continue;
                 }

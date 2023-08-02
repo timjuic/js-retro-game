@@ -7,7 +7,7 @@ export default class Enemy extends RectangleEntity {
     constructor(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image) {
         super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.moveInterval = moveInterval;
-        this.speed = speed;
+        this.speed = speed * this.game.canvas.width / 800;
         this.health = health;
         this.damage = damage;
         this.ticksPassed = 0;
