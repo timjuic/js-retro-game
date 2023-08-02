@@ -6,7 +6,9 @@ export default class Wave {
         this.game = game;
         this.waveSize = waveSize;
         this.enemyType = enemyType;
-        this.enemyDummy = new enemyType(game);
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
+        this.enemyWidth = enemyType.baseWidth * canvas.width;
+        this.enemyHeight = enemyType.baseHeight * canvas.width;
     }
 
     createEnemy(x, y) {

@@ -1,6 +1,9 @@
 import Enemy from "./enemy.js";
 
 export default class Basic2Enemy extends Enemy {
+    static baseWidth = 6;
+    static baseHeight = 6;
+
     constructor(game, posX, posY, angle, velX, velY, velRotation, color, image) {
         let width = 6;
         let height = 6;

@@ -20,20 +20,20 @@ export default class SquareWave extends Wave {
         let startX, startY;
         switch (side) {
           case Sides.TOP:
-            startX = (playerCanvas.width - this.waveSize * (this.enemyDummy.width + gap) + gap) / 2;
+            startX = (playerCanvas.width - this.waveSize * (this.enemyWidth + gap) + gap) / 2;
             startY = borderWidth + distanceFromSide;
             break;
           case Sides.LEFT:
             startX = borderWidth + distanceFromSide;
-            startY = (playerCanvas.height - this.waveSize * (this.enemyDummy.height + gap) + gap) / 2;
+            startY = (playerCanvas.height - this.waveSize * (this.enemyHeight + gap) + gap) / 2;
             break;
           case Sides.RIGHT:
-            startX = playerCanvas.width - borderWidth - distanceFromSide - this.waveSize * (this.enemyDummy.width + gap) + gap;
-            startY = (playerCanvas.height - this.waveSize * (this.enemyDummy.height + gap) + gap) / 2;
+            startX = playerCanvas.width - borderWidth - distanceFromSide - this.waveSize * (this.enemyWidth + gap) + gap;
+            startY = (playerCanvas.height - this.waveSize * (this.enemyHeight + gap) + gap) / 2;
             break;
           case Sides.BOTTOM:
-            startX = (playerCanvas.width - this.waveSize * (this.enemyDummy.width + gap) + gap) / 2;
-            startY = playerCanvas.height - distanceFromSide - borderWidth - this.waveSize * (this.enemyDummy.height + gap) + gap;
+            startX = (playerCanvas.width - this.waveSize * (this.enemyWidth + gap) + gap) / 2;
+            startY = playerCanvas.height - distanceFromSide - borderWidth - this.waveSize * (this.enemyHeight + gap) + gap;
             break;
           default:
             throw new Error("Invalid side provided.");
@@ -44,11 +44,11 @@ export default class SquareWave extends Wave {
             let posX, posY;
             if (side === Sides.RIGHT || side === Sides.BOTTOM) {
               // Reverse the order of enemy creation for RIGHT and BOTTOM sides
-              posX = startX + col * (this.enemyDummy.width + gap);
-              posY = startY + row * (this.enemyDummy.height + gap);
+              posX = startX + col * (this.enemyWidth + gap);
+              posY = startY + row * (this.enemyHeight + gap);
             } else {
-              posX = startX + col * (this.enemyDummy.width + gap);
-              posY = startY + row * (this.enemyDummy.height + gap);
+              posX = startX + col * (this.enemyWidth + gap);
+              posY = startY + row * (this.enemyHeight + gap);
             }
             this.createEnemy(posX, posY);
           }

@@ -90,7 +90,7 @@ export default class CollisionDetector {
       return true;
    }
 
-   isFullyInsideCanvas() {
+   isFullyInsideCanvas(entity) {
       if (entity.posX + entity.width < 0) return false;
       if (entity.posY + entity.height < 0) return false;
       if (entity.posX > this.canvas.width) return false;

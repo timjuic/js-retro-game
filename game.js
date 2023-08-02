@@ -11,6 +11,8 @@ import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
 import AssetLoader from "./asset-loader.js";
+import SpawnerEnemy from "./enemies/spawner-enemy.js";
+import SpeedyEnemy from "./enemies/speedy-enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -46,7 +48,7 @@ export default class Game {
           // new SideWave(this, 10, BasicEnemy);
           // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, 12, BasicEnemy);
+          new CornerWave(this, 1, SpeedyEnemy);
         }, 1000);
 
 
@@ -168,6 +170,7 @@ export default class Game {
               // Implement ability for bullet to kill multiple enemies if its strong enough
               
               if (bullet.damage >= enemy.health) {
+                enemy.health = 0;
                 this.enemies.splice(j, 1);
                 enemy.particleDeath()
                 if (bullet.piercing) {

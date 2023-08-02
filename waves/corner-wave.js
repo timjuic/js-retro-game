@@ -8,7 +8,7 @@ export default class CornerWave extends Wave {
         super(game, waveSize, enemyType);
         this.borderWidth = this.game.getBorderManager().getLeftBorder();
         this.gapFromBorder = playerCanvas.width / 150
-
+      
         let corner = this.getPossibleCorner();
         if (corner === Corners.UPPER_LEFT) this.createTopLeftWave(waveSize);
         else if (corner === Corners.UPPER_RIGHT) this.createTopRightWave(waveSize);
@@ -25,11 +25,11 @@ export default class CornerWave extends Wave {
       
         // Loop to create 3 rows of enemies
         for (let row = 0; row < this.waveSize; row++) {
-          let posY = startY + row * (gap + this.enemyDummy.height);
+          let posY = startY + row * (gap + this.enemyHeight);
       
           // Loop to create enemies in each row
           for (let col = 0; col < this.waveSize - row; col++) {
-            this.createEnemy(startX + col * (gap + this.enemyDummy.width), posY);
+            this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
           }
         }
       }
@@ -43,12 +43,12 @@ export default class CornerWave extends Wave {
       
         // Loop to create 3 rows of enemies
         for (let row = 0; row < this.waveSize; row++) {
-          let posY = startY + row * (gap + this.enemyDummy.height);
+          let posY = startY + row * (gap + this.enemyHeight);
       
           // Loop to create enemies in each row
           for (let col = 0; col < this.waveSize - row; col++) {
             // Start creating enemies from the corner and go further to the left
-            let posX = startX - col * (gap + this.enemyDummy.width);
+            let posX = startX - col * (gap + this.enemyWidth);
             this.createEnemy(posX, posY);
           }
         }
@@ -67,11 +67,11 @@ export default class CornerWave extends Wave {
         // Loop to create 3 rows of enemies, starting from the bottom row
         for (let row = this.waveSize - 1; row >= 0; row--) {
           // Start creating enemies from the corner and move upwards
-          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyDummy.height);
+          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyHeight);
       
           // Loop to create enemies in each row
           for (let col = 0; col <= row; col++) {
-            this.createEnemy(startX + col * (gap + this.enemyDummy.width), posY);
+            this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
           }
         }
       }
@@ -87,12 +87,12 @@ export default class CornerWave extends Wave {
         // Loop to create 3 rows of enemies, starting from the bottom row
         for (let row = this.waveSize - 1; row >= 0; row--) {
           // Start creating enemies from the corner and move upwards
-          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyDummy.height);
+          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyHeight);
       
           // Loop to create enemies in each row
           for (let col = 2; col >= 2 - row; col--) {
             // Start creating enemies from the corner and move to the left
-            let posX = startX - (2 - col) * (gap + this.enemyDummy.width);
+            let posX = startX - (2 - col) * (gap + this.enemyWidth);
             this.createEnemy(posX, posY);
           }
         }
@@ -127,12 +127,12 @@ export default class CornerWave extends Wave {
         if (corner === Corners.UPPER_LEFT) {
           return [this.borderWidth + this.gapFromBorder, this.borderWidth + this.gapFromBorder];
         } else if (corner === Corners.UPPER_RIGHT) {
-          return [playerCanvas.width - this.borderWidth - this.gapFromBorder - this.enemyDummy.width, this.borderWidth + this.gapFromBorder];
+          return [playerCanvas.width - this.borderWidth - this.gapFromBorder - this.enemyWidth, this.borderWidth + this.gapFromBorder];
         
         } else if (corner === Corners.BOTTOM_LEFT) {
-          return [this.borderWidth + this.gapFromBorder, playerCanvas.height - this.borderWidth - this.gapFromBorder - this.enemyDummy.height];
+          return [this.borderWidth + this.gapFromBorder, playerCanvas.height - this.borderWidth - this.gapFromBorder - this.enemyHeight];
         } else if (corner === Corners.BOTTOM_RIGHT) {
-          return [playerCanvas.width - this.borderWidth - this.gapFromBorder - this.enemyDummy.width, playerCanvas.height - this.borderWidth - this.gapFromBorder - this.enemyDummy.height];
+          return [playerCanvas.width - this.borderWidth - this.gapFromBorder - this.enemyWidth, playerCanvas.height - this.borderWidth - this.gapFromBorder - this.enemyHeight];
         }
       }
 }

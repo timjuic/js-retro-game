@@ -7,14 +7,14 @@ export default class ParticleManager {
         this.entity = entity;
         this.particleBaseSize = particleBaseSize;
         this.pixelGroupingModifier = pixelGroupingModifier;
-        this.explosionStrength = explosionStrength;
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
+        this.explosionStrength = explosionStrength * canvas.width / 500;
         this.particles = [];
         this.particleClearTimer = setInterval(() => this.clearParticles(), 500);
     }
 
     clearParticles() {
         if (this.particles.some(particle => particle.opacity < 0.01)) {
-            console.log('Clearing them');
             this.particles.length = 0;
         }
     }
@@ -47,7 +47,6 @@ export default class ParticleManager {
 
               const sizeRandomizer = MathUtil.generateRandomNumber(-this.particleBaseSize, this.particleBaseSize)
               const finalParticleSize = this.particleBaseSize + sizeRandomizer
-              console.log(finalParticleSize);
 
               const xVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
               const yVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);

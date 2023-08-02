@@ -27,14 +27,14 @@ export default class LineWave extends Wave {
               break;
             case Sides.BOTTOM:
               posX = startPos + i * gap;
-              posY = borderManager.getBottomBorder() - borderGap - this.enemyDummy.height;  // assuming enemy height is 50
+              posY = borderManager.getBottomBorder() - borderGap - this.enemyHeight;  // assuming enemy height is 50
               break;
             case Sides.LEFT:
               posX = borderManager.getLeftBorder() + borderGap;
               posY = startPos + i * gap;
               break;
             case Sides.RIGHT:
-              posX = borderManager.getRightBorder() - borderGap - this.enemyDummy.height;  // assuming enemy width is 50
+              posX = borderManager.getRightBorder() - borderGap - this.enemyHeight;  // assuming enemy width is 50
               posY = startPos + i * gap;
               break;
           }
