@@ -2,8 +2,8 @@ import Enemy from "./enemy.js";
 
 export default class BasicEnemy extends Enemy {
     constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
-        let width = 20;
-        let height = 20;
+        let width = 4;
+        let height = 4;
         let moveInterval = 50;
         let speed = 5;
         let health = 200;

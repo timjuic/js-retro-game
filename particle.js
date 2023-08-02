@@ -5,7 +5,7 @@ export default class Particle extends RectangleEntity {
     constructor(game, posX, posY, width, height, angle, velX, velY, velRotation, color, opacity, image) {
         super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.opacity = opacity;
-        this.decay = MathUtil.generateRandomNumber(0.9, 0.99);
+        this.decay = MathUtil.generateRandomNumber(0.8, 0.95);
     }
 
     draw(canvasName) {
@@ -42,7 +42,7 @@ export default class Particle extends RectangleEntity {
         this.angle += this.velRotation;  
         
         if (Math.abs(this.velX) < 0.01) {
-            this.opacity *= 0.96;
+            this.opacity *= 0.9;
         }
     }
 }

@@ -16,10 +16,11 @@ class Entity {
 class RectangleEntity extends Entity {
    constructor(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image) {
       super(game, posX, posY, velX, velY, color, image)
-      this.baseWidth = width;
-      this.baseHeight = height;
-      this.width = width;
-      this.height = height;
+      let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
+      this.baseWidth = width / 100;
+      this.baseHeight = height / 100;
+      this.width = this.baseHeight * canvas.width;
+      this.height = this.baseHeight * canvas.width;
       this.angle = angle;
       this.velRotation = MathUtil.degreesToRadians(velRotation);
 

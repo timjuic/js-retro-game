@@ -7,16 +7,9 @@ import Player from "./player.js";
 import BorderManager from "./border-manager.js";
 import CrosshairManager from "./crosshair-manager.js";
 import InputType from "./enums/input-type.js";
-import Wave from "./waves/corner-wave.js";
-import WaveType from "./enums/wave-type.js";
 import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
-import SideWave from "./waves/line-wave.js";
-import RandomWave from "./waves/random-wave.js";
-import SquareWave from "./waves/square-wave.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
-import Basic2Enemy from "./enemies/basic2-enemy.js";
-import LineWave from "./waves/line-wave.js";
 import AssetLoader from "./asset-loader.js";
 
 const pauseModal = document.querySelector(".pause-modal");
@@ -53,7 +46,7 @@ export default class Game {
           // new SideWave(this, 10, BasicEnemy);
           // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, CornerWaveSize.BIG, BasicEnemy);
+          new CornerWave(this, 3, BasicEnemy);
         }, 1000);
 
 
@@ -147,7 +140,7 @@ export default class Game {
         if (this.isPaused || !this.loopId) {
             this.isPaused = false;
             pauseModal.style.display = 'none'
-            this.loopId = setInterval(() => this.tick(), 2);
+            this.loopId = setInterval(() => this.tick(), 16);
         }
     }
 

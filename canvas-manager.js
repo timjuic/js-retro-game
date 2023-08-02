@@ -72,48 +72,60 @@ export default class CanvasManager {
             canvas.height = windowWidth * 9 / 16
         }
 
-        let widthChangedPercentage = (canvas.width - this.previousCanvasWidth) / this.previousCanvasWidth
-        let heightChangedPercentage = (canvas.height - this.previousCanvasHeight) / this.previousCanvasHeight
-        // let percentChange = (widthChangedPercentage + heightChangedPercentage) / 2
-        
-
-        this.resizeGameElements(widthChangedPercentage, heightChangedPercentage)
+        this.newCanvasWidth = canvas.width;
+        this.newCanvasHeight = canvas.height;
     }
 
-    resizeGameElements(widthChangedPercentage, heightChangedPercentage) {
+    resizeGameElements() {
       let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
-        console.log("before", this.game.player.width, this.game.player.posX, this.game.player.posY)
-         this.resizeEntity(this.game.player, widthChangedPercentage, heightChangedPercentage)
-         console.log("after", this.game.player.width, this.game.player.posX, this.game.player.posY)
+        console.log("before resize: posx: " ,this.game.player.posX, " posY: ", this.game.player.posY);
+         this.resizeEntity(this.game.player)
+         console.log("after resize: posx: " ,this.game.player.posX, " posY: ", this.game.player.posY);
       }
 
-      // if (this.game.borderManager) {
-      //   let gameBorders = this.game.borderManager.getBorders()
-      //   Array.from(Object.values(gameBorders)).forEach(border => {
-      //       this.resizeEntity(border, percentChange)
-      //   })
-      // }
+      if (this.game.borderManager) {
+        let gameBorders = this.game.borderManager.getBorders()
+        Array.from(Object.values(gameBorders)).forEach(border => {
+            this.resizeEntity(border)
+        })
+      }
 
-      // if (this.game.playerBullets) {
-      //   this.game.playerBullets.forEach(bulletEntity => {
-      //       this.resizeEntity(bulletEntity, percentChange);
-      //   })
-      // }
+      this.game.enemies.forEach(enemy => {
+        this.resizeEntity(enemy);
+      })
 
-      // if (this.game.crosshairManager) {
+      if (this.game.playerBullets) {
+        this.game.playerBullets.forEach(bulletEntity => {
+            this.resizeEntity(bulletEntity);
+            console.log(bulletEntity.height, bulletEntity.width, bulletEntity.posX, bulletEntity.posY, bulletEntity.velX, bulletEntity.velY);
+        })
+      }
 
-      // }
+      if (this.game.crosshairManager) {
+        this.resizeEntity(this.game.getCrosshair())
+      }
     }
 
-    resizeEntity(entity, widthChangedPercentage, heightChangedPercentage) {
-        // console.log("before", entity.width)
-        // entity.width = entity.width + entity.width * percentChange / 100
-        // // console.log("after", entity.width)
-        // entity.height = entity.height + entity.height * percentChange / 100
-        console.log(widthChangedPercentage, heightChangedPercentage);
-        entity.posX = entity.posX + entity.posX * (widthChangedPercentage)
-        entity.posY = entity.posY + entity.posY * (heightChangedPercentage)
+    resizeEntity(entity) {
+        let widthPercentage = entity.baseWidth;
+        let heightPercentage = entity.baseHeight;
+        let xPosPercentage = entity.posX / this.previousCanvasWidth;
+        let yPosPercentage = entity.posY / this.previousCanvasHeight;
+        let xVelPercentage = entity.velX / this.previousCanvasWidth;
+        let yVelPercentage = entity.velY / this.previousCanvasHeight;
+        if (entity.speed) var speedPercentage = entity.speed / this.previousCanvasWidth;
+        
+
+
+        entity.width = (this.newCanvasWidth * widthPercentage);
+        entity.height = (this.newCanvasWidth * heightPercentage);
+        entity.posX = (this.newCanvasWidth * xPosPercentage);
+        entity.posY = (this.newCanvasHeight  * yPosPercentage);
+        entity.velX = (this.newCanvasWidth * xVelPercentage);
+        entity.velY = (this.newCanvasHeight  * yVelPercentage);
+        if (entity.speed) entity.speed = (this.newCanvasHeight * speedPercentage)
+        
     }
 
     scaleEntities() { // Scaling entities according to starting screen size
@@ -132,11 +144,13 @@ export default class CanvasManager {
     }
 
     resizeCanvases() {
+      console.log("CALLED !!!!!!!!!!!!!!!!!!!!!!!!!!");
       this.game.pause();
         Array.from(Object.values(this.canvases)).forEach(canvas => {
             this.resizeCanvas(canvas)
         })
         this.game.drawGameElements();
+        this.resizeGameElements()
     }
 
     clearCanvases() {

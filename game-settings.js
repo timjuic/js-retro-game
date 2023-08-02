@@ -1,6 +1,6 @@
 const settings = {
    BORDER_SIZE: 0.01,
-   BULLET_SPEED_MODIFIER: 5,
+   BULLET_SPEED_MODIFIER: 1,
    HITMARKER_TICKS: 20,
 }
 

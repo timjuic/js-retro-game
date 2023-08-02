@@ -10,8 +10,8 @@ export default class Player extends RectangleEntity {
       let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
       let posX = playerCanvas.width / 2;
       let posY = playerCanvas.height / 2;
-      let width = 5 / 100 // Percentage of the canvas width. Canvas width is appended later in canvas-manager
-      let height = 5 / 100
+      let width = 5
+      let height = 5
       let angle = 0
       let velX = 0;
       let velY = 0;
@@ -20,7 +20,7 @@ export default class Player extends RectangleEntity {
       super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
       this.nickname = nickname;
-      this.speed = 1
+      this.speed = 4
       this.health = health;
       this.maxHealth = health;
       this.lastMovedDirection = 1;
@@ -105,7 +105,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[1]
+        this.gun = gunsData[0]
         console.log(this.gun);
     }
 }
@@ -126,6 +126,6 @@ function createBullet(entity, crosshair, centerX, centerY) {
     let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
 
-    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 14, 14, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
+    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 2, 2, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
 }

@@ -1,18 +1,21 @@
+
 export default class CrosshairManager {
     constructor(game) {
         this.game = game
+        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
+        this.baseWidth = 6 / 100;
+        this.baseHeight = 6 / 100;
         this.posX;
         this.posY;
         this.aimX;
         this.aimY;
-        this.width = 30
-        this.height = 30
+        this.width = this.baseWidth * canvas.width
+        this.height = this.baseHeight * canvas.width
         this.color = "blue"
         this.image = new Image()
         this.image.src = "./assets/crosshair3.png"
 
         let crosshairCanvas = this.game.getCanvasManager().getCanvas("crosshairCanvas")
-        let crosshairCtx = this.game.getCanvasManager().getContext("crosshairCanvas")
         window.addEventListener('mousemove', (e) => {
             let upperBorderHeight = (window.innerHeight - crosshairCanvas.height) / 2
             let leftBorderWidth = (window.innerWidth - crosshairCanvas.width) / 2
@@ -31,8 +34,4 @@ export default class CrosshairManager {
         ctx.clearRect(0, 0, canvas.width, canvas.height)
         ctx.drawImage(this.image, this.posX, this.posY, this.width, this.height)
      }
-
-    static enable() {
-       
-    }
 }
