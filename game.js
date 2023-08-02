@@ -136,7 +136,6 @@ export default class Game {
 
         this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
 
-        // console.log(this.particles);
         this.particleManagers.forEach(pm => {
             pm.particles.forEach(particle => particle.draw('playerCanvas'));
         })

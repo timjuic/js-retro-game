@@ -56,7 +56,6 @@ export default class CanvasManager {
     }
 
     resizeCanvas(canvas) {
-        console.log("resizing");
          this.previousCanvasWidth = canvas.width
          this.previousCanvasHeight = canvas.height
 
@@ -81,9 +80,7 @@ export default class CanvasManager {
     resizeGameElements() {
       let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
-        console.log("before resize: posx: " ,this.game.player.posX, " posY: ", this.game.player.posY);
          this.resizeEntity(this.game.player)
-         console.log("after resize: posx: " ,this.game.player.posX, " posY: ", this.game.player.posY);
       }
 
       if (this.game.borderManager) {
@@ -100,7 +97,6 @@ export default class CanvasManager {
       if (this.game.playerBullets) {
         this.game.playerBullets.forEach(bulletEntity => {
             this.resizeEntity(bulletEntity);
-            console.log(bulletEntity.height, bulletEntity.width, bulletEntity.posX, bulletEntity.posY, bulletEntity.velX, bulletEntity.velY);
         })
       }
 
@@ -125,10 +121,6 @@ export default class CanvasManager {
         entity.velX = (this.newCanvasWidth * xVelPercentage);
         entity.velY = (this.newCanvasHeight  * yVelPercentage);
         if (entity.speed) entity.speed = this.newCanvasWidth * speedPercentage
-        if (entity instanceof Player) {
-            console.log("playerspeed", entity.speed);
-        }
-        
     }
 
     scaleEntities() { // Scaling entities according to starting screen size
@@ -147,7 +139,6 @@ export default class CanvasManager {
     }
 
     resizeCanvases() {
-      console.log("CALLED !!!!!!!!!!!!!!!!!!!!!!!!!!");
       this.game.pause();
         Array.from(Object.values(this.canvases)).forEach(canvas => {
             this.resizeCanvas(canvas)

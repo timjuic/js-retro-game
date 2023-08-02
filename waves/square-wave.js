@@ -4,8 +4,6 @@ import Wave from "./wave.js";
 export default class SquareWave extends Wave {
     constructor(game, waveSize, enemyType) {
         super(game, waveSize, enemyType);
-        console.log(enemyType);
-        console.log(new enemyType);
 
         let side = this.getFurthestSideFromPlayer()
         this.createSquareWave(side)

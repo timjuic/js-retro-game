@@ -12,7 +12,6 @@ export default class Wave {
     }
 
     createEnemy(x, y) {
-      console.log("before !!!!!!");
         let newEnemy = new this.enemyType(
           this.game,
           x,

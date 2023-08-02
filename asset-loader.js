@@ -34,7 +34,6 @@ export default class AssetLoader {
         let testCanvas = document.createElement('canvas');
         let testContext = testCanvas.getContext('2d');
         Array.from(Object.keys(this.enemyAssets)).forEach(enemyAssetName => {
-            console.log(enemyAssetName);
             let img = this.enemyAssets[enemyAssetName];
             img.onload = () => {
                 testCanvas.width = img.width;

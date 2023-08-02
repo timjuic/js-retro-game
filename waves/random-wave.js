@@ -11,9 +11,7 @@ export default class RandomWave extends Wave {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         let borderWidth = this.game.getBorderManager().getLeftBorder();
         let gapFromBorder = playerCanvas.width / 150
-        console.log(borderWidth);
         
-        // Define the spawn area
         let spawnArea = {
             minX: borderWidth + gapFromBorder,
             maxX: playerCanvas.width - borderWidth - gapFromBorder - this.enemyWidth,

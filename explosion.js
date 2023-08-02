@@ -6,7 +6,6 @@ export default class Explosion extends CircleEntity {
         this.maxSize = maxSize;
         this.spreadSpeed = spreadSpeed;
         this.opacity = 1;
-        console.log(this.color);
     }
 
     update() {
@@ -20,15 +19,11 @@ export default class Explosion extends CircleEntity {
         }
 
         if (this.isFinished() && !this.isVisible()) {
-            console.log('Removed it');
-            console.log(this.game.explosions.length);
             this.game.explosions = this.game.explosions.filter(explosion => explosion !== this);
-            console.log(this.game.explosions.length);
         }
     }
 
     draw(ctx) {
-        console.log('drawring it');
         ctx.save();
         ctx.beginPath();
         ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2, false);

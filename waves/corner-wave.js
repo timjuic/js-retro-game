@@ -8,8 +8,6 @@ export default class CornerWave extends Wave {
         super(game, waveSize, enemyType);
         this.borderWidth = this.game.getBorderManager().getLeftBorder();
         this.gapFromBorder = playerCanvas.width / 150
-
-        console.log(this.enemyWidth, this.enemyHeight);
       
         let corner = this.getPossibleCorner();
         if (corner === Corners.UPPER_LEFT) this.createTopLeftWave(waveSize);
