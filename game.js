@@ -48,7 +48,7 @@ export default class Game {
           // new SideWave(this, 10, BasicEnemy);
           // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, 1, SpeedyEnemy);
+          new CornerWave(this, 2, SpawnerEnemy);
         }, 1000);
 
 

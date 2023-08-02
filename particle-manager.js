@@ -7,8 +7,7 @@ export default class ParticleManager {
         this.entity = entity;
         this.particleBaseSize = particleBaseSize;
         this.pixelGroupingModifier = pixelGroupingModifier;
-        let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
-        this.explosionStrength = explosionStrength * canvas.width / 500;
+        this.explosionStrength = explosionStrength
         this.particles = [];
         this.particleClearTimer = setInterval(() => this.clearParticles(), 500);
     }
