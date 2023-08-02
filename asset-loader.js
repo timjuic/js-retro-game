@@ -13,7 +13,7 @@ export default class AssetLoader {
     }
 
     loadBulletAssets() {
-        let bulletAssetNames = ['bullet.png'];
+        let bulletAssetNames = ['bullet.png', 'enemybullet.png'];
         this.loadImages(bulletAssetNames, this.bulletAssets);
     }
 

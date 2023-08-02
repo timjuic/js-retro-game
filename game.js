@@ -13,6 +13,7 @@ import BasicEnemy from "./enemies/basic-enemy.js";
 import AssetLoader from "./asset-loader.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
+import PufPufEnemy from "./enemies/pufpuf-enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -48,7 +49,7 @@ export default class Game {
           // new SideWave(this, 10, BasicEnemy);
           // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, 2, SpawnerEnemy);
+          new CornerWave(this, 3, PufPufEnemy);
         }, 1000);
 
 
@@ -95,11 +96,16 @@ export default class Game {
         this.borderManager.drawBorders('playerCanvas')
         this.player.updatePosition();
         this.playerBullets.forEach(bullet => bullet.updatePosition());
+        this.enemyBullets.forEach(bullet => bullet.updatePosition());
         this.enemies.forEach(enemy => enemy.move())
+        this.enemies.forEach(enemy => {
+          if (enemy.canShoot) enemy.runShootAbility();
+        })
+        this.runHitDetection()
+
         this.particleManagers.forEach(pm => pm.particles.forEach(particle => {
           particle.updatePosition();
         }));
-        this.runHitDetection()
 
         this.drawGameElements();
     }
@@ -111,6 +117,14 @@ export default class Game {
       this.playerBullets.forEach((bullet, i) => {
         if (!this.collisionDetector.isInsideCanvas(bullet)) {
             this.playerBullets.splice(i, 1);
+            return;
+        }
+        bullet.draw("projectileCanvas");
+      })
+
+      this.enemyBullets.forEach((bullet, i) => {
+        if (!this.collisionDetector.isInsideCanvas(bullet)) {
+            this.enemyBullets.splice(i, 1);
             return;
         }
         bullet.draw("projectileCanvas");

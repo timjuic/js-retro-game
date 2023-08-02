@@ -12,6 +12,10 @@ export default class Enemy extends RectangleEntity {
         this.ticksPassed = 0;
     }
 
+    isAlive() {
+      return this.health > 0;
+    }
+
     move() {
       const randomOffset = Math.floor(Math.random() * this.moveInterval);
   
@@ -75,7 +79,7 @@ export default class Enemy extends RectangleEntity {
       
 
       async particleDeath() {
-        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(200 / this.width), this.width / 2);
+        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width), this.width / 2);
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion(); 
       };
