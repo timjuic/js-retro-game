@@ -45,8 +45,9 @@ export default class ParticleManager {
               const particlePosX = centerX + x * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfX;
               const particlePosY = centerY + y * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfY;
 
-              const sizeRandomizer = MathUtil.generateRandomInteger(-this.particleBaseSize+1, this.particleBaseSize-1)
+              const sizeRandomizer = MathUtil.generateRandomNumber(-this.particleBaseSize, this.particleBaseSize)
               const finalParticleSize = this.particleBaseSize + sizeRandomizer
+              console.log(finalParticleSize);
 
               const xVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
               const yVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
