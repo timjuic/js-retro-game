@@ -79,7 +79,7 @@ export default class Enemy extends RectangleEntity {
       }
       
 
-      async particleDeath() {
+      onDeath() {
         let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width), this.width / 2);
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion(); 

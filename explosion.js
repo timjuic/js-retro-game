@@ -34,8 +34,8 @@ export default class Explosion extends CircleEntity {
         ctx.arc(this.posX, this.posY, this.radius, 0, Math.PI * 2, false);
     
         const gradient = ctx.createRadialGradient(this.posX, this.posY, 0, this.posX, this.posY, this.radius);
-        gradient.addColorStop(0, `rgba(128, 0, 128, 0)`);
-        gradient.addColorStop(1, `rgba(128, 0, 128, ${this.opacity})`);
+        gradient.addColorStop(0, `rgba(150, 0, 0, 0)`);
+        gradient.addColorStop(1, `rgba(150, 0, 0, ${this.opacity})`);
     
         ctx.fillStyle = gradient;
         ctx.fill();

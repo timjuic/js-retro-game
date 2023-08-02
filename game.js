@@ -46,10 +46,10 @@ export default class Game {
         this.canvasManager.scaleEntities()
 
         setTimeout(() => {
-          // new CornerWave(this, CornerWaveSize.BIG);
-          // new SideWave(this, 3, BasicEnemy);
+            // new CornerWave(this, CornerWaveSize.BIG);
+            // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, 3, KamikazeEnemy);
+            new CornerWave(this, 3, PufPufEnemy);
         }, 1000);
 
 
@@ -59,31 +59,31 @@ export default class Game {
 
 
     getInputManager() {
-      return this.inputManager;
+        return this.inputManager;
     }
     getEventEmmiter() {
-      return this.events;
+        return this.events;
     }
     getCanvasManager() {
-      return this.canvasManager;
+        return this.canvasManager;
     }
     getBorderManager() {
-      return this.borderManager;
+        return this.borderManager;
     }
     getCrosshair() {
-      return this.crosshairManager;
+        return this.crosshairManager;
     }
     getCollisionDetector() {
-      return this.collisionDetector;
+        return this.collisionDetector;
     }
 
 
     generateCanvases() {
-      this.canvasManager.generateCanvas('projectileCanvas')
-      this.canvasManager.generateCanvas('playerCanvas')
-      this.canvasManager.generateCanvas('crosshairCanvas')
-      //   this.canvasManager.generateCanvas('enemiesCanvas')
-        
+        this.canvasManager.generateCanvas('projectileCanvas')
+        this.canvasManager.generateCanvas('playerCanvas')
+        this.canvasManager.generateCanvas('crosshairCanvas')
+        //   this.canvasManager.generateCanvas('enemiesCanvas')
+
     }
 
     tick() {
@@ -99,60 +99,60 @@ export default class Game {
         this.enemyBullets.forEach(bullet => bullet.updatePosition());
         this.enemies.forEach(enemy => enemy.move())
         this.enemies.forEach(enemy => {
-          if (enemy.canShoot) enemy.runShootAbility();
+            if (enemy.canShoot) enemy.runShootAbility();
         })
         this.runHitDetection()
 
         this.explosions.forEach(explosion => explosion.update())
         this.particleManagers.forEach(pm => pm.particles.forEach(particle => {
-          particle.updatePosition();
+            particle.updatePosition();
         }));
 
         this.drawGameElements();
     }
 
     drawGameElements() {
-      this.player.draw('playerCanvas')
-      this.enemies.forEach(enemy => enemy.draw('playerCanvas'))
+        this.player.draw('playerCanvas')
+        this.enemies.forEach(enemy => enemy.draw('playerCanvas'))
 
-      this.playerBullets.forEach((bullet, i) => {
-        if (!this.collisionDetector.isInsideCanvas(bullet)) {
-            this.playerBullets.splice(i, 1);
-            return;
-        }
-        bullet.draw("projectileCanvas");
-      })
+        this.playerBullets.forEach((bullet, i) => {
+            if (!this.collisionDetector.isInsideCanvas(bullet)) {
+                this.playerBullets.splice(i, 1);
+                return;
+            }
+            bullet.draw("projectileCanvas");
+        })
 
-      this.enemyBullets.forEach((bullet, i) => {
-        if (!this.collisionDetector.isInsideCanvas(bullet)) {
-            this.enemyBullets.splice(i, 1);
-            return;
-        }
-        bullet.draw("projectileCanvas");
-      })
+        this.enemyBullets.forEach((bullet, i) => {
+            if (!this.collisionDetector.isInsideCanvas(bullet)) {
+                this.enemyBullets.splice(i, 1);
+                return;
+            }
+            bullet.draw("projectileCanvas");
+        })
 
-      this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
+        this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
 
-      // console.log(this.particles);
-      this.particleManagers.forEach(pm => {
-        pm.particles.forEach(particle => particle.draw('playerCanvas'));
-      })
+        // console.log(this.particles);
+        this.particleManagers.forEach(pm => {
+            pm.particles.forEach(particle => particle.draw('playerCanvas'));
+        })
     }
 
     activatePauseListener() {
-      this.getEventEmmiter().on('playerInput', (control, pressed) => {
-        if (control !== InputType.TOGGLEPAUSE) return;
-        if (!pressed) return;
-        this.togglePause();
-      })
+        this.getEventEmmiter().on('playerInput', (control, pressed) => {
+            if (control !== InputType.TOGGLEPAUSE) return;
+            if (!pressed) return;
+            this.togglePause();
+        })
     }
 
     togglePause() {
-      if (this.isPaused || !this.loopId) {
-        this.play();
-      } else {
-        this.pause();
-      }
+        if (this.isPaused || !this.loopId) {
+            this.play();
+        } else {
+            this.pause();
+        }
     }
 
     play() {
@@ -174,63 +174,76 @@ export default class Game {
 
     runHitDetection() {
         this.enemies.forEach((enemy, i) => {
-          if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
-            if (enemy.damage < this.player.health) {
-              this.player.health -= enemy.damage;
-              enemy.onDeath();
-              this.enemies.splice(i, 1)
+            if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
+                if (enemy.damage < this.player.health) {
+                    this.player.health -= enemy.damage;
+                    this.player.isBeingHit = true;
+                    enemy.onDeath();
+                    this.enemies.splice(i, 1)
+                }
             }
-            
-          }
+        })
+
+        this.enemyBullets.forEach((bullet, i) => {
+            if (this.getCollisionDetector().collidesWithEntityRotated(bullet, this.player)) {
+                if (this.player.health > bullet.damage) {
+                    this.player.health -= bullet.damage;
+                    this.player.isBeingHit = true;
+                    this.enemyBullets.splice(i, 1);
+                } else {
+                    this.player.health = 0;
+                    this.player.onDeath();
+                }
+            }
         })
 
         this.playerBullets.forEach((bullet, i) => {
-          // console.log(bullet.posX, bullet.posY, bullet.angle);
-          this.enemies.forEach((enemy, j) => {
-            
-            if (this.getCollisionDetector().collidesWithEntityRotated(bullet, enemy)) {
-              // Implement ability for bullet to kill multiple enemies if its strong enough
-              
-              if (bullet.damage >= enemy.health) {
-                enemy.health = 0;
-                enemy.onDeath();
-                this.enemies.splice(j, 1);
-                enemy.particleDeath()
-                if (bullet.piercing) {
-                  bullet.damage -= enemy.health;
-                } else this.playerBullets.splice(i, 1);
-              } else {
-                enemy.health -= bullet.damage;
-                this.playerBullets.splice(i, 1);
-                enemy.isBeingHit = true;
-                let tries = 5;
-                let newEnemyPosX, newEnemyPosY, validPosition = false;
-                for (let i = 1; i <= tries; i++) {
-                  newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / i;
-                  newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / i;
-                  if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
-                    continue;
-                  }
-                  if (!this.getCollisionDetector().isInsideCanvasBorders({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height }))  {
-                    continue;
-                  }
-                  validPosition = true;
+            this.enemies.forEach((enemy, j) => {
+                if (this.getCollisionDetector().collidesWithEntityRotated(bullet, enemy)) {
+                    this.handleEnemyHit(bullet, enemy, i, j)
                 }
-                
-                
-                if (!validPosition) return;
-                enemy.posX = newEnemyPosX;
-                enemy.posY = newEnemyPosY
-              }
-            }
-          })
+            })
         })
     }
 
+    handleEnemyHit(bullet, enemy, i, j) {
+        if (bullet.damage >= enemy.health) {
+            enemy.health = 0;
+            enemy.onDeath();
+            this.enemies.splice(j, 1);
+            if (bullet.piercing) {
+                bullet.damage -= enemy.health;
+            } else this.playerBullets.splice(i, 1);
+        } else {
+            enemy.health -= bullet.damage;
+            this.playerBullets.splice(i, 1);
+            enemy.isBeingHit = true;
+
+            let tries = 5;
+            let newEnemyPosX, newEnemyPosY, validPosition = false;
+            for (let i = 1; i <= tries; i++) {
+                newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / i;
+                newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / i;
+                if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
+                    continue;
+                }
+                if (!this.getCollisionDetector().isInsideCanvasBorders({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
+                    continue;
+                }
+                validPosition = true;
+            }
+
+
+            if (!validPosition) return;
+            enemy.posX = newEnemyPosX;
+            enemy.posY = newEnemyPosY
+        }
+    }
+
     collidesWithAnEnemy(entity) {
-      for (let enemy of this.enemies) {
-        if (this.getCollisionDetector().collidesWithEntity(entity, enemy)) return true;
-      }
-      return false;
+        for (let enemy of this.enemies) {
+            if (this.getCollisionDetector().collidesWithEntity(entity, enemy)) return true;
+        }
+        return false;
     }
 }

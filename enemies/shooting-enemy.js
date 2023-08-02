@@ -39,8 +39,8 @@ export default class ShooterEnemy extends Enemy {
     
         let grainAngle = MathUtil.calculateAngle(centerX, centerY, grainTargetPointX, grainTargetPointY);
         let grainDistanceFromTarget = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
-        let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromTarget / entity.game.settings.BULLET_SPEED_MODIFIER);
-        let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromTarget / entity.game.settings.BULLET_SPEED_MODIFIER);
+        let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromTarget / entity.game.settings.ENEMY_BULLET_SPEED_MODIFIER);
+        let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromTarget / entity.game.settings.ENEMY_BULLET_SPEED_MODIFIER);
     
         let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.damage, false, entity.gunKnockbackMultiplier, "blue", this.game.assetLoader.bulletAssets.enemybullet)
         entity.game.enemyBullets.push(bullet);

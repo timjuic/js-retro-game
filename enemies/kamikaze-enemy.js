@@ -20,7 +20,7 @@ export default class KamikazeEnemy extends Enemy {
     onDeath() {
         let centerX = this.posX + this.width / 2;
         let centerY = this.posY + this.height / 2;
-        let explosion = new Explosion(this.game, centerX, centerY, 0, 0, 0, 100, 6, 'purple');
+        let explosion = new Explosion(this.game, centerX, centerY, 0, 0, 0, 100, 6, 'rgba(255, 0, 0, 1)');
         this.game.explosions.push(explosion)
     }
 }
