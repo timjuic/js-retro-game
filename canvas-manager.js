@@ -1,3 +1,5 @@
+import Player from "./player.js";
+
 export default class CanvasManager {
     constructor(game) {
       this.game = game;
@@ -116,15 +118,16 @@ export default class CanvasManager {
         let yVelPercentage = entity.velY / this.previousCanvasHeight;
         if (entity.speed) var speedPercentage = entity.speed / this.previousCanvasWidth;
         
-
-
         entity.width = (this.newCanvasWidth * widthPercentage);
         entity.height = (this.newCanvasWidth * heightPercentage);
         entity.posX = (this.newCanvasWidth * xPosPercentage);
         entity.posY = (this.newCanvasHeight  * yPosPercentage);
         entity.velX = (this.newCanvasWidth * xVelPercentage);
         entity.velY = (this.newCanvasHeight  * yVelPercentage);
-        if (entity.speed) entity.speed = (this.newCanvasHeight * speedPercentage)
+        if (entity.speed) entity.speed = this.newCanvasWidth * speedPercentage
+        if (entity instanceof Player) {
+            console.log("playerspeed", entity.speed);
+        }
         
     }
 

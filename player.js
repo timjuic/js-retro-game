@@ -20,7 +20,8 @@ export default class Player extends RectangleEntity {
       super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
       this.nickname = nickname;
-      this.speed = 4
+      this.speed = 4 * this.game.canvas.width / 800;
+      console.log(this.speed);
       this.health = health;
       this.maxHealth = health;
       this.lastMovedDirection = 1;

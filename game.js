@@ -34,6 +34,7 @@ export default class Game {
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
+        this.canvas = this.canvasManager.getCanvas('playerCanvas');
         this.player = new Player(this, 'test', 1000);
         this.enemies = []
         this.playerBullets = []
@@ -43,7 +44,6 @@ export default class Game {
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
-        this.canvas = this.canvasManager.getCanvas('playerCanvas');
 
         // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
