@@ -14,6 +14,7 @@ import AssetLoader from "./asset-loader.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
 import PufPufEnemy from "./enemies/pufpuf-enemy.js";
+import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -31,11 +32,12 @@ export default class Game {
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
-        this.player = new Player(this, 'test', 100);
+        this.player = new Player(this, 'test', 1000);
         this.enemies = []
         this.playerBullets = []
         this.enemyBullets = []
         this.particleManagers = [];
+        this.explosions = [];
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
@@ -45,11 +47,9 @@ export default class Game {
 
         setTimeout(() => {
           // new CornerWave(this, CornerWaveSize.BIG);
-          // new SideWave(this, 3, Basic2Enemy);
-          // new SideWave(this, 10, BasicEnemy);
           // new SideWave(this, 3, BasicEnemy);
 
-          new CornerWave(this, 3, PufPufEnemy);
+          new CornerWave(this, 3, KamikazeEnemy);
         }, 1000);
 
 
@@ -103,6 +103,7 @@ export default class Game {
         })
         this.runHitDetection()
 
+        this.explosions.forEach(explosion => explosion.update())
         this.particleManagers.forEach(pm => pm.particles.forEach(particle => {
           particle.updatePosition();
         }));
@@ -129,6 +130,8 @@ export default class Game {
         }
         bullet.draw("projectileCanvas");
       })
+
+      this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
 
       // console.log(this.particles);
       this.particleManagers.forEach(pm => {
@@ -172,7 +175,12 @@ export default class Game {
     runHitDetection() {
         this.enemies.forEach((enemy, i) => {
           if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
-            this.enemies.splice(i, 1)
+            if (enemy.damage < this.player.health) {
+              this.player.health -= enemy.damage;
+              enemy.onDeath();
+              this.enemies.splice(i, 1)
+            }
+            
           }
         })
 
@@ -185,6 +193,7 @@ export default class Game {
               
               if (bullet.damage >= enemy.health) {
                 enemy.health = 0;
+                enemy.onDeath();
                 this.enemies.splice(j, 1);
                 enemy.particleDeath()
                 if (bullet.piercing) {

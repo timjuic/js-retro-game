@@ -9,7 +9,8 @@ export default class Basic2Enemy extends Enemy {
         let height = 6;
         let moveInterval = 200;
         let speed = 5;
-        let health = 40;
-        super(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, color, image);
+        let health = 60;
+        let damage = 20;
+        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

@@ -3,16 +3,15 @@ import MathUtil from "../helpers/math-util.js";
 import Enemy from "./enemy.js";
 
 export default class ShooterEnemy extends Enemy {
-    constructor(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, shootTickInterval, accuracy, damage, gunKnockbackMultiplier, color, image) {
+    constructor(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image) {
         if (new.target === ShooterEnemy) {
             throw new Error("Cannot create an instance of ShooterEnemy. Please choose its child implementation")
         }
 
-        super(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, color, image);
+        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canShoot = true;
         this.shootTickInterval = shootTickInterval;
         this.accuracy = accuracy;
-        this.damage = damage;
         this.gunKnockbackMultiplier = gunKnockbackMultiplier;
         this.shootTickCounter = 0;
     }
@@ -21,16 +20,11 @@ export default class ShooterEnemy extends Enemy {
         const randomOffset = MathUtil.generateRandomInteger(1, this.shootTickInterval)
 
         this.shootTickCounter++;
-        let randomizeInterval = MathUtil.generateRandomInteger(-this.shootTickInterval / 2, this.shootTickInterval);
         if ((this.shootTickCounter + randomOffset) % this.shootTickInterval === 0) {
             this.createBullet(this, this.game.player);
             this.shootTickCounter = 0;
         }
     }
-
-    // shoot() {
-    //     this.createBullet(this, this.game.player)
-    // }
 
     createBullet(entity, targetEntity) {
         let centerX = this.posX + this.width / 2;

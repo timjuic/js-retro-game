@@ -1,12 +1,12 @@
 import ShooterEnemy from "./shooting-enemy.js";
 
 export default class PufPufEnemy extends ShooterEnemy {
-    static baseWidth = 6;
-    static baseHeight = 4;
+    static baseWidth = 5;
+    static baseHeight = 5;
 
     constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
-        let width = 6;
-        let height = 4;
+        let width = 5;
+        let height = 5;
         let moveInterval = 50;
         let speed = 5;
         let health = 100;
@@ -15,6 +15,6 @@ export default class PufPufEnemy extends ShooterEnemy {
         let damage = 10;
         let gunKnockbackMultiplier = 10;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, shootTickInterval, accuracy, damage, gunKnockbackMultiplier, color, image)
+        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image)
     }
 }

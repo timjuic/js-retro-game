@@ -1,6 +1,7 @@
+import Explosion from "../explosion.js";
 import Enemy from "./enemy.js";
 
-export default class BasicEnemy extends Enemy {
+export default class KamikazeEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
 
@@ -10,8 +11,16 @@ export default class BasicEnemy extends Enemy {
         let moveInterval = 10;
         let speed = 8;
         let health = 50;
-        let damage = 20;
+        let damage = 50;
         let image = game.assetLoader.enemyAssets.enemy1;
         super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+    }
+
+
+    onDeath() {
+        let centerX = this.posX + this.width / 2;
+        let centerY = this.posY + this.height / 2;
+        let explosion = new Explosion(this.game, centerX, centerY, 0, 0, 0, 100, 6, 'purple');
+        this.game.explosions.push(explosion)
     }
 }

@@ -11,9 +11,10 @@ export default class SpawnerEnemy extends Enemy {
         let moveInterval = 50;
         let speed = 5;
         let health = 1000;
+        let damage = 100;
         let spawnIntervalMs = 2000;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, angle, velX, velY, velRotation, color, image);
+        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
 
         let spawnEnemiesInterval = setInterval(() => {
             if (this.health <= 0) {

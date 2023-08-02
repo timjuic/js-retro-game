@@ -19,7 +19,7 @@ class RectangleEntity extends Entity {
       let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
       this.baseWidth = width / 100;
       this.baseHeight = height / 100;
-      this.width = this.baseHeight * canvas.width;
+      this.width = this.baseWidth * canvas.width;
       this.height = this.baseHeight * canvas.width;
       this.angle = angle;
       this.velRotation = MathUtil.degreesToRadians(velRotation);
