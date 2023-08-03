@@ -1,7 +1,7 @@
 import { RectangleEntity } from "../entity.js"
 import MathUtil from "../helpers/math-util.js";
-import ParticleManager from "../particle-manager.js";
-import Particle from "../particle.js";
+import ParticleManager from "../particles/particle-manager.js";
+import Particle from "../particles/particle.js";
 
 export default class Enemy extends RectangleEntity {
     constructor(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image) {
@@ -84,4 +84,8 @@ export default class Enemy extends RectangleEntity {
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion(); 
       };
+
+      onDamaged() {
+        return true;
+      }
 }

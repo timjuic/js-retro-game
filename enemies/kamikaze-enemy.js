@@ -1,4 +1,4 @@
-import Explosion from "../explosion.js";
+import Explosion from "../particles/explosion.js";
 import Enemy from "./enemy.js";
 
 export default class KamikazeEnemy extends Enemy {

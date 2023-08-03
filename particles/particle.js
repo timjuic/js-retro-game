@@ -1,5 +1,5 @@
-import { RectangleEntity } from "./entity.js";
-import MathUtil from "./helpers/math-util.js";
+import { RectangleEntity } from "../entity.js";
+import MathUtil from "../helpers/math-util.js";
 
 export default class Particle extends RectangleEntity {
     constructor(game, posX, posY, width, height, angle, velX, velY, velRotation, color, opacity, image) {

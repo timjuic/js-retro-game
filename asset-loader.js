@@ -2,11 +2,13 @@ export default class AssetLoader {
     constructor() {
         this.bulletAssets = {};
         this.enemyAssets = {}
+        this.otherAssets = {};
         this.enemyImageDataObjects = {};
         this.playerAsset;
 
         this.loadBulletAssets();
         this.loadEnemyAssets()
+        this.loadOtherAssets();
         this.loadEnemyImagesData(); // Preloading image data for each enemy as cache for explosion effects
         
 
@@ -20,6 +22,11 @@ export default class AssetLoader {
     loadEnemyAssets() {
         let enemyAssetNames = ['enemy1.png'];
         this.loadImages(enemyAssetNames, this.enemyAssets);   
+    }
+
+    loadOtherAssets() {
+        let otherAssets = ['shield_icon.png'];
+        this.loadImages(otherAssets, this.otherAssets);
     }
 
     loadImages(assetNames, assetType) {

@@ -18,7 +18,7 @@ export default class Bullet extends RectangleEntity {
         let centerY = this.posY + this.height / 2;
           
         ctx.translate(centerX, centerY);
-        ctx.rotate(this.angle);
+        ctx.rotate(MathUtil.degreesToRadians(this.angle));
         ctx.translate(-centerX, -centerY);
 
         if (this.image !== undefined) {

@@ -1,4 +1,4 @@
-import { CircleEntity } from "./entity.js";
+import { CircleEntity } from "../entity.js";
 
 export default class Explosion extends CircleEntity {
     constructor(game, posX, posY, radius, velX, velY, maxSize, spreadSpeed, color) {

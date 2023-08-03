@@ -17,6 +17,8 @@ import PufPufEnemy from "./enemies/pufpuf-enemy.js";
 import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
 import MathUtil from "./helpers/math-util.js";
 import LineWave from "./waves/line-wave.js";
+import ShieldedEnemy from "./enemies/shielded-enemy.js";
+import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -35,11 +37,12 @@ export default class Game {
         this.collisionDetector = new CollisionDetector(this)
         this.level = 1;
         this.canvas = this.canvasManager.getCanvas('playerCanvas');
-        this.player = new Player(this, 'test', 1000);
+        this.player = new Player(this, 'test', 50);
         this.enemies = []
         this.playerBullets = []
         this.enemyBullets = []
         this.particleManagers = [];
+        this.particles = [];
         this.explosions = [];
         this.player.draw('playerCanvas');
         this.isPaused = false;
@@ -52,7 +55,7 @@ export default class Game {
             // new CornerWave(this, CornerWaveSize.BIG);
             // new SideWave(this, 3, BasicEnemy);
 
-            new LineWave(this, 5, PufPufEnemy);
+            new CornerWave(this, 5, TeleporterEnemy);
         }, 1000);
 
 
@@ -110,6 +113,7 @@ export default class Game {
         this.particleManagers.forEach(pm => pm.particles.forEach(particle => {
             particle.updatePosition();
         }));
+        this.particles.forEach(particle => particle.update())
 
         this.drawGameElements();
     }
@@ -135,6 +139,7 @@ export default class Game {
         })
 
         this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
+        this.particles.forEach(particle => particle.draw(this.canvasManager.contexts.playerCanvas))
 
         this.particleManagers.forEach(pm => {
             pm.particles.forEach(particle => particle.draw('playerCanvas'));
@@ -217,8 +222,11 @@ export default class Game {
                 bullet.damage -= enemy.health;
             } else this.playerBullets.splice(i, 1);
         } else {
-            enemy.health -= bullet.damage;
             this.playerBullets.splice(i, 1);
+            let successfullyDamaged = enemy.onDamaged(bullet);
+            if (!successfullyDamaged) return;
+            console.log("enemy was damaged");
+            enemy.health -= bullet.damage;
             enemy.isBeingHit = true;
 
             let tries = 5;

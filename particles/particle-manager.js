@@ -1,4 +1,4 @@
-import MathUtil from "./helpers/math-util.js";
+import MathUtil from "../helpers/math-util.js";
 import Particle from "./particle.js";
 
 export default class ParticleManager {

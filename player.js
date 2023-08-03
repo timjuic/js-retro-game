@@ -4,6 +4,7 @@ import { CircleEntity, RectangleEntity } from "./entity.js";
 import gunsData from "./guns-data.js";
 import MathUtil from "./helpers/math-util.js";
 import InputType from "./enums/input-type.js";
+import ParticleManager from "./particles/particle-manager.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -108,6 +109,12 @@ export default class Player extends RectangleEntity {
         this.gun = gunsData[1]
         console.log(this.gun);
     }
+
+    onDeath() {
+        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width / 5), this.width / 2);
+        this.game.particleManagers.push(particleManager)
+        particleManager.createParticleExplosion(); 
+      };
 }
 
 
@@ -128,4 +135,5 @@ function createBullet(entity, crosshair, centerX, centerY) {
 
     let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
+    console.log("angle", grainAngle);
 }
