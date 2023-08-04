@@ -10,6 +10,7 @@ class Entity {
         this.lastMovedDirection;
         this.color = color
         this.image = image
+        this.opacity = 1;
     }
 }
 
@@ -38,7 +39,7 @@ class RectangleEntity extends Entity {
 
     draw(canvasName) {
         let ctx = this.game.getCanvasManager().getContext(canvasName);
-
+        ctx.globalAlpha = this.opacity;
         ctx.save();
 
         let centerX = this.posX + this.width / 2;
@@ -77,9 +78,9 @@ class RectangleEntity extends Entity {
             } else {
                 ctx.drawImage(
                     this.image,
-                    (this.posX) * flip, // Flip back the image if scaleX is -1
+                    (this.posX) * flip,
                     (this.posY),
-                    this.width * flip, // Flip back the width if scaleX is -1
+                    this.width * flip,
                     this.height
                 );
             }
@@ -94,7 +95,7 @@ class RectangleEntity extends Entity {
             );
         }
 
-        ctx.restore(); // Restore the original state of the canvas
+        ctx.restore();
     }
 }
 

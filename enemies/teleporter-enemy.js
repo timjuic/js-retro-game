@@ -5,7 +5,7 @@ import Enemy from "./enemy.js";
 export default class TeleporterEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
-    constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
+    constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
         let height = 3;
         let moveInterval = 10;
@@ -13,7 +13,7 @@ export default class TeleporterEnemy extends Enemy {
         let health = 50;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
+        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
         this.maxTeleportTimes = 5;
         this.timesTeleported = 0;
         this.maxTeleportDistance = this.width * 4;
@@ -54,7 +54,6 @@ export default class TeleporterEnemy extends Enemy {
         const distance = Math.sqrt((newPosX - oldPosX) ** 2 + (newPosY - oldPosY) ** 2);
         const framesCount = Math.floor(distance / 5); // One frame per 5 pixels
         const opacityStep = 1 / framesCount;
-        const imageBlurRadius = 2; // You may want to adjust this value
     
         for (let i = 0; i < framesCount; i++) {
             const t = i / (framesCount - 1);

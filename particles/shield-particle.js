@@ -49,5 +49,9 @@ export default class ShieldParticle extends CircleEntity {
             this.parentEntity.hasShieldActive = false;
         }
     }
+
+    update(){
+        
+    }
     
 }

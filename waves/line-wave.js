@@ -8,6 +8,7 @@ export default class LineWave extends Wave {
 
         let side = this.getFurthestSideFromPlayer()
         this.createLineWave(side)
+        super.spawnEnemiesFromQueue();
     }
 
     createLineWave(side) {
@@ -38,8 +39,9 @@ export default class LineWave extends Wave {
               posY = startPos + i * gap;
               break;
           }
-      
-          this.createEnemy(posX, posY);
+          
+          this.spawnQueue.push({ x: posX, y: posY});
+        //   this.createEnemy(posX, posY);
         }
       }
 

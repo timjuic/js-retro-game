@@ -9,11 +9,15 @@ export default class Wave {
         let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         this.enemyWidth = enemyType.baseWidth * canvas.width / 100;
         this.enemyHeight = enemyType.baseHeight * canvas.width / 100;
+        this.spawnQueue = [];
+        this.delayBetweenSummonsMs = 32;
+        this.spawningFinished = false;
     }
 
-    createEnemy(x, y) {
+    createEnemy(x, y, wave) {
         let newEnemy = new this.enemyType(
           this.game,
+          wave,
           x,
           y,
           0,
@@ -31,4 +35,18 @@ export default class Wave {
       
         this.game.enemies.push(newEnemy);
       }
+
+      spawnEnemiesFromQueue() {
+        let spawnInterval = setInterval(() => {
+            if (this.spawnQueue.length > 0) {
+                let enemyPos = this.spawnQueue.shift();
+    
+                this.createEnemy(enemyPos.x, enemyPos.y, this);
+            }
+            else {
+                clearInterval(spawnInterval);
+                this.spawningFinished = true;
+            }
+        }, 32);
+    }
 }

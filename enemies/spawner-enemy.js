@@ -5,7 +5,7 @@ export default class SpawnerEnemy extends Enemy {
     static baseWidth = 7;
     static baseHeight = 7;
 
-    constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
+    constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 7;
         let height = 7;
         let moveInterval = 50;
@@ -14,7 +14,7 @@ export default class SpawnerEnemy extends Enemy {
         let damage = 100;
         let spawnIntervalMs = 2000;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
 
         let spawnEnemiesInterval = setInterval(() => {
             if (this.health <= 0) {

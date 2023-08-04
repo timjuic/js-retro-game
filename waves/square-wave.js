@@ -7,6 +7,7 @@ export default class SquareWave extends Wave {
 
         let side = this.getFurthestSideFromPlayer()
         this.createSquareWave(side)
+        super.spawnEnemiesFromQueue();
     }
 
      createSquareWave(side) {
@@ -48,7 +49,8 @@ export default class SquareWave extends Wave {
               posX = startX + col * (this.enemyWidth + gap);
               posY = startY + row * (this.enemyHeight + gap);
             }
-            this.createEnemy(posX, posY);
+            // this.createEnemy(posX, posY);
+            this.spawnQueue.push({ x: posX, y: posY});
           }
         }
       }

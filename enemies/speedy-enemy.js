@@ -4,7 +4,7 @@ export default class BasicEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
 
-    constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
+    constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
         let height = 3;
         let moveInterval = 10;
@@ -12,6 +12,6 @@ export default class BasicEnemy extends Enemy {
         let health = 50;
         let damage = 20;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

@@ -5,6 +5,7 @@ export default class RandomWave extends Wave {
     constructor(game, waveSize, enemyType) {
         super(game, waveSize, enemyType)
         this.spawnEnemiesNearBorder(this.waveSize)
+        super.spawnEnemiesFromQueue();
     }
 
     spawnEnemiesNearBorder() {
@@ -41,7 +42,8 @@ export default class RandomWave extends Wave {
               break;
           }
       
-          this.createEnemy(x, y);
+          this.spawnQueue.push({ x: x, y: y })
+        //   this.createEnemy(x, y);
         }
       }
 }

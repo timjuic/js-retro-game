@@ -7,9 +7,12 @@ import Player from "./player.js";
 import BorderManager from "./border-manager.js";
 import CrosshairManager from "./crosshair-manager.js";
 import InputType from "./enums/input-type.js";
+import RandomWave from "./waves/random-wave.js"
+import SquareWave from "./waves/square-wave.js"
 import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
+import Basic2Enemy from "./enemies/basic2-enemy.js";
 import AssetLoader from "./asset-loader.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
@@ -19,6 +22,7 @@ import MathUtil from "./helpers/math-util.js";
 import LineWave from "./waves/line-wave.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
+import ShooterEnemy from "./enemies/shooting-enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -55,7 +59,10 @@ export default class Game {
             // new CornerWave(this, CornerWaveSize.BIG);
             // new SideWave(this, 3, BasicEnemy);
 
-            new CornerWave(this, 5, TeleporterEnemy);
+            // new CornerWave(this, 10, TeleporterEnemy);
+            // new RandomWave(this, 10, TeleporterEnemy)
+
+            new SquareWave(this, 10, SpeedyEnemy)
         }, 1000);
 
 
@@ -166,7 +173,7 @@ export default class Game {
         if (this.isPaused || !this.loopId) {
             this.isPaused = false;
             pauseModal.style.display = 'none'
-            this.loopId = setInterval(() => this.tick(), 16);
+            this.loopId = setInterval(() => this.tick(), this.settings.TICK_DURATION_MS);
         }
     }
 
@@ -182,11 +189,17 @@ export default class Game {
     runHitDetection() {
         this.enemies.forEach((enemy, i) => {
             if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
+                console.log('Player contact');
                 if (enemy.damage < this.player.health) {
                     this.player.health -= enemy.damage;
                     this.player.isBeingHit = true;
                     enemy.onDeath();
                     this.enemies.splice(i, 1)
+                } else {
+                    if (!this.player.isDead()) {
+                        this.player.health = 0;
+                        this.player.onDeath()
+                    }
                 }
             }
         })

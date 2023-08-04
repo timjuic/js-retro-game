@@ -6,7 +6,7 @@ export default class ShieldedEnemy extends Enemy {
     static baseWidth = 4;
     static baseHeight = 4;
 
-    constructor(game, posX, posY, angle, velX, velY, velRotation, color) {
+    constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
         let height = 3;
         let moveInterval = 10;
@@ -14,7 +14,7 @@ export default class ShieldedEnemy extends Enemy {
         let health = 50;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
+        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
         this.hasShieldActive = false;
     }
 

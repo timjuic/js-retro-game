@@ -8,32 +8,32 @@ import ParticleManager from "./particles/particle-manager.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
-      let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
-      let posX = playerCanvas.width / 2;
-      let posY = playerCanvas.height / 2;
-      let width = 5
-      let height = 5
-      let angle = 0
-      let velX = 0;
-      let velY = 0;
-      let color = 'blue'
-      let image = game.assetLoader.enemyAssets.enemy1
-      super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
+        let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
+        let posX = playerCanvas.width / 2;
+        let posY = playerCanvas.height / 2;
+        let width = 5
+        let height = 5
+        let angle = 0
+        let velX = 0;
+        let velY = 0;
+        let color = 'blue'
+        let image = game.assetLoader.enemyAssets.enemy1
+        super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
-      this.nickname = nickname;
-      this.speed = 4 * this.game.canvas.width / 800;
-      this.health = health;
-      this.maxHealth = health;
-      this.lastMovedDirection = 1;
-      this.addGun();
-      this.bulletImg = this.game.assetLoader.bulletAssets.bullet;        
-        
-      this.shootingInterval = null;
+        this.nickname = nickname;
+        this.speed = 4 * this.game.canvas.width / 800;
+        this.health = health;
+        this.maxHealth = health;
+        this.lastMovedDirection = 1;
+        this.addGun();
+        this.bulletImg = this.game.assetLoader.bulletAssets.bullet;
 
-      this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
-        if (control !== InputType.SHOOT) return;
-        this.handleShoot(pressed)
-      })
+        this.shootingInterval = null;
+
+        this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
+            if (control !== InputType.SHOOT) return;
+            this.handleShoot(pressed)
+        })
     }
 
     handleShoot(pressed) {
@@ -65,6 +65,7 @@ export default class Player extends RectangleEntity {
     }
 
     shoot() {
+        if (this.isDead()) return;
         this.gun.saveShotTimestamp();
         let crosshair = this.game.getCrosshair();
         let grainsAmount = this.gun.getGrainsAmount();
@@ -82,8 +83,9 @@ export default class Player extends RectangleEntity {
     }
 
     updatePosition() {
+        if (this.isDead()) return;
         let inputManager = this.game.getInputManager()
-         let collisionDetector = this.game.collisionDetector
+        let collisionDetector = this.game.collisionDetector
 
         if (inputManager.pressedControls['moveUp']) {
             if (!collisionDetector.collidesWithTopBorder(this, -this.speed)) this.posY -= this.speed;
@@ -111,10 +113,16 @@ export default class Player extends RectangleEntity {
     }
 
     onDeath() {
-        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width / 5), this.width / 2);
+        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width / 4), this.width / 2);
         this.game.particleManagers.push(particleManager)
-        particleManager.createParticleExplosion(); 
-      };
+        particleManager.createParticleExplosion();
+        this.game.player.opacity = 0;
+    };
+
+
+    isDead() {
+        return this.health <= 0;
+    }
 }
 
 
@@ -135,5 +143,4 @@ function createBullet(entity, crosshair, centerX, centerY) {
 
     let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
     entity.game.playerBullets.push(bullet);
-    console.log("angle", grainAngle);
 }

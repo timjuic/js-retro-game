@@ -14,6 +14,7 @@ export default class CornerWave extends Wave {
         else if (corner === Corners.UPPER_RIGHT) this.createTopRightWave(waveSize);
         else if (corner === Corners.BOTTOM_LEFT) this.createBottomLeftWave(waveSize);
         else if (corner === Corners.BOTTOM_RIGHT) this.createBottomRightWave(waveSize);
+        super.spawnEnemiesFromQueue();
     }
 
     createTopLeftWave() {
@@ -29,7 +30,8 @@ export default class CornerWave extends Wave {
       
           // Loop to create enemies in each row
           for (let col = 0; col < this.waveSize - row; col++) {
-            this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
+            this.spawnQueue.push( { x: startX + col * (gap + this.enemyWidth), y: posY })
+            // this.createEnemy(, posY);
           }
         }
       }
@@ -49,11 +51,11 @@ export default class CornerWave extends Wave {
           for (let col = 0; col < this.waveSize - row; col++) {
             // Start creating enemies from the corner and go further to the left
             let posX = startX - col * (gap + this.enemyWidth);
-            this.createEnemy(posX, posY);
+            // this.createEnemy(posX, posY);
+            this.spawnQueue.push( { x: posX, y: posY })
           }
         }
       }
-      
       
       
 
@@ -71,7 +73,8 @@ export default class CornerWave extends Wave {
       
           // Loop to create enemies in each row
           for (let col = 0; col <= row; col++) {
-            this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
+            // this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
+            this.spawnQueue.push({ x: startX + col * (gap + this.enemyWidth), y: posY })
           }
         }
       }
@@ -93,7 +96,8 @@ export default class CornerWave extends Wave {
           for (let col = 2; col >= 2 - row; col--) {
             // Start creating enemies from the corner and move to the left
             let posX = startX - (2 - col) * (gap + this.enemyWidth);
-            this.createEnemy(posX, posY);
+            // this.createEnemy(posX, posY);
+            this.spawnQueue.push({ x: posX, y: posY })
           }
         }
       }
