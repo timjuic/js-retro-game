@@ -4,16 +4,23 @@ import WaveType from "../enums/wave-type.js";
 import Wave from "./wave.js";
 
 export default class CornerWave extends Wave {
-    constructor(game, waveSize, enemyType) {
-        super(game, waveSize, enemyType);
+    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
+        super(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs);
         this.borderWidth = this.game.getBorderManager().getLeftBorder();
         this.gapFromBorder = playerCanvas.width / 150
       
-        let corner = this.getPossibleCorner();
-        if (corner === Corners.UPPER_LEFT) this.createTopLeftWave(waveSize);
-        else if (corner === Corners.UPPER_RIGHT) this.createTopRightWave(waveSize);
-        else if (corner === Corners.BOTTOM_LEFT) this.createBottomLeftWave(waveSize);
-        else if (corner === Corners.BOTTOM_RIGHT) this.createBottomRightWave(waveSize);
+        
+    }
+
+    startSummoningEnemies(requestedPosition) {
+        if (requestedPosition === undefined) {
+            requestedPosition = this.getPossibleCorner();
+        }
+        
+        if (requestedPosition === Corners.UPPER_LEFT) this.createTopLeftWave(this.waveSize);
+        else if (requestedPosition === Corners.UPPER_RIGHT) this.createTopRightWave(this.waveSize);
+        else if (requestedPosition === Corners.BOTTOM_LEFT) this.createBottomLeftWave(this.waveSize);
+        else if (requestedPosition === Corners.BOTTOM_RIGHT) this.createBottomRightWave(this.waveSize);
         super.spawnEnemiesFromQueue();
     }
 

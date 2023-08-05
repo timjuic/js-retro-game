@@ -12,7 +12,7 @@ import SquareWave from "./waves/square-wave.js"
 import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-size.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
-import Basic2Enemy from "./enemies/basic2-enemy.js";
+import BuffEnemy from "./enemies/buff-enemy.js";
 import AssetLoader from "./asset-loader.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
@@ -23,6 +23,8 @@ import LineWave from "./waves/line-wave.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 import ShooterEnemy from "./enemies/shooting-enemy.js";
+import LevelManager from "./levels-manager.js";
+import levelsData from "./levels-data.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -39,7 +41,7 @@ export default class Game {
         this.crosshairManager = new CrosshairManager(this)
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
-        this.level = 1;
+        this.levelManager = new LevelManager(this, levelsData)
         this.canvas = this.canvasManager.getCanvas('playerCanvas');
         this.player = new Player(this, 'test', 50);
         this.enemies = []
@@ -55,15 +57,7 @@ export default class Game {
         // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
 
-        setTimeout(() => {
-            // new CornerWave(this, CornerWaveSize.BIG);
-            // new SideWave(this, 3, BasicEnemy);
-
-            // new CornerWave(this, 10, TeleporterEnemy);
-            // new RandomWave(this, 10, TeleporterEnemy)
-
-            new SquareWave(this, 10, SpeedyEnemy)
-        }, 1000);
+        this.levelManager.startCurrentLevel();
 
 
         this.play()

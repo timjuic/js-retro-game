@@ -9,7 +9,7 @@ export default class BasicEnemy extends Enemy {
         let height = 3;
         let moveInterval = 10;
         let speed = 8;
-        let health = 50;
+        let health = 40;
         let damage = 20;
         let image = game.assetLoader.enemyAssets.enemy1;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);

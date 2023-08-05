@@ -2,15 +2,16 @@ import BasicEnemy from "../enemies/basic-enemy.js";
 import Enemy from "../enemies/enemy.js";
 
 export default class Wave {
-    constructor(game, waveSize, enemyType) {
+    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
         this.game = game;
+        this.startSummoningMs = startSummoningSeconds * 1000;
         this.waveSize = waveSize;
         this.enemyType = enemyType;
         let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         this.enemyWidth = enemyType.baseWidth * canvas.width / 100;
         this.enemyHeight = enemyType.baseHeight * canvas.width / 100;
         this.spawnQueue = [];
-        this.delayBetweenSummonsMs = 32;
+        this.delayBetweenSummonsMs = delayBetweenSummonsMs;
         this.spawningFinished = false;
     }
 
@@ -47,6 +48,6 @@ export default class Wave {
                 clearInterval(spawnInterval);
                 this.spawningFinished = true;
             }
-        }, 32);
+        }, this.delayBetweenSummonsMs);
     }
 }

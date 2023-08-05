@@ -2,12 +2,12 @@ import BasicEnemy from "./basic-enemy.js";
 import Enemy from "./enemy.js";
 
 export default class SpawnerEnemy extends Enemy {
-    static baseWidth = 7;
-    static baseHeight = 7;
+    static baseWidth = 6;
+    static baseHeight = 6;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
-        let width = 7;
-        let height = 7;
+        let width = 6;
+        let height = 6;
         let moveInterval = 50;
         let speed = 5;
         let health = 1000;
@@ -26,8 +26,9 @@ export default class SpawnerEnemy extends Enemy {
     }
 
     spawnEnemies() {
+        console.log('Spawning');
         let numEnemiesToSpawn = 5;
-        let maxSpawnAttempts = 50;
+        let maxSpawnAttempts = 20;
     
         let enemiesSpawned = 0;
     
@@ -48,6 +49,7 @@ export default class SpawnerEnemy extends Enemy {
     createEnemy(enemyType, x, y) {
           let newEnemy = new enemyType(
             this.game,
+            this.wave,
             x,
             y,
             0,
@@ -58,7 +60,9 @@ export default class SpawnerEnemy extends Enemy {
           );
   
           for (const enemy of this.game.enemies) {
-              if (this.game.getCollisionDetector().collidesWithEntity(newEnemy, enemy)) return false;
+              if (this.game.getCollisionDetector().collidesWithEntity(newEnemy, enemy)) {
+                return false;
+              }
           }
           if (this.game.getCollisionDetector().collidesWithEntity(newEnemy, this.game.player)) return false;
           if (!this.game.getCollisionDetector().isInsideCanvasBorders(newEnemy)) return false;

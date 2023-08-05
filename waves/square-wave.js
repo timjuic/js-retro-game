@@ -2,11 +2,18 @@ import Sides from "../enums/sides.js";
 import Wave from "./wave.js";
 
 export default class SquareWave extends Wave {
-    constructor(game, waveSize, enemyType) {
-        super(game, waveSize, enemyType);
+    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
+        super(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs);
 
-        let side = this.getFurthestSideFromPlayer()
-        this.createSquareWave(side)
+        
+    }
+
+    startSummoningEnemies(requestedPosition) {
+        if (requestedPosition === undefined) {
+            requestedPosition = this.getFurthestSideFromPlayer()
+        }
+        
+        this.createSquareWave(requestedPosition)
         super.spawnEnemiesFromQueue();
     }
 

@@ -20,7 +20,7 @@ export default class AssetLoader {
     }
 
     loadEnemyAssets() {
-        let enemyAssetNames = ['enemy1.png'];
+        let enemyAssetNames = ['enemy1.png', 'enemy2.png'];
         this.loadImages(enemyAssetNames, this.enemyAssets);   
     }
 
