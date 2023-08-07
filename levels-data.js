@@ -22,16 +22,16 @@ let levels = [
         [CornerWave, 8, 4, BasicEnemy, 50, Corners.BOTTOM_RIGHT],
         [CornerWave, 12, 5, BasicEnemy, 50, Corners.UPPER_LEFT],
         [SquareWave, 18, 2, BuffEnemy, 50, Sides.TOP],
-        [SquareWave, 20, 2, BuffEnemy, 50, Sides.BOTTOM],
-        [RandomWave, 23, 3, TankEnemy, 100],
+        [SquareWave, 19, 2, BuffEnemy, 50, Sides.BOTTOM],
+        [SquareWave, 20, 2, BuffEnemy, 50, Sides.LEFT],
+        [SquareWave, 21, 2, BuffEnemy, 50, Sides.RIGHT],
         [SquareWave, 30, 3, SpeedyEnemy, 100, Sides.RIGHT],
         [SquareWave, 30, 3, SpeedyEnemy, 100, Sides.LEFT],
-        [RandomWave, 35, 20, SpeedyEnemy, 400],
-        [CornerWave, 48, 1, SpawnerEnemy, 1, Corners.UPPER_LEFT],
-        [RandomWave, 55, 10, KamikazeEnemy, 500],
-        [CornerWave, 60, 2, TeleporterEnemy, 50, CornerWave.UPPER_LEFT],
-        [LineWave, 65, 2, SpawnerEnemy, 1, Sides.TOP],
-        
+        [RandomWave, 35, 50, SpeedyEnemy, 500],
+        [LineWave, 60, 1, SpawnerEnemy, 1, Sides.TOP],
+        [RandomWave, 75, 10, KamikazeEnemy, 500],
+        [CornerWave, 80, 2, TeleporterEnemy, 50, CornerWave.UPPER_LEFT],
+        [LineWave, 85, 2, SpawnerEnemy, 1, Sides.TOP]
     ],
     [
         

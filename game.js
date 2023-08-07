@@ -25,6 +25,8 @@ import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 import ShooterEnemy from "./enemies/shooting-enemy.js";
 import LevelManager from "./levels-manager.js";
 import levelsData from "./levels-data.js";
+import SoundManager from "./sound-manager.js";
+import StatsManager from "./stats-manager.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -42,6 +44,8 @@ export default class Game {
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
         this.levelManager = new LevelManager(this, levelsData)
+        this.soundManager = new SoundManager(this);
+        this.statsManager = new StatsManager(this);
         this.canvas = this.canvasManager.getCanvas('playerCanvas');
         this.player = new Player(this, 'test', 50);
         this.enemies = []
@@ -145,6 +149,7 @@ export default class Game {
         this.particleManagers.forEach(pm => {
             pm.particles.forEach(particle => particle.draw('playerCanvas'));
         })
+        this.statsManager.displaySurvivedTime()
     }
 
     activatePauseListener() {
@@ -164,10 +169,18 @@ export default class Game {
     }
 
     play() {
+        console.log('play called');
         if (this.isPaused || !this.loopId) {
+            console.log('INNER');
             this.isPaused = false;
             pauseModal.style.display = 'none'
             this.loopId = setInterval(() => this.tick(), this.settings.TICK_DURATION_MS);
+            if (!this.statsManager.timer.isStarted()) {
+                console.log("STARTING");
+                this.statsManager.startTimer();
+            } else {
+                this.statsManager.unpauseTimer();
+            }
         }
     }
 
@@ -177,13 +190,13 @@ export default class Game {
             clearInterval(this.loopId)
             this.loopId = null;
             pauseModal.style.display = 'flex'
+            this.statsManager.pauseTimer();
         }
     }
 
     runHitDetection() {
         this.enemies.forEach((enemy, i) => {
             if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
-                console.log('Player contact');
                 if (enemy.damage < this.player.health) {
                     this.player.health -= enemy.damage;
                     this.player.isBeingHit = true;
@@ -232,7 +245,6 @@ export default class Game {
             this.playerBullets.splice(i, 1);
             let successfullyDamaged = enemy.onDamaged(bullet);
             if (!successfullyDamaged) return;
-            console.log("enemy was damaged");
             enemy.health -= bullet.damage;
             enemy.isBeingHit = true;
 

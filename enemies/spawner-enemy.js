@@ -10,11 +10,14 @@ export default class SpawnerEnemy extends Enemy {
         let height = 6;
         let moveInterval = 50;
         let speed = 5;
-        let health = 1000;
+        let health = 900;
         let damage = 100;
         let spawnIntervalMs = 2000;
         let image = game.assetLoader.enemyAssets.enemy1;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        this.numEnemiesToSpawn = 5;
+        this.maxSpawnAttempts = 20;
+        this.maxTotalEnemiesSpawned = 30;
 
         let spawnEnemiesInterval = setInterval(() => {
             if (this.health <= 0) {
@@ -23,16 +26,16 @@ export default class SpawnerEnemy extends Enemy {
             }
             this.spawnEnemies()
         }, spawnIntervalMs);
+
+        setTimeout(() => {
+            if (!this.game.enemies.includes(this)) clearInterval(spawnEnemiesInterval)
+        }, 500);
     }
 
     spawnEnemies() {
-        console.log('Spawning');
-        let numEnemiesToSpawn = 5;
-        let maxSpawnAttempts = 20;
-    
         let enemiesSpawned = 0;
     
-        for (let attempt = 0; attempt < maxSpawnAttempts && enemiesSpawned < numEnemiesToSpawn; attempt++) {
+        for (let attempt = 0; attempt < this.maxSpawnAttempts && enemiesSpawned < this.numEnemiesToSpawn; attempt++) {
             // generate a random position near the parent entity
             let spawnRadius = Math.sqrt(this.width*this.width + this.height*this.height) * 2;
             let angle = Math.random() * Math.PI * 2; // random angle

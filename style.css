@@ -70,3 +70,36 @@
     /* Apply your preferred hover effect styles here */
   }
   
+
+  .menu-button {
+    background: rgba(128, 0, 128, 0.7); /* Dark cyberpunk purple, less transparent */
+    border: 2px solid rgba(128, 0, 128, 0.9);
+    color: #f8e4ff;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 15px 30px;
+    text-align: center;
+    text-transform: uppercase;
+    transition: all 0.3s ease 0s;
+    outline: none;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.5); /* Purple glow */
+}
+
+.menu-button:hover {
+    transform: scale(1.1);
+    background: rgba(128, 0, 128, 0.9); /* Fully opaque dark cyberpunk purple when hovered */
+    box-shadow: 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1); /* Purple glow */
+}
+
+.menu-button:active {
+    background: rgba(128, 0, 128, 0.8);
+    box-shadow: 0 0 15px rgba(128, 0, 128, 0.5); /* Purple glow */
+}
+
+.time-survived {
+    color: white;
+    position: absolute;
+    right: 5%;
+    top: 5%;
+}

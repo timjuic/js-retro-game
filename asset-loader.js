@@ -3,6 +3,7 @@ export default class AssetLoader {
         this.bulletAssets = {};
         this.enemyAssets = {}
         this.otherAssets = {};
+        this.audioAssets = {}
         this.enemyImageDataObjects = {};
         this.playerAsset;
 
@@ -10,7 +11,7 @@ export default class AssetLoader {
         this.loadEnemyAssets()
         this.loadOtherAssets();
         this.loadEnemyImagesData(); // Preloading image data for each enemy as cache for explosion effects
-        
+        this.loadAudioAssets();
 
     }
 
@@ -35,6 +36,13 @@ export default class AssetLoader {
             assetImage.src = `./assets/${assetName}`;
             assetType[assetName.split('.')[0]] = assetImage;
         });
+    }
+
+    loadAudioAssets() {
+        let audioAssetFileNames = ['enemy_death.wav', 'menu_hover.mp3'];
+        audioAssetFileNames.forEach(fileName => {
+            this.audioAssets[fileName.split('.')[0]] = new Audio(`./assets/sounds/${fileName}`)
+        })
     }
 
     loadEnemyImagesData() {

@@ -52,6 +52,7 @@ export default class Player extends RectangleEntity {
 
     startShooting() {
         if (this.shootingInterval !== null) return;
+        if (this.game.isPaused) return;
 
         if (this.gun.canShoot()) this.shoot(); // Initial shot
         this.shootingInterval = setInterval(() => {
@@ -73,11 +74,12 @@ export default class Player extends RectangleEntity {
         let centerX = this.posX + this.width / 2
         let centerY = this.posY + this.height / 2
 
+        this.game.soundManager.playSound('blaster.wav')
         if (grainsAmount === 1) {
-            createBullet(this, crosshair, centerX, centerY);
+            this.createBullet(this, crosshair, centerX, centerY);
         } else {
             for (let i = 0; i < grainsAmount; i++) {
-                createBullet(this, crosshair, centerX, centerY);
+                this.createBullet(this, crosshair, centerX, centerY);
             }
         }
     }
@@ -108,7 +110,7 @@ export default class Player extends RectangleEntity {
     }
 
     addGun(gun) {
-        this.gun = gunsData[1]
+        this.gun = gunsData[0]
         console.log(this.gun);
     }
 
@@ -123,24 +125,24 @@ export default class Player extends RectangleEntity {
     isDead() {
         return this.health <= 0;
     }
-}
 
-
-function createBullet(entity, crosshair, centerX, centerY) {
-    let deviationX = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
-    let deviationY = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
-    let directionX = MathUtil.getRandomSign();
-    let directionY = MathUtil.getRandomSign();
-    let playerDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY);
-    let grainTargetPointX = crosshair.aimX + directionX * deviationX * playerDistanceFromCrosshair / 1000;
-    let grainTargetPointY = crosshair.aimY + directionY * deviationY * playerDistanceFromCrosshair / 1000;
-
-
-    let grainAngle = MathUtil.calculateAngle(centerX, centerY, grainTargetPointX, grainTargetPointY);
-    let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
-    let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
-    let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
-
-    let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
-    entity.game.playerBullets.push(bullet);
+    createBullet(entity, crosshair, centerX, centerY) {
+        let deviationX = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
+        let deviationY = MathUtil.generateRandomInteger(0, entity.gun.accuracy);
+        let directionX = MathUtil.getRandomSign();
+        let directionY = MathUtil.getRandomSign();
+        let playerDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, crosshair.aimX, crosshair.aimY);
+        let grainTargetPointX = crosshair.aimX + directionX * deviationX * playerDistanceFromCrosshair / 1000;
+        let grainTargetPointY = crosshair.aimY + directionY * deviationY * playerDistanceFromCrosshair / 1000;
+    
+    
+        let grainAngle = MathUtil.calculateAngle(centerX, centerY, grainTargetPointX, grainTargetPointY);
+        let grainDistanceFromCrosshair = MathUtil.calculateDistance(centerX, centerY, grainTargetPointX, grainTargetPointY)
+        let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
+        let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
+    
+        let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
+        entity.game.playerBullets.push(bullet);
+        
+    }
 }
