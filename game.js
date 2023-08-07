@@ -276,4 +276,28 @@ export default class Game {
         }
         return false;
     }
+
+
+    
+    showDeathScreen() {
+        // Update the time survived in the modal
+        const timeElement = document.querySelector("#survival-time span");
+        timeElement.textContent = this.statsManager.getTimeSurvivedFormatted();
+    
+        // Display the modal
+        const modal = document.getElementById("death-modal");
+        modal.style.display = "block";
+    }
+    
+    closeModal() {
+        const modal = document.getElementById("death-modal");
+        modal.style.display = "none";
+        // Possibly restart the game or navigate to main menu
+    }
+    
+    
+    
+    
+    
+    
 }

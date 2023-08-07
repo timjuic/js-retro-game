@@ -2,7 +2,7 @@
     margin: 0;
     padding: 0;
     box-sizing: content-box;
-    cursor:  none;
+    /* cursor:  none; */
 }
 
 #game-container {
@@ -66,13 +66,9 @@
     color: #fff;
   }
   
-  button:hover {
-    /* Apply your preferred hover effect styles here */
-  }
-  
 
   .menu-button {
-    background: rgba(128, 0, 128, 0.7); /* Dark cyberpunk purple, less transparent */
+    background: rgba(128, 0, 128, 0.7);
     border: 2px solid rgba(128, 0, 128, 0.9);
     color: #f8e4ff;
     cursor: pointer;
@@ -83,18 +79,18 @@
     transition: all 0.3s ease 0s;
     outline: none;
     border-radius: 4px;
-    box-shadow: 0 0 10px rgba(128, 0, 128, 0.5); /* Purple glow */
+    box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);
 }
 
 .menu-button:hover {
     transform: scale(1.1);
-    background: rgba(128, 0, 128, 0.9); /* Fully opaque dark cyberpunk purple when hovered */
-    box-shadow: 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1); /* Purple glow */
+    background: rgba(128, 0, 128, 0.9);
+    box-shadow: 0 0 20px rgba(128, 0, 128, 1), 0 0 30px rgba(128, 0, 128, 1);
 }
 
 .menu-button:active {
     background: rgba(128, 0, 128, 0.8);
-    box-shadow: 0 0 15px rgba(128, 0, 128, 0.5); /* Purple glow */
+    box-shadow: 0 0 15px rgba(128, 0, 128, 0.5);
 }
 
 .time-survived {
@@ -102,4 +98,61 @@
     position: absolute;
     right: 5%;
     top: 5%;
+}
+
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.9);
+}
+
+#start-modal {
+    display: block;
+}
+
+.modal-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #333;
+    padding: 20px;
+    border: 3px solid #d100d1;
+    text-align: center;
+    width: 70%;
+    max-width: 400px;
+}
+
+.modal h1 {
+    color: #ff2d6f;
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.modal p {
+    color: #ffffff;
+    font-size: 20px;
+    margin-bottom: 20px;
+}
+
+.modal button {
+    padding: 10px 20px;
+    font-size: 16px;
+    background-color: #d100d1;
+    border: none;
+    color: #333;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.modal button:hover {
+    background-color: #ff2d6f;
+    transform: scale(1.1);
 }

@@ -119,6 +119,8 @@ export default class Player extends RectangleEntity {
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion();
         this.game.player.opacity = 0;
+        this.game.pause();
+        this.game.showDeathScreen();
     };
 
 
