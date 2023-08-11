@@ -13,6 +13,8 @@ import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
 import TeleportationTrail from "./particles/teleportation-trail.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
+import PufPufEnemy from './enemies/pufpuf-enemy.js'
+import ShieldedEnemy from './enemies/shielded-enemy.js'
 
 let levels = [
     [
@@ -25,17 +27,15 @@ let levels = [
         [SquareWave, 19, 2, BuffEnemy, 50, Sides.BOTTOM],
         [SquareWave, 20, 2, BuffEnemy, 50, Sides.LEFT],
         [SquareWave, 21, 2, BuffEnemy, 50, Sides.RIGHT],
-        [SquareWave, 30, 3, SpeedyEnemy, 100, Sides.RIGHT],
-        [SquareWave, 30, 3, SpeedyEnemy, 100, Sides.LEFT],
-        [RandomWave, 35, 50, SpeedyEnemy, 500],
-        [LineWave, 60, 1, SpawnerEnemy, 1, Sides.TOP],
-        [RandomWave, 75, 10, KamikazeEnemy, 500],
+        [SquareWave, 25, 3, SpeedyEnemy, 100, Sides.RIGHT],
+        [SquareWave, 25, 3, SpeedyEnemy, 100, Sides.LEFT],
+        [RandomWave, 30, 50, SpeedyEnemy, 500],
+        [LineWave, 50, 1, SpawnerEnemy, 1, Sides.TOP],
+        [RandomWave, 60, 10, KamikazeEnemy, 500],
         [CornerWave, 80, 2, TeleporterEnemy, 50, CornerWave.UPPER_LEFT],
-        [LineWave, 85, 2, SpawnerEnemy, 1, Sides.TOP]
+        [LineWave, 85, 2, SpawnerEnemy, 1, Sides.TOP],
+
     ],
-    [
-        
-    ]
 ]
 
 export default levels;

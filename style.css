@@ -12,6 +12,10 @@
     height: 100vh;
 }
 
+canvas:hover {
+    cursor: none;
+}
+
 .game-canvas {
     position: absolute;
     top: 50%;

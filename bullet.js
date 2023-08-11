@@ -12,7 +12,7 @@ export default class Bullet extends RectangleEntity {
     draw(canvasName) {
         let ctx = this.game.getCanvasManager().getContext(canvasName);
       
-        ctx.save(); // Save the current state of the canvas
+        ctx.save();
           
         let centerX = this.posX + this.width / 2;
         let centerY = this.posY + this.height / 2;
@@ -51,6 +51,6 @@ export default class Bullet extends RectangleEntity {
             );
         }
          
-        ctx.restore(); // Restore the original state of the canvas
+        ctx.restore();
       }
 }

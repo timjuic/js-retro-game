@@ -10,7 +10,7 @@ export default class AssetLoader {
         this.loadBulletAssets();
         this.loadEnemyAssets()
         this.loadOtherAssets();
-        this.loadEnemyImagesData(); // Preloading image data for each enemy as cache for explosion effects
+        this.loadEnemyImagesData();
         this.loadAudioAssets();
 
     }

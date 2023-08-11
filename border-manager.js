@@ -43,14 +43,12 @@ export default class BorderManager{
       let ctx = this.game.getCanvasManager().getContext(canvasName)
       ctx.fillStyle = this.borders.top.color
     
-      // draw the top and bottom borders
       let borderThickness = this.borders.top.height;
       let halfCanvasWidth = canvas.width / 2;
       let halfBorderWidth = this.borders.top.width / 2;
       ctx.fillRect(halfCanvasWidth - halfBorderWidth, 0, this.borders.top.width, borderThickness);
       ctx.fillRect(halfCanvasWidth - halfBorderWidth, canvas.height - borderThickness, this.borders.bottom.width, borderThickness);
     
-      // draw the left and right borders
       let borderHeight = canvas.height - (2 * borderThickness);
       let halfCanvasHeight = canvas.height / 2;
       let halfBorderHeight = borderHeight / 2;

@@ -8,8 +8,8 @@ export default class Particle extends RectangleEntity {
         this.decay = MathUtil.generateRandomNumber(0.8, 0.95);
     }
 
-    draw(canvasName) {
-        let ctx = this.game.getCanvasManager().getContext(canvasName);
+    draw() {
+        let ctx = this.game.getCanvasManager().getContext('projectileCanvas');
     
         ctx.save();
           

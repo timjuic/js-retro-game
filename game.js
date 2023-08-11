@@ -93,12 +93,9 @@ export default class Game {
         this.canvasManager.generateCanvas('projectileCanvas')
         this.canvasManager.generateCanvas('playerCanvas')
         this.canvasManager.generateCanvas('crosshairCanvas')
-        //   this.canvasManager.generateCanvas('enemiesCanvas')
-
     }
 
     tick() {
-        // TODO
         if (this.isPaused) return
 
         let playerCtx = this.getCanvasManager().getContext('playerCanvas')
