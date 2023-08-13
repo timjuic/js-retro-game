@@ -57,6 +57,7 @@ export default class Game {
         this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
+        this.ticksElapsed = 0;
 
         // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
@@ -98,7 +99,7 @@ export default class Game {
     tick() {
         if (this.isPaused) return
 
-        let playerCtx = this.getCanvasManager().getContext('playerCanvas')
+        this.levelManager.checkForUpcomingWaves();
 
         this.canvasManager.clearCanvases()
         this.borderManager.drawBorders('playerCanvas')
@@ -118,6 +119,7 @@ export default class Game {
         this.particles.forEach(particle => particle.update())
 
         this.drawGameElements();
+        this.ticksElapsed++;
     }
 
     drawGameElements() {

@@ -2,14 +2,19 @@ import Enemy from "../enemies/enemy.js";
 import Wave from "./wave.js";
 
 export default class RandomWave extends Wave {
-    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
-        super(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs)
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs) {
+        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs)
         this.spawningFinished = true;
+        this.calculateDuration(this.getTotalEnemies());
     }
 
     startSummoningEnemies() {
         this.spawnEnemiesNearBorder(this.waveSize)
         super.spawnEnemiesFromQueue();
+    }
+
+    getTotalEnemies() {
+        return this.waveSize;
     }
 
     spawnEnemiesNearBorder() {

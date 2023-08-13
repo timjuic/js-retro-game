@@ -4,13 +4,15 @@ import Enemy from "./enemy.js";
 export default class SpawnerEnemy extends Enemy {
     static baseWidth = 6;
     static baseHeight = 6;
+    static startingHealth = 800;
+    static buffness = Enemy.calculateBuffness(SpawnerEnemy.startingHealth)
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 6;
         let height = 6;
         let moveInterval = 50;
         let speed = 5;
-        let health = 900;
+        let health = SpawnerEnemy.startingHealth;
         let damage = 100;
         let spawnIntervalMs = 2000;
         let image = game.assetLoader.enemyAssets.enemy1;

@@ -5,13 +5,15 @@ import Enemy from "./enemy.js";
 export default class ShieldedEnemy extends Enemy {
     static baseWidth = 4;
     static baseHeight = 4;
+    static startingHealth = 50;
+    static buffness = Enemy.calculateBuffness(ShieldParticle.startingHealth)
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
         let height = 3;
         let moveInterval = 10;
         let speed = 8;
-        let health = 50;
+        let health = ShieldedEnemy.startingHealth;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.enemy1;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)

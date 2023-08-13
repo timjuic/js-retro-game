@@ -2,9 +2,9 @@ import BasicEnemy from "../enemies/basic-enemy.js";
 import Enemy from "../enemies/enemy.js";
 
 export default class Wave {
-    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs) {
         this.game = game;
-        this.startSummoningMs = startSummoningSeconds * 1000;
+        this.startSummoningTicks = startSummoningTicks;
         this.waveSize = waveSize;
         this.enemyType = enemyType;
         let canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
@@ -13,6 +13,7 @@ export default class Wave {
         this.spawnQueue = [];
         this.delayBetweenSummonsMs = delayBetweenSummonsMs;
         this.spawningFinished = false;
+        this.tickDuration;
     }
 
     createEnemy(x, y, wave) {
@@ -49,5 +50,14 @@ export default class Wave {
                 this.spawningFinished = true;
             }
         }, this.delayBetweenSummonsMs);
+    }
+
+
+    calculateDuration(amountOfEnemies) {
+        let spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
+        let buffnessExtra = amountOfEnemies * this.enemyType.buffness;
+        
+        this.tickDuration = spawnDurationTicks + buffnessExtra + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
+        console.log("wave duration in ticks", this.tickDuration);
     }
 }

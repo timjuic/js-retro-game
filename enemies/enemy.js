@@ -8,7 +8,7 @@ export default class Enemy extends RectangleEntity {
         super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.wave = wave;
         this.moveInterval = moveInterval;
-        this.speed = speed * this.game.canvas.width / 800;
+        this.speed = speed * this.game.canvas.width / this.game.settings.ENEMY_SPEED_MODIFIER;
         this.health = health;
         this.damage = damage;
         this.ticksPassed = 0;
@@ -91,5 +91,9 @@ export default class Enemy extends RectangleEntity {
 
       onDamaged() {
         return true;
+      }
+
+      static calculateBuffness(health) {
+        return health / 4;
       }
 }

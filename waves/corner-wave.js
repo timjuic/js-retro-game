@@ -4,24 +4,28 @@ import WaveType from "../enums/wave-type.js";
 import Wave from "./wave.js";
 
 export default class CornerWave extends Wave {
-    constructor(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs) {
-        super(game, startSummoningSeconds, waveSize, enemyType, delayBetweenSummonsMs);
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition) {
+        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition);
         this.borderWidth = this.game.getBorderManager().getLeftBorder();
         this.gapFromBorder = playerCanvas.width / 150
-      
-        
+        this.summoningPosition = summoningPosition
+        this.calculateDuration(this.getTotalEnemies());
     }
 
-    startSummoningEnemies(requestedPosition) {
-        if (requestedPosition === undefined) {
-            requestedPosition = this.getPossibleCorner();
+    startSummoningEnemies() {
+        if (this.summoningPosition === undefined) {
+            this.summoningPosition = this.getPossibleCorner();
         }
         
-        if (requestedPosition === Corners.UPPER_LEFT) this.createTopLeftWave(this.waveSize);
-        else if (requestedPosition === Corners.UPPER_RIGHT) this.createTopRightWave(this.waveSize);
-        else if (requestedPosition === Corners.BOTTOM_LEFT) this.createBottomLeftWave(this.waveSize);
-        else if (requestedPosition === Corners.BOTTOM_RIGHT) this.createBottomRightWave(this.waveSize);
+        if (this.summoningPosition === Corners.UPPER_LEFT) this.createTopLeftWave(this.waveSize);
+        else if (this.summoningPosition === Corners.UPPER_RIGHT) this.createTopRightWave(this.waveSize);
+        else if (this.summoningPosition === Corners.BOTTOM_LEFT) this.createBottomLeftWave(this.waveSize);
+        else if (this.summoningPosition === Corners.BOTTOM_RIGHT) this.createBottomRightWave(this.waveSize);
         super.spawnEnemiesFromQueue();
+    }
+
+    getTotalEnemies() {
+        return (this.waveSize * this.waveSize) / 2;
     }
 
     createTopLeftWave() {
