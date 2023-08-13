@@ -76,7 +76,7 @@ export default class TeleporterEnemy extends Enemy {
         let thisEntity = { posX: posX, posY: posY, width: this.width, height: this.height, angle: 0, }
         let isInsideCanvas = cd.isInsideCanvasBorders(thisEntity);
         let collidesWithEnemy = this.game.enemies.some(enemy => cd.collidesWithEntity(thisEntity, enemy));
-        let collidesWithBullet = this.game.playerBullets.some(bullet => cd.collidesWithEntityRotated(thisEntity, bullet));
+        let collidesWithBullet = this.game.playerBullets.some(bullet => cd.collidesWithEntity(thisEntity, bullet));
         let collidesWithPlayer = cd.collidesWithEntity(thisEntity, this.game.player)
         if (isInsideCanvas && !collidesWithBullet && !collidesWithEnemy && !collidesWithPlayer) return true;
         return false;

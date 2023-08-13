@@ -12,7 +12,7 @@ export default class GrowingEnemy extends Enemy {
         let height = width;
         let maxSize = 6;
         let moveInterval = 50;
-        let speed = 10;
+        let speed = 0;
         let health = GrowingEnemy.startingHealth;
         let damage = 10;
         let image = game.assetLoader.enemyAssets.enemy1;

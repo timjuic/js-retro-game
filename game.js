@@ -211,7 +211,7 @@ export default class Game {
         })
 
         this.enemyBullets.forEach((bullet, i) => {
-            if (this.getCollisionDetector().collidesWithEntityRotated(bullet, this.player)) {
+            if (this.getCollisionDetector().collidesWithEntity(bullet, this.player)) {
                 if (this.player.health > bullet.damage) {
                     this.player.health -= bullet.damage;
                     this.player.isBeingHit = true;
@@ -225,7 +225,7 @@ export default class Game {
 
         this.playerBullets.forEach((bullet, i) => {
             this.enemies.forEach((enemy, j) => {
-                if (this.getCollisionDetector().collidesWithEntityRotated(bullet, enemy)) {
+                if (this.getCollisionDetector().collidesWithEntity(bullet, enemy)) {
                     this.handleEnemyHit(bullet, enemy, i, j)
                 }
             })
