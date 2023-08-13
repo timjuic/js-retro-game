@@ -1,4 +1,4 @@
-import Player from "./player.js";
+import Player from "../player.js";
 
 export default class CanvasManager {
     constructor(game) {
@@ -14,7 +14,7 @@ export default class CanvasManager {
 
     activateResizeHandler() {
       let resizeTimer;
-      const delay = 500; // The debounce delay in milliseconds
+      const delay = 50; // The debounce delay in milliseconds
 
       const resizeFunction = () => {
           // Clear the previous resize timer

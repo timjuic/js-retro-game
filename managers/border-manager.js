@@ -1,4 +1,4 @@
-import { RectangleEntity } from "./entity.js";
+import { RectangleEntity } from "../entity.js";
 
 export default class BorderManager{
     constructor(game, thickness) {

@@ -71,7 +71,6 @@ export default class CollisionDetector {
          entity1.posY + entity1.height > entity2.posY
       );
     }
-    
 
    isInsideCanvas(entity) {
       if (entity.posX < 0) return false;

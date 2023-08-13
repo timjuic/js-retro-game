@@ -58,6 +58,5 @@ export default class Wave {
         let buffnessExtra = amountOfEnemies * this.enemyType.buffness;
         
         this.tickDuration = spawnDurationTicks + buffnessExtra + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
-        console.log("wave duration in ticks", this.tickDuration);
     }
 }

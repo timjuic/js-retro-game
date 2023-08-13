@@ -1,16 +1,16 @@
-import CanvasManager from "./canvas-manager.js";
+import CanvasManager from "./managers/canvas-manager.js";
 import CollisionDetector from "./collision-detector.js";
 import settings from "./game-settings.js";
 import EventEmmiter from "./helpers/event-emmiter.js";
-import InputManager from "./input-manager.js";
+import InputManager from "./managers/input-manager.js";
 import Player from "./player.js";
-import BorderManager from "./border-manager.js";
-import CrosshairManager from "./crosshair-manager.js";
+import BorderManager from "./managers/border-manager.js";
+import CrosshairManager from "./managers/crosshair-manager.js";
 import InputType from "./enums/input-type.js";
 import RandomWave from "./waves/random-wave.js"
 import SquareWave from "./waves/square-wave.js"
 import CornerWave from "./waves/corner-wave.js";
-import CornerWaveSize from "./enums/corner-wave-size.js";
+import CornerWaveSize from "./enums/corner-wave-sizes.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
 import BuffEnemy from "./enemies/buff-enemy.js";
 import AssetLoader from "./asset-loader.js";
@@ -23,10 +23,10 @@ import LineWave from "./waves/line-wave.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 import ShooterEnemy from "./enemies/shooting-enemy.js";
-import LevelManager from "./levels-manager.js";
+import LevelManager from "./managers/levels-manager.js";
 import levelsData from "./levels-data.js";
-import SoundManager from "./sound-manager.js";
-import StatsManager from "./stats-manager.js";
+import SoundManager from "./managers/sound-manager.js";
+import StatsManager from "./managers/stats-manager.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -168,14 +168,11 @@ export default class Game {
     }
 
     play() {
-        console.log('play called');
         if (this.isPaused || !this.loopId) {
-            console.log('INNER');
             this.isPaused = false;
             pauseModal.style.display = 'none'
             this.loopId = setInterval(() => this.tick(), this.settings.TICK_DURATION_MS);
             if (!this.statsManager.timer.isStarted()) {
-                console.log("STARTING");
                 this.statsManager.startTimer();
             } else {
                 this.statsManager.unpauseTimer();

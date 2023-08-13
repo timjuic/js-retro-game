@@ -1,4 +1,4 @@
-import Timer from "./helpers/timer.js";
+import Timer from "../helpers/timer.js";
 
 export default class StatsManager {
     constructor(game) {
@@ -12,7 +12,6 @@ export default class StatsManager {
 
     startTimer() {
         this.timer.start();
-        console.log('started');
     }
 
     pauseTimer() {

@@ -27,12 +27,10 @@ export default class GrowingEnemy extends Enemy {
         if (!(entity instanceof Bullet)) return;
 
         let sizeIncrease = this.relativeSizeIncrease * this.canvasRef.width / 100;
-        console.log(sizeIncrease);
         if (this.width + sizeIncrease <= this.maxSize) {
             this.width += sizeIncrease;
             this.height += sizeIncrease;
             this.speed *= this.speedDecrease;
-            console.log("SPEED", this.speed);
             this.health = GrowingEnemy.startingHealth
         }
         return true;

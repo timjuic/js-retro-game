@@ -1,6 +1,5 @@
 import Enemy from "../enemies/enemy.js";
 import Corners from "../enums/corners.js";
-import WaveType from "../enums/wave-type.js";
 import Wave from "./wave.js";
 
 export default class CornerWave extends Wave {

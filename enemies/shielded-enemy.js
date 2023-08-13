@@ -26,7 +26,6 @@ export default class ShieldedEnemy extends Enemy {
         let isSideHit = false;
         let side = 0; // 0: left, 1: right
     
-        // Assuming the angle is between -PI and PI.
         if (entity.angle > 45 && entity.angle < 135) {
             isSideHit = true; // Side hit
             side = 1;
@@ -35,10 +34,7 @@ export default class ShieldedEnemy extends Enemy {
             isSideHit = true;
         }
     
-        console.log(side);
-
         if (isSideHit) {
-            // Spawn shield particle
             if (!this.hasShieldActive) {
                 const shield = new ShieldParticle(this.game, this, this.posX + this.width / 2, this.posY + this.height / 2, this.width, 0, 0, side, 'rgba(173, 216, 230, 0.5)');
                 this.game.particles.push(shield);

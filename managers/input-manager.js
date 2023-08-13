@@ -1,4 +1,4 @@
-import InputType from "./enums/input-type.js";
+import InputType from "../enums/input-type.js";
 
 export default class InputManager {
     constructor(game) {

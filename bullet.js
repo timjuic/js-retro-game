@@ -22,18 +22,13 @@ export default class Bullet extends RectangleEntity {
         ctx.translate(-centerX, -centerY);
 
         if (this.image !== undefined) {
-            let bulletScale = 2;
+            let scaledWidth = this.width * this.game.settings.BULLET_SIZE_MODIFIER;
+            let scaledHeight = this.height * this.game.settings.BULLET_SIZE_MODIFIER * 2;
 
-            // Calculate the new dimensions after scaling
-            let scaledWidth = this.width * bulletScale;
-            let scaledHeight = this.height * bulletScale * 2;
-
-            // Calculate the position to keep the image centered within the rectangle
             let centerX = this.posX + this.width / 2;
             let centerY = this.posY + this.height;
             let scaledPosX = centerX - scaledWidth / 2;
 
-            // Ensure the scaledPosY is within the front side boundary
             let scaledPosY = centerY - scaledHeight;
             if (scaledPosY < this.posY - 10) {
                 scaledPosY = this.posY - 10;

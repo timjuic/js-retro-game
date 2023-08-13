@@ -111,7 +111,6 @@ export default class Player extends RectangleEntity {
 
     addGun(gun) {
         this.gun = gunsData[1]
-        console.log(this.gun);
     }
 
     onDeath() {
@@ -119,8 +118,11 @@ export default class Player extends RectangleEntity {
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion();
         this.game.player.opacity = 0;
-        this.game.pause();
-        this.game.showDeathScreen();
+
+        setTimeout(() => {
+            this.game.pause();
+            this.game.showDeathScreen();    
+        }, 2000);
     };
 
 
