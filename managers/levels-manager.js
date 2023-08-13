@@ -15,7 +15,7 @@ export default class LevelManager {
     }
 
     startCurrentLevel() {
-        let wavesToGenerate = 50;
+        let wavesToGenerate = 1;
         let generatedWaveData = [];
         for (let i = 0; i < wavesToGenerate; i++) {
             let waveData = this.waveGenerator.generateNextWave();
@@ -24,6 +24,7 @@ export default class LevelManager {
             console.log('amount' ,waveData[1]);
             console.log('type', waveData[2]);
             console.log('delay', waveData[3]);
+            console.log("position", waveData[4]);
         }
         console.log(generatedWaveData);
         // let currentLevelData = this.levelsData[this.level-1];
@@ -40,7 +41,6 @@ export default class LevelManager {
 
     checkForUpcomingWaves() {
         if (this.game.ticksElapsed % 20 !== 0) return;
-        console.log('checking');
         this.waves.forEach((wave, i) => {
             if (this.game.ticksElapsed >= wave.startSummoningTicks) {
                 wave.startSummoningEnemies();

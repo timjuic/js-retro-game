@@ -27,22 +27,33 @@ export default class CornerWave extends Wave {
         return (this.waveSize * this.waveSize) / 2;
     }
 
+    calculateRowsForEnemies(totalEnemies) {
+        return (-1 + Math.sqrt(1 + 8 * totalEnemies)) / 2;
+      }
+
+     calculateColumnsForEnemies(totalEnemies) {
+        return Math.ceil((-1 + Math.sqrt(1 + 8 * totalEnemies)) / 2);
+    }
+
     createTopLeftWave() {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         
         let [startX, startY] = this.getStartingPosition(Corners.UPPER_LEFT);
       
         let gap = playerCanvas.width / 130;
-      
-        // Loop to create 3 rows of enemies
-        for (let row = 0; row < this.waveSize; row++) {
-          let posY = startY + row * (gap + this.enemyHeight);
-      
-          // Loop to create enemies in each row
-          for (let col = 0; col < this.waveSize - row; col++) {
-            this.spawnQueue.push( { x: startX + col * (gap + this.enemyWidth), y: posY })
-            // this.createEnemy(, posY);
-          }
+
+        let numRows = this.calculateRowsForEnemies(this.waveSize);
+        let numCols = this.calculateColumnsForEnemies(this.waveSize)
+        let elementNumber = 1;
+
+        for (let col = 0; col < numCols; col++) {
+            for (let row = 0; row <= col && elementNumber <= this.waveSize; row++) {
+              let actualRow = row;
+              let actualCol = col - row;
+                
+                this.spawnQueue.push( { x: startX + actualCol * (gap + this.enemyWidth), y: startY + actualRow * (gap + this.enemyHeight) })
+                elementNumber++;
+            }
         }
       }
 
@@ -52,20 +63,22 @@ export default class CornerWave extends Wave {
         let [startX, startY] = this.getStartingPosition(Corners.UPPER_RIGHT);
       
         let gap = playerCanvas.width / 130;
-      
-        // Loop to create 3 rows of enemies
-        for (let row = 0; row < this.waveSize; row++) {
-          let posY = startY + row * (gap + this.enemyHeight);
-      
-          // Loop to create enemies in each row
-          for (let col = 0; col < this.waveSize - row; col++) {
-            // Start creating enemies from the corner and go further to the left
-            let posX = startX - col * (gap + this.enemyWidth);
-            // this.createEnemy(posX, posY);
-            this.spawnQueue.push( { x: posX, y: posY })
-          }
+
+        let numRows = this.calculateRowsForEnemies(this.waveSize);
+        let numCols = this.calculateColumnsForEnemies(this.waveSize)
+        let elementNumber = 1;
+
+        for (let col = 0; col < numCols; col++) {
+            for (let row = 0; row <= col && elementNumber <= this.waveSize; row++) {
+              let actualRow = row;
+              let actualCol = col - row;
+                
+                this.spawnQueue.push( { x: startX - actualCol * (gap + this.enemyWidth), y: startY + actualRow * (gap + this.enemyHeight) })
+                elementNumber++;
+            }
         }
       }
+      
       
       
 
@@ -75,17 +88,19 @@ export default class CornerWave extends Wave {
         let [startX, startY] = this.getStartingPosition(Corners.BOTTOM_LEFT);
       
         let gap = playerCanvas.width / 130;
-      
-        // Loop to create 3 rows of enemies, starting from the bottom row
-        for (let row = this.waveSize - 1; row >= 0; row--) {
-          // Start creating enemies from the corner and move upwards
-          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyHeight);
-      
-          // Loop to create enemies in each row
-          for (let col = 0; col <= row; col++) {
-            // this.createEnemy(startX + col * (gap + this.enemyWidth), posY);
-            this.spawnQueue.push({ x: startX + col * (gap + this.enemyWidth), y: posY })
-          }
+
+        let numRows = this.calculateRowsForEnemies(this.waveSize);
+        let numCols = this.calculateColumnsForEnemies(this.waveSize)
+        let elementNumber = 1;
+
+        for (let col = 0; col < numCols; col++) {
+            for (let row = 0; row <= col && elementNumber <= this.waveSize; row++) {
+              let actualRow = row;
+              let actualCol = col - row;
+                
+                this.spawnQueue.push( { x: startX + actualCol * (gap + this.enemyWidth), y: startY - actualRow * (gap + this.enemyHeight) })
+                elementNumber++;
+            }
         }
       }
       
@@ -96,24 +111,22 @@ export default class CornerWave extends Wave {
         let [startX, startY] = this.getStartingPosition(Corners.BOTTOM_RIGHT);
       
         let gap = playerCanvas.width / 130;
-      
-        // Loop to create 3 rows of enemies, starting from the bottom row
-        for (let row = this.waveSize - 1; row >= 0; row--) {
-          // Start creating enemies from the corner and move upwards
-          let posY = startY - (this.waveSize - 1 - row) * (gap + this.enemyHeight);
-      
-          // Loop to create enemies in each row
-          for (let col = 2; col >= 2 - row; col--) {
-            // Start creating enemies from the corner and move to the left
-            let posX = startX - (2 - col) * (gap + this.enemyWidth);
-            // this.createEnemy(posX, posY);
-            this.spawnQueue.push({ x: posX, y: posY })
-          }
+
+        let numRows = this.calculateRowsForEnemies(this.waveSize);
+        let numCols = this.calculateColumnsForEnemies(this.waveSize)
+        let elementNumber = 1;
+
+        for (let col = 0; col < numCols; col++) {
+            for (let row = 0; row <= col && elementNumber <= this.waveSize; row++) {
+              let actualRow = row;
+              let actualCol = col - row;
+                
+                this.spawnQueue.push( { x: startX - actualCol * (gap + this.enemyWidth), y: startY - actualRow * (gap + this.enemyHeight) })
+                elementNumber++;
+            }
         }
       }
       
-      
-
 
     getPossibleCorner() {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');

@@ -1,5 +1,6 @@
 import BasicEnemy from "../enemies/basic-enemy.js";
 import Enemy from "../enemies/enemy.js";
+import RandomWave from "./random-wave.js";
 
 export default class Wave {
     constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs) {
@@ -54,9 +55,15 @@ export default class Wave {
 
 
     calculateDuration(amountOfEnemies) {
-        let spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
-        let buffnessExtra = amountOfEnemies * this.enemyType.buffness;
-        
+        let spawnDurationTicks, buffnessExtra;
+        if (this instanceof RandomWave) {
+            spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
+            buffnessExtra = amountOfEnemies / this.delayBetweenSummonsMs * this.enemyType.buffness;
+        } else {
+            spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
+            buffnessExtra = amountOfEnemies * this.enemyType.buffness;
+        }
+
         this.tickDuration = spawnDurationTicks + buffnessExtra + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
     }
 }

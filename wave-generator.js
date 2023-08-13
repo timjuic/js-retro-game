@@ -35,29 +35,20 @@ export default class WaveGenerator {
     pickEnemy() {
         const currentDifficulty = this.difficultyManager.getCurrentDifficulty();
         const enemyChances = EnemyChances[currentDifficulty];
-        console.log(enemyChances);
         
         const totalWeight = Object.values(enemyChances).reduce((sum, weight) => sum + weight, 0);
         const randomValue = Math.random() * totalWeight;
-        console.log(totalWeight, randomValue);
 
         let accumulatedWeight = 0;
         for (const enemyClassName in enemyChances) {
-            // console.log(enemyClassName);
             accumulatedWeight += enemyChances[enemyClassName];
-            // console.log(accumulatedWeight);
             if (randomValue <= accumulatedWeight) {
-                console.log(enemyClassName);
-                console.log(enemyRegistry.getEnemyClassByName(enemyClassName));
                 return enemyRegistry.getEnemyClassByName(enemyClassName);
-                // return getClassByName(enemyClassName); // Return the chosen enemy class
             }
         }
 
-        console.log("WAS FALLBACK");
         // Fallback (shouldn't normally happen due to floating point imprecision)
         const randomEnemyClassName = Object.keys(enemyChances)[Object.keys(enemyChances).length - 1];
-        // return enemyChances(randomEnemyClassName);
         return enemyRegistry.getEnemyClassByName(randomEnemyClassName)
     }
 
@@ -86,11 +77,12 @@ export default class WaveGenerator {
     }
 
     getSummonPosition(waveType) {
-        if (waveType instanceof CornerWave) {
+        if (waveType === CornerWave) {
             const cornerValues = Object.values(Corners);
             const randomIndex = MathUtil.generateRandomInteger(0, cornerValues.length);
+            console.log(cornerValues, randomIndex);
             return cornerValues[randomIndex];
-        } else if (waveType instanceof SquareWave || waveType === LineWave) {
+        } else if (waveType === SquareWave || waveType === LineWave) {
             const sideValues = Object.values(Sides);
             const randomIndex = MathUtil.generateRandomInteger(0, sideValues.length);
             return sideValues[randomIndex];
@@ -102,10 +94,8 @@ export default class WaveGenerator {
         let enemyType = this.pickEnemy();
         let enemyAmount = this.getEnemySpawnAmount(waveType);
         let summonDelay = this.getEnemySpawnDelay(waveType, enemyAmount);
-        let summonPosition = this.getSummonPosition();
+        let summonPosition = this.getSummonPosition(waveType);
 
-        // console.log(waveType);
-        console.log(enemyAmount);
         return [waveType, enemyAmount, enemyType, summonDelay, summonPosition]
     }
 }
