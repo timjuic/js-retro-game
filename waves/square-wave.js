@@ -18,7 +18,7 @@ export default class SquareWave extends Wave {
     }
 
     getTotalEnemies() {
-        return this.waveSize * this.waveSize;
+        return this.waveSize;
     }
 
      createSquareWave(side) {
@@ -26,41 +26,44 @@ export default class SquareWave extends Wave {
         const gap = playerCanvas.width / 150;
         let borderWidth = this.game.getBorderManager().getLeftBorder();
         let distanceFromSide = playerCanvas.width / 150;
+        let gridSize = Math.sqrt(this.waveSize);
         
         let startX, startY;
         switch (side) {
           case Sides.TOP:
-            startX = (playerCanvas.width - this.waveSize * (this.enemyWidth + gap) + gap) / 2;
+            startX = (playerCanvas.width - gridSize * (this.enemyWidth + gap) + gap) / 2;
             startY = borderWidth + distanceFromSide;
             break;
           case Sides.LEFT:
             startX = borderWidth + distanceFromSide;
-            startY = (playerCanvas.height - this.waveSize * (this.enemyHeight + gap) + gap) / 2;
+            startY = (playerCanvas.height - gridSize * (this.enemyHeight + gap) + gap) / 2;
             break;
           case Sides.RIGHT:
-            startX = playerCanvas.width - borderWidth - distanceFromSide - this.waveSize * (this.enemyWidth + gap) + gap;
-            startY = (playerCanvas.height - this.waveSize * (this.enemyHeight + gap) + gap) / 2;
+            startX = playerCanvas.width - borderWidth - distanceFromSide - this.enemyWidth;
+            startY = (playerCanvas.height - gridSize * (this.enemyHeight + gap) + gap) / 2;
             break;
           case Sides.BOTTOM:
-            startX = (playerCanvas.width - this.waveSize * (this.enemyWidth + gap) + gap) / 2;
-            startY = playerCanvas.height - distanceFromSide - borderWidth - this.waveSize * (this.enemyHeight + gap) + gap;
+            startX = (playerCanvas.width - gridSize * (this.enemyWidth + gap) + gap) / 2;
+            startY = playerCanvas.height - distanceFromSide - borderWidth - this.enemyHeight;
             break;
           default:
             throw new Error("Invalid side provided.");
         }
         
-        for (let row = 0; row < this.waveSize; row++) {
-          for (let col = 0; col < this.waveSize; col++) {
+        for (let row = 0; row < gridSize; row++) {
+          for (let col = 0; col < gridSize; col++) {
             let posX, posY;
-            if (side === Sides.RIGHT || side === Sides.BOTTOM) {
+            if (side === Sides.RIGHT) {
               // Reverse the order of enemy creation for RIGHT and BOTTOM sides
-              posX = startX + col * (this.enemyWidth + gap);
+              posX = startX - col * (this.enemyWidth + gap);
               posY = startY + row * (this.enemyHeight + gap);
+            } else if (side === Sides.BOTTOM) {
+                posX = startX + col * (this.enemyWidth + gap);
+                posY = startY - row * (this.enemyHeight + gap);
             } else {
               posX = startX + col * (this.enemyWidth + gap);
               posY = startY + row * (this.enemyHeight + gap);
             }
-            // this.createEnemy(posX, posY);
             this.spawnQueue.push({ x: posX, y: posY});
           }
         }
@@ -72,7 +75,6 @@ export default class SquareWave extends Wave {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         let player = this.game.player
 
-        // Calculate the distances to each side
         let distances = {
           [Sides.TOP]: player.posY,
           [Sides.BOTTOM]: playerCanvas.height - player.posY,
@@ -80,7 +82,6 @@ export default class SquareWave extends Wave {
           [Sides.RIGHT]: playerCanvas.width - player.posX
         };
       
-        // Find the side with the maximum distance
         let furthestSide = Sides.TOP;
         let maxDistance = distances[Sides.TOP];
       
@@ -93,6 +94,4 @@ export default class SquareWave extends Wave {
       
         return furthestSide;
       }
-    
-    
 }

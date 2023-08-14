@@ -52,14 +52,14 @@ export default class WaveGenerator {
         return enemyRegistry.getEnemyClassByName(randomEnemyClassName)
     }
 
-    getEnemySpawnAmount(waveType) {
+    getEnemySpawnAmount(waveType, enemyType) {
         let currentDifficulty = this.difficultyManager.getCurrentDifficulty();
         if (waveType === CornerWave) {
-            return CornerWaveSize[currentDifficulty];
+            return CornerWaveSize[currentDifficulty][enemyType.name];
         } else if (waveType === SquareWave) {
-            return SquareWaveSizes[currentDifficulty];
+            return CornerWaveSize[currentDifficulty][enemyType.name];
         } else if (waveType === RandomWave) {
-            return RandomWaveSizes[currentDifficulty];
+            return CornerWaveSize[currentDifficulty][enemyType.name];
         } else if (waveType === LineWave) {
             return LineWaveSizes[currentDifficulty]
         }
@@ -92,7 +92,7 @@ export default class WaveGenerator {
     generateNextWave() {
         let waveType = this.pickWaveType();
         let enemyType = this.pickEnemy();
-        let enemyAmount = this.getEnemySpawnAmount(waveType);
+        let enemyAmount = this.getEnemySpawnAmount(waveType, enemyType);
         let summonDelay = this.getEnemySpawnDelay(waveType, enemyAmount);
         let summonPosition = this.getSummonPosition(waveType);
 

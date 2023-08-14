@@ -15,7 +15,7 @@ export default class LevelManager {
     }
 
     startCurrentLevel() {
-        let wavesToGenerate = 1;
+        let wavesToGenerate = 50;
         let generatedWaveData = [];
         for (let i = 0; i < wavesToGenerate; i++) {
             let waveData = this.waveGenerator.generateNextWave();

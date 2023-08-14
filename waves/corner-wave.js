@@ -24,12 +24,12 @@ export default class CornerWave extends Wave {
     }
 
     getTotalEnemies() {
-        return (this.waveSize * this.waveSize) / 2;
+        return this.waveSize;
     }
 
     calculateRowsForEnemies(totalEnemies) {
         return (-1 + Math.sqrt(1 + 8 * totalEnemies)) / 2;
-      }
+    }
 
      calculateColumnsForEnemies(totalEnemies) {
         return Math.ceil((-1 + Math.sqrt(1 + 8 * totalEnemies)) / 2);
