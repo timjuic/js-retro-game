@@ -224,9 +224,12 @@ export default class Game {
             }
         })
 
+        // Collisions with explosions
         this.explosions.forEach((explosion, i) => {
             if (this.player.isDead()) return;
+            if (explosion.didDamageToPlayer()) return;
             if (this.getCollisionDetector().collidesWidthCircularEntity(this.player, explosion)) {
+                explosion.playerAffected = true;
                 if (this.player.health > explosion.damage) {
                     this.player.health -= explosion.damage;
                     this.player.isBeingHit = true;

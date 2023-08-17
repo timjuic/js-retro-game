@@ -60,7 +60,7 @@ const EnemyChances = {
         SpeedyEnemy: 10,
         TankEnemy: 15,
         SpawnerEnemy: 15,
-        KamikazeEnemy: 15,
+        KamikazeEnemy: 1500,
         TeleporterEnemy: 15,
         PufPufEnemy: 10,
         ShieldedEnemy: 5,

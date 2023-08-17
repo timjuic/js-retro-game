@@ -78,7 +78,6 @@ export default class WaveGenerator {
         if (waveType === CornerWave) {
             const cornerValues = Object.values(Corners);
             const randomIndex = MathUtil.generateRandomInteger(0, cornerValues.length);
-            console.log(cornerValues, randomIndex);
             return cornerValues[randomIndex];
         } else if (waveType === SquareWave || waveType === LineWave) {
             const sideValues = Object.values(Sides);

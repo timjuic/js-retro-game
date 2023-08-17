@@ -101,7 +101,6 @@ export default class Enemy extends RectangleEntity {
       }
 
       draw() {
-        // console.log("draw called");
         super.draw();
         this.healthBar.draw();
       }

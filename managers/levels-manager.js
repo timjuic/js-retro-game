@@ -20,13 +20,7 @@ export default class LevelManager {
         for (let i = 0; i < wavesToGenerate; i++) {
             let waveData = this.waveGenerator.generateNextWave();
             generatedWaveData.push(waveData)
-            console.log('waveType' ,waveData[0]);
-            console.log('amount' ,waveData[1]);
-            console.log('type', waveData[2]);
-            console.log('delay', waveData[3]);
-            console.log("position", waveData[4]);
         }
-        console.log(generatedWaveData);
         // let currentLevelData = this.levelsData[this.level-1];
         let waveSpawnTick = 0;
         generatedWaveData.forEach(data => {
@@ -35,8 +29,6 @@ export default class LevelManager {
             this.waves.push(wave);
             waveSpawnTick += wave.tickDuration;
         })
-        console.log(this.waves);
-        
     }
 
     checkForUpcomingWaves() {

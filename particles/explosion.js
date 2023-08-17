@@ -4,9 +4,15 @@ export default class Explosion extends CircleEntity {
     constructor(game, posX, posY, radius, velX, velY, maxSize, spreadSpeed, damage, color) {
         super(game, posX, posY, radius, velX, velY, color)
         this.damage = damage;
+        this.playerAffected = false;
         this.maxSize = maxSize;
         this.spreadSpeed = spreadSpeed;
+        this.fadeSpeed = 8;
         this.opacity = 1;
+    }
+
+    didDamageToPlayer() {
+        return this.playerAffected;
     }
 
     update() {
@@ -16,7 +22,8 @@ export default class Explosion extends CircleEntity {
         }
     
         if (this.isFinished()) {
-            this.opacity -= this.spreadSpeed / this.maxSize / 4; // This will create a fade out effect
+            console.log(this.spreadSpeed);
+            this.opacity -= this.fadeSpeed / this.maxSize / 4; // This will create a fade out effect
         }
 
         if (this.isFinished() && !this.isVisible()) {

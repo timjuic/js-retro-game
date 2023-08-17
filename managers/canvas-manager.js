@@ -113,6 +113,7 @@ export default class CanvasManager {
         let xVelPercentage = entity.velX / this.previousCanvasWidth;
         let yVelPercentage = entity.velY / this.previousCanvasHeight;
         if (entity.speed) var speedPercentage = entity.speed / this.previousCanvasWidth;
+        if (entity.healthBar) var healthBarPercentage = entity.healthBar.width / this.previousCanvasWidth;
         
         entity.width = (this.newCanvasWidth * widthPercentage);
         entity.height = (this.newCanvasWidth * heightPercentage);
@@ -121,6 +122,10 @@ export default class CanvasManager {
         entity.velX = (this.newCanvasWidth * xVelPercentage);
         entity.velY = (this.newCanvasHeight  * yVelPercentage);
         if (entity.speed) entity.speed = this.newCanvasWidth * speedPercentage
+        if (entity.healthBar) {
+            entity.healthBar.width = this.newCanvasWidth * healthBarPercentage;
+            entity.healthBar.height = entity.healthBar.width / 3;
+        }
     }
 
     scaleEntities() { // Scaling entities according to starting screen size
