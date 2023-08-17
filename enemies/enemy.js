@@ -1,4 +1,5 @@
 import { RectangleEntity } from "../entity.js"
+import HealthBar from "../healthbar.js";
 import MathUtil from "../helpers/math-util.js";
 import ParticleManager from "../particles/particle-manager.js";
 import Particle from "../particles/particle.js";
@@ -10,8 +11,10 @@ export default class Enemy extends RectangleEntity {
         this.moveInterval = moveInterval;
         this.speed = speed * this.game.canvas.width / this.game.settings.ENEMY_SPEED_MODIFIER;
         this.health = health;
+        this.maxHealth = health;
         this.damage = damage;
         this.ticksPassed = 0;
+        this.healthBar = new HealthBar(game, this);
     }
 
     isAlive() {
@@ -95,5 +98,11 @@ export default class Enemy extends RectangleEntity {
 
       static calculateBuffness(health) {
         return health / 4;
+      }
+
+      draw() {
+        // console.log("draw called");
+        super.draw();
+        this.healthBar.draw();
       }
 }

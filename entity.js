@@ -37,8 +37,8 @@ class RectangleEntity extends Entity {
         this.posY = this.posY + this.velY;
     }
 
-    draw(canvasName) {
-        let ctx = this.game.getCanvasManager().getContext(canvasName);
+    draw() {
+        let ctx = this.game.getCanvasManager().getContext('playerCanvas');
         ctx.globalAlpha = this.opacity;
         ctx.save();
 

@@ -47,7 +47,7 @@ export default class Game {
         this.soundManager = new SoundManager(this);
         this.statsManager = new StatsManager(this);
         this.canvas = this.canvasManager.getCanvas('playerCanvas');
-        this.player = new Player(this, 'test', 50);
+        this.player = new Player(this, 'test', 500);
         this.enemies = []
         this.playerBullets = []
         this.enemyBullets = []

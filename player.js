@@ -5,6 +5,7 @@ import gunsData from "./guns-data.js";
 import MathUtil from "./helpers/math-util.js";
 import InputType from "./enums/input-type.js";
 import ParticleManager from "./particles/particle-manager.js";
+import HealthBar from "./healthbar.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -34,6 +35,7 @@ export default class Player extends RectangleEntity {
             if (control !== InputType.SHOOT) return;
             this.handleShoot(pressed)
         })
+        this.healthBar = new HealthBar(game, this);
     }
 
     handleShoot(pressed) {
@@ -147,6 +149,10 @@ export default class Player extends RectangleEntity {
     
         let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
         entity.game.playerBullets.push(bullet);
-        
+    }
+
+    draw() {
+        super.draw();
+        this.healthBar.draw();
     }
 }
