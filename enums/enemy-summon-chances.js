@@ -56,11 +56,11 @@ const EnemyChances = {
     },
     [Difficulties.VERY_HARD]: {
         BasicEnemy: 5,
-        BuffEnemy: 10,
+        BuffEnemy: 5,
         SpeedyEnemy: 10,
         TankEnemy: 15,
         SpawnerEnemy: 15,
-        KamikazeEnemy: 15,
+        KamikazeEnemy: 1000,
         TeleporterEnemy: 15,
         PufPufEnemy: 10,
         ShieldedEnemy: 5,

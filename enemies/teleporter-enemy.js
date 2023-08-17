@@ -17,7 +17,7 @@ export default class TeleporterEnemy extends Enemy {
         let damage = 50;
         let image = game.assetLoader.enemyAssets.enemy1;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
-        this.maxTeleportTimes = 5;
+        this.maxTeleportTimes = 3;
         this.timesTeleported = 0;
         this.maxTeleportDistance = this.width * 4;
     }

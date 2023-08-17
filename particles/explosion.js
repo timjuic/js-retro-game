@@ -1,8 +1,9 @@
 import { CircleEntity } from "../entity.js";
 
 export default class Explosion extends CircleEntity {
-    constructor(game, posX, posY, radius, velX, velY, maxSize, spreadSpeed, color) {
+    constructor(game, posX, posY, radius, velX, velY, maxSize, spreadSpeed, damage, color) {
         super(game, posX, posY, radius, velX, velY, color)
+        this.damage = damage;
         this.maxSize = maxSize;
         this.spreadSpeed = spreadSpeed;
         this.opacity = 1;

@@ -191,7 +191,9 @@ export default class Game {
     }
 
     runHitDetection() {
+        // Collision with enemies
         this.enemies.forEach((enemy, i) => {
+            if (this.player.isDead()) return;
             if (this.getCollisionDetector().collidesWithEntity(this.player, enemy)) {
                 if (enemy.damage < this.player.health) {
                     this.player.health -= enemy.damage;
@@ -207,7 +209,9 @@ export default class Game {
             }
         })
 
+        // Collision with enemy bullets
         this.enemyBullets.forEach((bullet, i) => {
+            if (this.player.isDead()) return;
             if (this.getCollisionDetector().collidesWithEntity(bullet, this.player)) {
                 if (this.player.health > bullet.damage) {
                     this.player.health -= bullet.damage;
@@ -220,6 +224,20 @@ export default class Game {
             }
         })
 
+        this.explosions.forEach((explosion, i) => {
+            if (this.player.isDead()) return;
+            if (this.getCollisionDetector().collidesWidthCircularEntity(this.player, explosion)) {
+                if (this.player.health > explosion.damage) {
+                    this.player.health -= explosion.damage;
+                    this.player.isBeingHit = true;
+                } else {
+                    this.player.health = 0;
+                    this.player.onDeath();
+                }
+            }
+        })
+
+        // collision player bullets with enemies
         this.playerBullets.forEach((bullet, i) => {
             this.enemies.forEach((enemy, j) => {
                 if (this.getCollisionDetector().collidesWithEntity(bullet, enemy)) {

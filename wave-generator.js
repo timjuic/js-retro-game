@@ -1,14 +1,12 @@
 import BasicEnemy from "./enemies/basic-enemy.js";
 import Difficulties from "./enums/difficulties.js";
 import WaveTypes from "./enums/wave-types.js";
-import CornerWaveSize from "./enums/corner-wave-sizes.js";
 import DifficultyManager from "./managers/difficulty-manager.js";
 import EnemyChances from "./enums/enemy-summon-chances.js";
 import enemyRegistry from "./enemy-class-registry.js";
 import CornerWave from "./waves/corner-wave.js";
-import CornerWaveSizes from "./enums/corner-wave-sizes.js";
+import CornerWaveSizes from "../enums/corner-wave-sizes.js";
 import SquareWave from "./waves/square-wave.js";
-import SquareWaveSizes from "./enums/square-wave-sizes.js";
 import RandomWave from "./waves/random-wave.js";
 import RandomWaveSizes from "./enums/random-wave-sizes.js";
 import Corners from "./enums/corners.js";
@@ -55,11 +53,11 @@ export default class WaveGenerator {
     getEnemySpawnAmount(waveType, enemyType) {
         let currentDifficulty = this.difficultyManager.getCurrentDifficulty();
         if (waveType === CornerWave) {
-            return CornerWaveSize[currentDifficulty][enemyType.name];
+            return CornerWaveSizes[currentDifficulty][enemyType.name];
         } else if (waveType === SquareWave) {
-            return CornerWaveSize[currentDifficulty][enemyType.name];
+            return CornerWaveSizes[currentDifficulty][enemyType.name];
         } else if (waveType === RandomWave) {
-            return CornerWaveSize[currentDifficulty][enemyType.name];
+            return RandomWaveSizes[currentDifficulty][enemyType.name];
         } else if (waveType === LineWave) {
             return LineWaveSizes[currentDifficulty]
         }

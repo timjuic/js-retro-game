@@ -72,6 +72,19 @@ export default class CollisionDetector {
       );
     }
 
+    collidesWidthCircularEntity(entityRect, entityCirc) {
+        const closestX = Math.max(entityRect.posX, Math.min(entityCirc.posX, entityRect.posX + entityRect.width));
+        const closestY = Math.max(entityRect.posY, Math.min(entityCirc.posY, entityRect.posY + entityRect.height));
+
+        // Calculate the distance between the circle's center and this closest point
+        const distanceX = entityCirc.posX - closestX;
+        const distanceY = entityCirc.posY - closestY;
+        const distanceSquared = distanceX ** 2 + distanceY ** 2;
+
+        // If the distance is less than the circle's radius, they are colliding
+        return distanceSquared < entityCirc.radius ** 2;
+    }
+
    isInsideCanvas(entity) {
       if (entity.posX < 0) return false;
       if (entity.posY < 0) return false;

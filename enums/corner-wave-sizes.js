@@ -10,7 +10,7 @@ import SpeedyEnemy from "../enemies/speedy-enemy.js";
 import TankEnemy from "../enemies/tank-enemy.js";
 import TeleporterEnemy from "../enemies/teleporter-enemy.js";
 
-const WaveSizes = {
+const CornerWaveSizes = {
     [Difficulties.VERY_EASY]: {
         [BasicEnemy.name]: 6,
         [BuffEnemy.name]: 6,
@@ -73,4 +73,4 @@ const WaveSizes = {
     },
 };
 
-export default WaveSizes;
+export default CornerWaveSizes;

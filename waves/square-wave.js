@@ -54,7 +54,6 @@ export default class SquareWave extends Wave {
           for (let col = 0; col < gridSize; col++) {
             let posX, posY;
             if (side === Sides.RIGHT) {
-              // Reverse the order of enemy creation for RIGHT and BOTTOM sides
               posX = startX - col * (this.enemyWidth + gap);
               posY = startY + row * (this.enemyHeight + gap);
             } else if (side === Sides.BOTTOM) {

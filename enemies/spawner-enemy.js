@@ -5,7 +5,7 @@ import Enemy from "./enemy.js";
 export default class SpawnerEnemy extends Enemy {
     static baseWidth = 6;
     static baseHeight = 6;
-    static startingHealth = 500;
+    static startingHealth = 400;
     static buffness = Enemy.calculateBuffness(SpawnerEnemy.startingHealth)
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
