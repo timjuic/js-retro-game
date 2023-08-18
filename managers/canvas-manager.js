@@ -14,13 +14,11 @@ export default class CanvasManager {
 
     activateResizeHandler() {
       let resizeTimer;
-      const delay = 50; // The debounce delay in milliseconds
+      const delay = 50;
 
       const resizeFunction = () => {
-          // Clear the previous resize timer
           clearTimeout(resizeTimer);
 
-          // Start a new timer for the current resize event
           resizeTimer = setTimeout(() => {
               this.resizeCanvases();
           }, delay);
@@ -53,7 +51,7 @@ export default class CanvasManager {
     loadContexts() {
         for (let [name, canvas] of Object.entries(this.canvases)) {
             let ctx = canvas.getContext('2d');
-            ctx.imageSmoothingEnabled = 'false'
+            ctx.imageSmoothingEnabled = 'false';
             this.contexts[name] = ctx;
         }
     }
@@ -131,7 +129,7 @@ export default class CanvasManager {
         }
     }
 
-    scaleEntities() { // Scaling entities according to starting screen size
+    scaleEntities() {
       let canvas = this.canvases['playerCanvas']
       this.scaleEntity(canvas, this.game.player)
       

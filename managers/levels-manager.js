@@ -1,10 +1,9 @@
 import WaveGenerator from "../wave-generator.js";
 
 export default class LevelManager {
-    constructor(game, levelsData) {
+    constructor(game) {
         this.game = game;
         this.level = 1;
-        this.levelsData = levelsData;
         this.waves = [];
         this.wavesPassed = 0;
         this.waveGenerator = new WaveGenerator(this.game);
@@ -15,13 +14,12 @@ export default class LevelManager {
     }
 
     startCurrentLevel() {
-        let wavesToGenerate = 50;
+        let wavesToGenerate = 1000;
         let generatedWaveData = [];
         for (let i = 0; i < wavesToGenerate; i++) {
             let waveData = this.waveGenerator.generateNextWave();
             generatedWaveData.push(waveData)
         }
-        // let currentLevelData = this.levelsData[this.level-1];
         let waveSpawnTick = 0;
         generatedWaveData.forEach(data => {
             let waveType = data.splice(0, 1)[0];

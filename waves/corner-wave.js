@@ -130,8 +130,6 @@ export default class CornerWave extends Wave {
 
     getPossibleCorner() {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
-        let cornerX, cornerY;
-        // Calculate the distances from player to each corner
         const distanceTopLeft = Math.sqrt(Math.pow(this.game.player.posX, 2) + Math.pow(this.game.player.posY, 2));
         const distanceTopRight = Math.sqrt(Math.pow(playerCanvas.width - this.game.player.posX, 2) + Math.pow(this.game.player.posY, 2));
         const distanceBottomLeft = Math.sqrt(Math.pow(this.game.player.posX, 2) + Math.pow(playerCanvas.height - this.game.player.posY, 2));

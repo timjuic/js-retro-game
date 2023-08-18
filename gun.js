@@ -12,8 +12,6 @@ export default class Gun {
         this.accuracy = accuracy
         this.piercing = piercing;
         this.knockbackMultiplier = knockbackMultiplier;
-        // this.bulletImg = game.getAssetManager().bullets.bullet;
-        // this.bulletImg.src = bulletImgPath;
         this.lastShotTimestamp = null;
     }
 

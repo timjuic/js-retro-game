@@ -45,7 +45,6 @@ export default class WaveGenerator {
             }
         }
 
-        // Fallback (shouldn't normally happen due to floating point imprecision)
         const randomEnemyClassName = Object.keys(enemyChances)[Object.keys(enemyChances).length - 1];
         return enemyRegistry.getEnemyClassByName(randomEnemyClassName)
     }

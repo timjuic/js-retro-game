@@ -30,7 +30,7 @@ export default class Particle extends RectangleEntity {
         ctx.globalAlpha = 1;
         
          
-        ctx.restore(); // Restore the original state of the canvas
+        ctx.restore();
     }
 
     updatePosition() {

@@ -4,18 +4,14 @@ export default class MathUtil {
         const deltaX = x2 - x1;
         const deltaY = y2 - y1;
       
-        // Calculate the angle using Math.atan2 and convert to degrees
         let angleDegrees = (Math.atan2(deltaY, deltaX) * 180) / Math.PI;
       
-        // Ensure the angle is within the range [0, 360)
         if (angleDegrees < 0) {
           angleDegrees += 360;
         }
       
-        // Increase the angle by 90 degrees
         angleDegrees += 90;
     
-        // Ensure the angle is within the range [0, 360) after incrementing
         if (angleDegrees >= 360) {
           angleDegrees -= 360;
         }

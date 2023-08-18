@@ -30,9 +30,9 @@ export default class TeleporterEnemy extends Enemy {
         const oldPosY = this.posY;
     
         if (this.timesTeleported < this.maxTeleportTimes) {
-            for (let i = 0; i < 10; i++) { // tries 10 times to find a safe spot
-                const angle = Math.random() * Math.PI * 2; // Random angle
-                const distance = Math.random() * this.maxTeleportDistance; // Random distance
+            for (let i = 0; i < 10; i++) {
+                const angle = Math.random() * Math.PI * 2;
+                const distance = Math.random() * this.maxTeleportDistance;
                 const newPosX = this.posX + Math.cos(angle) * distance;
                 const newPosY = this.posY + Math.sin(angle) * distance;
     
@@ -55,7 +55,7 @@ export default class TeleporterEnemy extends Enemy {
 
     createDash(oldPosX, oldPosY, newPosX, newPosY) {
         const distance = Math.sqrt((newPosX - oldPosX) ** 2 + (newPosY - oldPosY) ** 2);
-        const framesCount = Math.floor(distance / 5); // One frame per 5 pixels
+        const framesCount = Math.floor(distance / 5);
         const opacityStep = 1 / framesCount;
     
         for (let i = 0; i < framesCount; i++) {

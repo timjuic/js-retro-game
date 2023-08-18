@@ -27,31 +27,25 @@ export default class Enemy extends RectangleEntity {
         const randomOffset = Math.floor(Math.random() * this.moveInterval);
 
         if ((this.ticksPassed + randomOffset) % this.moveInterval !== 0) {
-            return; // Skip moving on this tick
+            return;
         }
 
-        // Calculate the direction vector towards the player
         const playerX = this.game.player.posX;
         const playerY = this.game.player.posY;
 
         const dx = playerX - this.posX;
         const dy = playerY - this.posY;
 
-        // Calculate the total distance to the player
         const distance = Math.sqrt(dx * dx + dy * dy);
 
-        // Calculate the normalized direction vector
         const directionX = dx / distance;
         const directionY = dy / distance;
 
-        // Calculate the movement amount based on speed
         const moveAmount = this.speed;
 
-        // Calculate the potential new positions in both X and Y directions
         const newX = this.posX + moveAmount * directionX;
         const newY = this.posY + moveAmount * directionY;
 
-        // Check for collisions with other enemies in the X direction
         let canMoveX = true;
         for (const enemy of this.game.enemies) {
             if (enemy !== this && this.game.getCollisionDetector().collidesWithEntity({ posX: newX, posY: this.posY, width: this.width, height: this.height }, enemy)) {
@@ -60,7 +54,6 @@ export default class Enemy extends RectangleEntity {
             }
         }
 
-        // Check for collisions with other enemies in the Y direction
         let canMoveY = true;
         for (const enemy of this.game.enemies) {
             if (enemy !== this && this.game.getCollisionDetector().collidesWithEntity({ posX: this.posX, posY: newY, width: this.width, height: this.height }, enemy)) {
@@ -72,7 +65,6 @@ export default class Enemy extends RectangleEntity {
         if (newX < this.posX) this.lastMovedDirection = -1;
         if (newX > this.posX) this.lastMovedDirection = 1;
 
-        // Update the enemy position based on collision detection results
         if (canMoveX) {
             this.posX = newX;
         }
@@ -88,8 +80,6 @@ export default class Enemy extends RectangleEntity {
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion(); 
         this.game.soundManager.playSound('enemy_death.wav')
-        // // let sound = new Audio()
-        // // sound.play();
       };
 
       onDamaged() {
@@ -102,6 +92,7 @@ export default class Enemy extends RectangleEntity {
 
       draw() {
         super.draw();
+        if (!this.healthBar) return;
         this.healthBar.draw();
       }
 }

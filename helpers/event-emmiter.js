@@ -4,7 +4,6 @@ export default class EventEmmiter {
       }
     
       on(eventName, callback) {
-        // Register a callback for an event
         if (!this.events[eventName]) {
           this.events[eventName] = [];
         }
@@ -12,7 +11,6 @@ export default class EventEmmiter {
       }
     
       emit(eventName, ...args) {
-        // Emit an event and call all registered callbacks
         if (this.events[eventName]) {
           this.events[eventName].forEach(callback => {
             callback(...args);
@@ -21,7 +19,6 @@ export default class EventEmmiter {
       }
     
       off(eventName, callback) {
-        // Remove a registered callback for an event
         if (this.events[eventName]) {
           this.events[eventName] = this.events[eventName].filter(
             eventCallback => eventCallback !== callback

@@ -24,7 +24,6 @@ import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 import ShooterEnemy from "./enemies/shooting-enemy.js";
 import LevelManager from "./managers/levels-manager.js";
-import levelsData from "./levels-data.js";
 import SoundManager from "./managers/sound-manager.js";
 import StatsManager from "./managers/stats-manager.js";
 
@@ -43,7 +42,7 @@ export default class Game {
         this.crosshairManager = new CrosshairManager(this)
         this.inputManager = new InputManager(this);
         this.collisionDetector = new CollisionDetector(this)
-        this.levelManager = new LevelManager(this, levelsData)
+        this.levelManager = new LevelManager(this)
         this.soundManager = new SoundManager(this);
         this.statsManager = new StatsManager(this);
         this.canvas = this.canvasManager.getCanvas('playerCanvas');
@@ -59,7 +58,6 @@ export default class Game {
         this.loopId = null;
         this.ticksElapsed = 0;
 
-        // Take canvas size into account and adjust entity sizes accordingly
         this.canvasManager.scaleEntities()
 
         this.levelManager.startCurrentLevel();
@@ -102,7 +100,6 @@ export default class Game {
         if (this.isPaused) return
 
         this.levelManager.checkForUpcomingWaves();
-
         this.canvasManager.clearCanvases()
         this.borderManager.drawBorders('playerCanvas')
         this.player.updatePosition();
@@ -296,14 +293,10 @@ export default class Game {
         return false;
     }
 
-
-    
     showDeathScreen() {
-        // Update the time survived in the modal
         const timeElement = document.querySelector("#survival-time span");
         timeElement.textContent = this.statsManager.getTimeSurvivedFormatted();
     
-        // Display the modal
         const modal = document.getElementById("death-modal");
         modal.style.display = "block";
     }
@@ -311,12 +304,5 @@ export default class Game {
     closeModal() {
         const modal = document.getElementById("death-modal");
         modal.style.display = "none";
-        // Possibly restart the game or navigate to main menu
     }
-    
-    
-    
-    
-    
-    
 }

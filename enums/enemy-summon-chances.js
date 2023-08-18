@@ -26,7 +26,7 @@ const EnemyChances = {
         BuffEnemy: 15,
         SpeedyEnemy: 15,
         TankEnemy: 5,
-        SpawnerEnemy: 10000,
+        SpawnerEnemy: 10,
         KamikazeEnemy: 0,
         TeleporterEnemy: 0,
         PufPufEnemy: 0,

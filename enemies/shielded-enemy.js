@@ -24,10 +24,10 @@ export default class ShieldedEnemy extends Enemy {
         if (!(entity instanceof Bullet)) return true;
     
         let isSideHit = false;
-        let side = 0; // 0: left, 1: right
+        let side = 0;
     
         if (entity.angle > 45 && entity.angle < 135) {
-            isSideHit = true; // Side hit
+            isSideHit = true;
             side = 1;
         }
         if (entity.angle < 315 && entity.angle > 225) {

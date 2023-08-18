@@ -27,7 +27,7 @@ export default class Timer {
 
     getDuration() {
         if (!this.startTimestamp) {
-            return 0; // Return 0 if timer hasn't started
+            return 0;
         }
         const currentDuration = Date.now() - this.startTimestamp;
         return currentDuration - this.totalPausedDuration;

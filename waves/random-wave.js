@@ -29,12 +29,10 @@ export default class RandomWave extends Wave {
             maxY: playerCanvas.height - borderWidth - gapFromBorder - this.enemyHeight
           };
       
-        // Generate the enemies
         for (let i = 0; i < this.waveSize; i++) {
           let x = Math.random() * (spawnArea.maxX - spawnArea.minX) + spawnArea.minX;
           let y = Math.random() * (spawnArea.maxY - spawnArea.minY) + spawnArea.minY;
       
-          // Decide randomly on which side to spawn the enemy
           let side = Math.floor(Math.random() * 4);
           switch (side) {
             case 0:
@@ -52,7 +50,6 @@ export default class RandomWave extends Wave {
           }
       
           this.spawnQueue.push({ x: x, y: y })
-        //   this.createEnemy(x, y);
         }
       }
 }

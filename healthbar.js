@@ -7,12 +7,13 @@ export default class HealthBar {
         this.entity = entity;
         this.canvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         this.baseWidth = entity.baseWidth * 0.8;
-        this.baseHeight = this.baseWidth / 3;
+        this.baseHeight = this.baseWidth / 5;
         this.width = this.baseWidth * this.canvas.width;
         this.height = this.baseHeight * this.canvas.width;
         this.outlineColor = "rgba(128, 0, 0, 0.8)";
         this.fillColor = "rgba(255, 64, 64, 0.6)";
-        this.strokeOutlineWidth = 0.5 / 100 * this.canvas.width
+        this.strokeOutlineWidth = this.width / 10;
+        console.log(this.strokeOutlineWidth);
 
         // Check if the entity is a valid player or enemy instance
         if (!(entity instanceof Player) && !(entity instanceof Enemy)) {
@@ -33,8 +34,6 @@ export default class HealthBar {
         ctx.strokeRect(posX, posY, this.width, this.height);
 
         let fillWidth = (this.entity.health / this.entity.maxHealth) * this.width;
-
-        // Draw the filled inner part
         ctx.fillStyle = this.fillColor;
         ctx.fillRect(posX, posY, fillWidth, this.height);
     }

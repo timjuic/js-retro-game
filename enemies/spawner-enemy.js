@@ -1,6 +1,7 @@
 import MathUtil from "../helpers/math-util.js";
 import BasicEnemy from "./basic-enemy.js";
 import Enemy from "./enemy.js";
+import SpawnerMinion from "./spawner-minion.js";
 
 export default class SpawnerEnemy extends Enemy {
     static baseWidth = 6;
@@ -49,7 +50,7 @@ export default class SpawnerEnemy extends Enemy {
             let spawnX = this.posX + Math.cos(angle) * distance;
             let spawnY = this.posY + Math.sin(angle) * distance;
 
-            if (this.createEnemy(BasicEnemy, spawnX, spawnY)) {
+            if (this.createEnemy(SpawnerMinion, spawnX, spawnY)) {
                 this.enemiesSpawned++;
                 enemiesSpawnedInBatch++;
             }

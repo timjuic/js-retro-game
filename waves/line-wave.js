@@ -26,7 +26,7 @@ export default class LineWave extends Wave {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         let borderGap = playerCanvas.width / 150;
         let gap = (side === Sides.TOP || side === Sides.BOTTOM) ? playerCanvas.width / this.waveSize : playerCanvas.height / this.waveSize;
-        let startPos = gap / 2;  // start from the center of the gap
+        let startPos = gap / 2;
         let borderManager = this.game.getBorderManager();
 
         for (let i = 0; i < this.waveSize; i++) {
@@ -39,20 +39,19 @@ export default class LineWave extends Wave {
               break;
             case Sides.BOTTOM:
               posX = startPos + i * gap;
-              posY = borderManager.getBottomBorder() - borderGap - this.enemyHeight;  // assuming enemy height is 50
+              posY = borderManager.getBottomBorder() - borderGap - this.enemyHeight;
               break;
             case Sides.LEFT:
               posX = borderManager.getLeftBorder() + borderGap;
               posY = startPos + i * gap;
               break;
             case Sides.RIGHT:
-              posX = borderManager.getRightBorder() - borderGap - this.enemyHeight;  // assuming enemy width is 50
+              posX = borderManager.getRightBorder() - borderGap - this.enemyHeight;
               posY = startPos + i * gap;
               break;
           }
           
           this.spawnQueue.push({ x: posX, y: posY});
-        //   this.createEnemy(posX, posY);
         }
       }
 
@@ -61,7 +60,6 @@ export default class LineWave extends Wave {
         let playerCanvas = this.game.getCanvasManager().getCanvas('playerCanvas');
         let player = this.game.player
 
-        // Calculate the distances to each side
         let distances = {
           [Sides.TOP]: player.posY,
           [Sides.BOTTOM]: playerCanvas.height - player.posY,
@@ -69,7 +67,6 @@ export default class LineWave extends Wave {
           [Sides.RIGHT]: playerCanvas.width - player.posX
         };
       
-        // Find the side with the maximum distance
         let furthestSide = Sides.TOP;
         let maxDistance = distances[Sides.TOP];
       

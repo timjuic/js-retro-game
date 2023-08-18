@@ -9,13 +9,6 @@ export default class InputManager {
     }
 
     loadDefaultControls() {
-        // this.controls = {
-        //     moveUp: ['w', 'ArrowUp'],
-        //     moveRight: ['d', 'ArrowRight'],
-        //     moveDown: ['s', 'ArrowDown'],
-        //     moveLeft: ['a', 'ArrowLeft'],
-        //     shoot: [0]
-        // }
         this.controls = {};
         this.controls[`${InputType.UP}`] = ['w', 'ArrowUp'];
         this.controls[`${InputType.RIGHT}`] = ['d', 'ArrowRight'];

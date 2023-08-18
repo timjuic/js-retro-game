@@ -76,12 +76,10 @@ export default class CollisionDetector {
         const closestX = Math.max(entityRect.posX, Math.min(entityCirc.posX, entityRect.posX + entityRect.width));
         const closestY = Math.max(entityRect.posY, Math.min(entityCirc.posY, entityRect.posY + entityRect.height));
 
-        // Calculate the distance between the circle's center and this closest point
         const distanceX = entityCirc.posX - closestX;
         const distanceY = entityCirc.posY - closestY;
         const distanceSquared = distanceX ** 2 + distanceY ** 2;
 
-        // If the distance is less than the circle's radius, they are colliding
         return distanceSquared < entityCirc.radius ** 2;
     }
 
