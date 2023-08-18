@@ -6,7 +6,7 @@ const settings = {
     ENEMY_BULLET_SPEED_MODIFIER: 15,
     ENEMY_SPEED_MODIFIER: 800,
     HITMARKER_TICKS: 3,
-    PARTICLE_AMOUNT_MODIFIER: 200,
+    PARTICLE_AMOUNT_MODIFIER: 500,
     INITIAL_DELAY_BETWEEN_WAVES_TICKS: 250,
     RESIZE_DELAY_MS: 50, // Delay in between resizing game elements when browser window resizes
 }

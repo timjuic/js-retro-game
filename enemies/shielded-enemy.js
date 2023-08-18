@@ -15,7 +15,7 @@ export default class ShieldedEnemy extends Enemy {
         let speed = 8;
         let health = ShieldedEnemy.startingHealth;
         let damage = 50;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.shielded;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
         this.hasShieldActive = false;
     }

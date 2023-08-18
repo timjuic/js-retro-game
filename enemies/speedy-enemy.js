@@ -13,7 +13,7 @@ export default class SpeedyEnemy extends Enemy {
         let speed = 8;
         let health = SpeedyEnemy.startingHealth;
         let damage = 20;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.speedy;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

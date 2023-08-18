@@ -13,7 +13,7 @@ export default class BuffEnemy extends Enemy {
         let speed = 5;
         let health = BuffEnemy.startingHealth;
         let damage = 20;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.buff;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

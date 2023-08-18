@@ -1,7 +1,7 @@
 import { RectangleEntity } from "./entity.js"
 
 export default class Gun {
-    constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, accuracy, piercing, knockbackMultiplier, bulletImgPath) {
+    constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, accuracy, piercing, knockbackMultiplier) {
         this.name = name;
         this.fireRate = fireRate
         this.automatic = automatic
@@ -12,9 +12,15 @@ export default class Gun {
         this.accuracy = accuracy
         this.piercing = piercing;
         this.knockbackMultiplier = knockbackMultiplier;
-        this.bulletImg = new Image()
-        this.bulletImg.src = bulletImgPath;
+        // this.bulletImg = game.getAssetManager().bullets.bullet;
+        // this.bulletImg.src = bulletImgPath;
         this.lastShotTimestamp = null;
+    }
+
+    addToGame(game) {
+        console.log(game);
+        this.game = game;
+        this.bulletImg = game.getAssetManager().bulletAssets.bullet
     }
 
     isAutomatic() {

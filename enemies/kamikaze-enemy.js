@@ -14,7 +14,7 @@ export default class KamikazeEnemy extends Enemy {
         let speed = 8;
         let health = KamikazeEnemy.startingHealth;
         let damage = 50;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.kamikaze;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 

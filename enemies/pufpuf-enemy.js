@@ -17,7 +17,7 @@ export default class PufPufEnemy extends ShooterEnemy {
         let accuracy = 100;
         let damage = 10;
         let gunKnockbackMultiplier = 10;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.pufpuf;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image)
     }
 }

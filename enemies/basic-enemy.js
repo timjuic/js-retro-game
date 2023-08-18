@@ -13,7 +13,7 @@ export default class BasicEnemy extends Enemy {
         let speed = 5;
         let health = BasicEnemy.startingHealth;
         let damage = 10;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.basic;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

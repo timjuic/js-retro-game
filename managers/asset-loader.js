@@ -17,23 +17,23 @@ export default class AssetLoader {
 
     loadBulletAssets() {
         let bulletAssetNames = ['bullet.png', 'enemybullet.png'];
-        this.loadImages(bulletAssetNames, this.bulletAssets);
+        this.loadImages('bullets', bulletAssetNames, this.bulletAssets);
     }
 
     loadEnemyAssets() {
-        let enemyAssetNames = ['enemy1.png', 'enemy2.png'];
-        this.loadImages(enemyAssetNames, this.enemyAssets);   
+        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png'];
+        this.loadImages('enemies', enemyAssetNames, this.enemyAssets);   
     }
 
     loadOtherAssets() {
-        let otherAssets = ['shield_icon.png'];
-        this.loadImages(otherAssets, this.otherAssets);
+        let otherAssets = ['crosshair3.png'];
+        this.loadImages('other', otherAssets, this.otherAssets);
     }
 
-    loadImages(assetNames, assetType) {
+    loadImages(subFolderName, assetNames, assetType) {
         assetNames.forEach(assetName => {
             let assetImage = new Image();
-            assetImage.src = `./assets/${assetName}`;
+            assetImage.src = `./assets/${subFolderName}/${assetName}`;
             assetType[assetName.split('.')[0]] = assetImage;
         });
     }

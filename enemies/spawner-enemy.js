@@ -16,7 +16,7 @@ export default class SpawnerEnemy extends Enemy {
         let health = SpawnerEnemy.startingHealth;
         let damage = 100;
         let spawnIntervalMs = 1000;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.enemyAssets.spawner;
         super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.enemiesSpawned = 0;
         this.minSpawns = 2;

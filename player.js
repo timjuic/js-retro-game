@@ -113,6 +113,7 @@ export default class Player extends RectangleEntity {
 
     addGun(gun) {
         this.gun = gunsData[0]
+        this.gun.addToGame(this.game);
     }
 
     onDeath() {

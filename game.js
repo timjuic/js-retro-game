@@ -13,7 +13,7 @@ import CornerWave from "./waves/corner-wave.js";
 import CornerWaveSize from "./enums/corner-wave-sizes.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
 import BuffEnemy from "./enemies/buff-enemy.js";
-import AssetLoader from "./asset-loader.js";
+import AssetLoader from "./managers/asset-loader.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
 import PufPufEnemy from "./enemies/pufpuf-enemy.js";
@@ -69,7 +69,9 @@ export default class Game {
         this.activatePauseListener();
     }
 
-
+    getAssetManager() {
+        return this.assetLoader;
+    }
     getInputManager() {
         return this.inputManager;
     }

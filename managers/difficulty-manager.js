@@ -3,7 +3,7 @@ import Difficulties from '../enums/difficulties.js';
 export default class DifficultyManager {
     constructor() {
         this.difficultyValues = Object.values(Difficulties);
-        this.currentDifficultyIndex = 4;
+        this.currentDifficultyIndex = 1;
     }
 
     increaseDifficulty() {
