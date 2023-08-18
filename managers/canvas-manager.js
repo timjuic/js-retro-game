@@ -42,6 +42,7 @@ export default class CanvasManager {
         let newCanvas = document.createElement('canvas')
         newCanvas.id = canvasName;
         newCanvas.className = 'game-canvas';
+        newCanvas.style.imageRendering = "pixelated";
         
         this.resizeCanvas(newCanvas)
 
@@ -51,7 +52,9 @@ export default class CanvasManager {
 
     loadContexts() {
         for (let [name, canvas] of Object.entries(this.canvases)) {
-            this.contexts[name] = canvas.getContext('2d');
+            let ctx = canvas.getContext('2d');
+            ctx.imageSmoothingEnabled = 'false'
+            this.contexts[name] = ctx;
         }
     }
 

@@ -12,6 +12,10 @@
     height: 100vh;
 }
 
+canvas {
+    image-rendering: optimizeQuality;
+}
+
 canvas:hover {
     cursor: none;
 }
@@ -22,6 +26,7 @@ canvas:hover {
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: transparent;
+    image-rendering: optimizeQuality;
 }
 
 .game-canvas:first-of-type {

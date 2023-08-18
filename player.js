@@ -12,13 +12,13 @@ export default class Player extends RectangleEntity {
         let playerCanvas = game.getCanvasManager().getCanvas('playerCanvas')
         let posX = playerCanvas.width / 2;
         let posY = playerCanvas.height / 2;
-        let width = 5
-        let height = 5
+        let width = 4
+        let height = 7
         let angle = 0
         let velX = 0;
         let velY = 0;
         let color = 'blue'
-        let image = game.assetLoader.enemyAssets.enemy1
+        let image = game.assetLoader.enemyAssets.player;
         super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
         this.nickname = nickname;

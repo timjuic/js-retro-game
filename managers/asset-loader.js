@@ -21,8 +21,8 @@ export default class AssetLoader {
     }
 
     loadEnemyAssets() {
-        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png'];
-        this.loadImages('enemies', enemyAssetNames, this.enemyAssets);   
+        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'player.png'];
+        this.loadImages('characters', enemyAssetNames, this.enemyAssets);   
     }
 
     loadOtherAssets() {
