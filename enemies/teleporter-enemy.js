@@ -7,6 +7,7 @@ export default class TeleporterEnemy extends Enemy {
     static baseHeight = 3;
     static startingHealth = 50;
     static buffness = Enemy.calculateBuffness(TeleporterEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
@@ -16,7 +17,7 @@ export default class TeleporterEnemy extends Enemy {
         let health = TeleporterEnemy.startingHealth;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.teleporter;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
+        super(game, wave, TeleporterEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
         this.maxTeleportTimes = 3;
         this.timesTeleported = 0;
         this.maxTeleportDistance = this.width * 4;

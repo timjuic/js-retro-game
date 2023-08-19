@@ -1,9 +1,12 @@
 import Difficulties from '../enums/difficulties.js';
+import SummonAmounts from '../enums/summon-amounts.js';
 
 export default class DifficultyManager {
     constructor() {
         this.difficultyValues = Object.values(Difficulties);
-        this.currentDifficultyIndex = 4;
+        this.summonAmountsValues = Object.values(SummonAmounts);
+        this.currentDifficultyIndex = 0;
+        this.currentSummonAmountIndex = 0;
     }
 
     increaseDifficulty() {
@@ -14,5 +17,15 @@ export default class DifficultyManager {
 
     getCurrentDifficulty() {
         return this.difficultyValues[this.currentDifficultyIndex];
+    }
+
+    increaseSummonAmount() {
+        if (this.currentSummonAmountIndex < this.summonAmountsValues - 1) {
+            this.currentSummonAmountIndex++;
+        }
+    }
+
+    getCurrentSummonAmount() {
+        return this.summonAmountsValues[this.currentSummonAmountIndex];
     }
 }

@@ -6,6 +6,7 @@ export default class KamikazeEnemy extends Enemy {
     static baseHeight = 3;
     static startingHealth = 50;
     static buffness = Enemy.calculateBuffness(KamikazeEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
@@ -15,7 +16,7 @@ export default class KamikazeEnemy extends Enemy {
         let health = KamikazeEnemy.startingHealth;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.kamikaze;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, KamikazeEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 
 

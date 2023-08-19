@@ -1,25 +1,24 @@
-import BasicEnemy from "./enemies/basic-enemy.js";
-import Difficulties from "./enums/difficulties.js";
-import WaveTypes from "./enums/wave-types.js";
-import DifficultyManager from "./managers/difficulty-manager.js";
-import EnemyChances from "./enums/enemy-summon-chances.js";
-import enemyRegistry from "./enemy-class-registry.js";
-import CornerWave from "./waves/corner-wave.js";
-import CornerWaveSizes from "../enums/corner-wave-sizes.js";
-import SquareWave from "./waves/square-wave.js";
-import RandomWave from "./waves/random-wave.js";
-import RandomWaveSizes from "./enums/random-wave-sizes.js";
-import Corners from "./enums/corners.js";
-import MathUtil from "./helpers/math-util.js";
-import Sides from "./enums/sides.js";
-import LineWave from "./waves/line-wave.js";
-import LineWaveSizes from "./enums/line-wave-sizes.js";
+import BasicEnemy from "../enemies/basic-enemy.js";
+import Difficulties from "../enums/difficulties.js";
+import WaveTypes from "../enums/wave-types.js";
+import DifficultyManager from "./difficulty-manager.js";
+import EnemyChances from "../enums/enemy-summon-chances.js";
+import enemyRegistry from "../enemy-class-registry.js";
+import CornerWave from "../waves/corner-wave.js";
+import EnemySpawnConfig from "../enums/enemy-spawn-config.js";
+import SquareWave from "../waves/square-wave.js";
+import RandomWave from "../waves/random-wave.js";
+import RandomEnemySpawnConfig from "../enums/random-enemy-spawn-config.js";
+import Corners from "../enums/corners.js";
+import MathUtil from "../helpers/math-util.js";
+import Sides from "../enums/sides.js";
+import LineWave from "../waves/line-wave.js";
+import LineWaveSizes from "../enums/line-wave-sizes.js";
 
 export default class WaveGenerator {
     constructor(game) {
         this.game = game;
         this.difficultyManager = new DifficultyManager();
-        
     }
 
     pickWaveType() {
@@ -50,15 +49,15 @@ export default class WaveGenerator {
     }
 
     getEnemySpawnAmount(waveType, enemyType) {
-        let currentDifficulty = this.difficultyManager.getCurrentDifficulty();
+        let currentSummonAmount = this.difficultyManager.getCurrentSummonAmount();
         if (waveType === CornerWave) {
-            return CornerWaveSizes[currentDifficulty][enemyType.name];
+            return EnemySpawnConfig[enemyType.name][currentSummonAmount];
         } else if (waveType === SquareWave) {
-            return CornerWaveSizes[currentDifficulty][enemyType.name];
+            return EnemySpawnConfig[enemyType.name][currentSummonAmount];
         } else if (waveType === RandomWave) {
-            return RandomWaveSizes[currentDifficulty][enemyType.name];
+            return RandomEnemySpawnConfig[enemyType.name][currentSummonAmount];
         } else if (waveType === LineWave) {
-            return LineWaveSizes[currentDifficulty]
+            return LineWaveSizes[currentSummonAmount]
         }
     }
 

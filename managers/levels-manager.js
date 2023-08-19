@@ -1,4 +1,4 @@
-import WaveGenerator from "../wave-generator.js";
+import WaveGenerator from "./wave-generator.js";
 
 export default class LevelManager {
     constructor(game) {
@@ -36,7 +36,10 @@ export default class LevelManager {
                 wave.startSummoningEnemies();
                 this.waves.splice(i, 1);
                 this.wavesPassed++;
-
+                this.game.getStatsManager().increaseBeatenWave(wave.enemyType.name)
+                let newEnemyLevel = Math.floor(this.game.getStatsManager().getBeatenWaves(wave.enemyType.name) / this.game.settings.INCREASE_ENEMY_LVL_EVERY_X_WAVES_OF_TYPE) + 1;
+                wave.enemyType.level = newEnemyLevel;
+                console.log(newEnemyLevel, wave.enemyType.name);
             } else {
                 
             }

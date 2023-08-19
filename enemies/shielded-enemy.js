@@ -7,6 +7,7 @@ export default class ShieldedEnemy extends Enemy {
     static baseHeight = 4;
     static startingHealth = 50;
     static buffness = Enemy.calculateBuffness(ShieldParticle.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
@@ -16,7 +17,7 @@ export default class ShieldedEnemy extends Enemy {
         let health = ShieldedEnemy.startingHealth;
         let damage = 50;
         let image = game.assetLoader.enemyAssets.shielded;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
+        super(game, wave, ShieldedEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image)
         this.hasShieldActive = false;
     }
 

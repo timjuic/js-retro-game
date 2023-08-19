@@ -1,3 +1,4 @@
+import enemyRegistry from "../enemy-class-registry.js";
 import Timer from "../helpers/timer.js";
 
 export default class StatsManager {
@@ -5,9 +6,21 @@ export default class StatsManager {
         this.game = game;
         this.timer = new Timer();
         this.enemiesKilled = 0;
+        this.wavesBeaten = {};
+        Array.from(Object.keys(enemyRegistry.registry)).forEach(enemyName => {
+            this.wavesBeaten[enemyName] = 0;
+        })        
 
 
         this.displaySurvivedTime();
+    }
+
+    increaseBeatenWave(enemyType) {
+        this.wavesBeaten[enemyType]++;
+    }
+
+    getBeatenWaves(enemyType) {
+        return this.wavesBeaten[enemyType];
     }
 
     startTimer() {

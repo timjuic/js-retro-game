@@ -13,7 +13,6 @@ export default class HealthBar {
         this.outlineColor = "rgba(128, 0, 0, 0.8)";
         this.fillColor = "rgba(255, 64, 64, 0.6)";
         this.strokeOutlineWidth = this.width / 10;
-        console.log(this.strokeOutlineWidth);
 
         // Check if the entity is a valid player or enemy instance
         if (!(entity instanceof Player) && !(entity instanceof Enemy)) {

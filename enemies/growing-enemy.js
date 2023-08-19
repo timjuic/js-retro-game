@@ -6,6 +6,7 @@ export default class GrowingEnemy extends Enemy {
     static baseHeight = 3;
     static startingHealth = 200;
     static buffness = Enemy.calculateBuffness(GrowingEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;
@@ -16,7 +17,7 @@ export default class GrowingEnemy extends Enemy {
         let health = GrowingEnemy.startingHealth;
         let damage = 10;
         let image = game.assetLoader.enemyAssets.enemy1;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, GrowingEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canvasRef = this.game.getCanvasManager().getCanvas('playerCanvas')
         this.maxSize = maxSize / 100 * this.canvasRef.width;
         this.relativeSizeIncrease = 0.2;

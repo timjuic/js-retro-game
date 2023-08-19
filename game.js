@@ -1,5 +1,5 @@
 import CanvasManager from "./managers/canvas-manager.js";
-import CollisionDetector from "./collision-detector.js";
+import CollisionDetector from "./managers/collision-detector.js";
 import settings from "./game-settings.js";
 import EventEmmiter from "./helpers/event-emmiter.js";
 import InputManager from "./managers/input-manager.js";
@@ -10,7 +10,7 @@ import InputType from "./enums/input-type.js";
 import RandomWave from "./waves/random-wave.js"
 import SquareWave from "./waves/square-wave.js"
 import CornerWave from "./waves/corner-wave.js";
-import CornerWaveSize from "./enums/corner-wave-sizes.js";
+import CornerWaveSize from "./enums/enemy-spawn-config.js";
 import BasicEnemy from "./enemies/basic-enemy.js";
 import BuffEnemy from "./enemies/buff-enemy.js";
 import AssetLoader from "./managers/asset-loader.js";
@@ -72,6 +72,9 @@ export default class Game {
     }
     getInputManager() {
         return this.inputManager;
+    }
+    getStatsManager() {
+        return this.statsManager;
     }
     getEventEmmiter() {
         return this.events;

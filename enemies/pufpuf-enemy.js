@@ -6,6 +6,7 @@ export default class PufPufEnemy extends ShooterEnemy {
     static baseHeight = 5;
     static startingHealth = 100;
     static buffness = Enemy.calculateBuffness(PufPufEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 5;
@@ -18,6 +19,6 @@ export default class PufPufEnemy extends ShooterEnemy {
         let damage = 10;
         let gunKnockbackMultiplier = 10;
         let image = game.assetLoader.enemyAssets.pufpuf;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image)
+        super(game, wave, PufPufEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image)
     }
 }

@@ -8,6 +8,7 @@ export default class SpawnerEnemy extends Enemy {
     static baseHeight = 6;
     static startingHealth = 400;
     static buffness = Enemy.calculateBuffness(SpawnerEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 6;
@@ -18,7 +19,7 @@ export default class SpawnerEnemy extends Enemy {
         let damage = 100;
         let spawnIntervalMs = 1000;
         let image = game.assetLoader.enemyAssets.spawner;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, SpawnerEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.enemiesSpawned = 0;
         this.minSpawns = 2;
         this.maxSpawns = 4;

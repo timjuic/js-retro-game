@@ -5,6 +5,7 @@ export default class BuffEnemy extends Enemy {
     static baseHeight = 4;
     static startingHealth = 80;
     static buffness = Enemy.calculateBuffness(BuffEnemy.startingHealth)
+    static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 4;
@@ -14,6 +15,6 @@ export default class BuffEnemy extends Enemy {
         let health = BuffEnemy.startingHealth;
         let damage = 20;
         let image = game.assetLoader.enemyAssets.buff;
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, BuffEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

@@ -1,5 +1,5 @@
-import { CircleEntity, RectangleEntity } from "./entity.js";
-import MathUtil from "./helpers/math-util.js";
+import { CircleEntity, RectangleEntity } from "../entity.js";
+import MathUtil from "../helpers/math-util.js";
 
 export default class CollisionDetector {
    constructor(game) {

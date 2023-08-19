@@ -5,16 +5,18 @@ import ParticleManager from "../particles/particle-manager.js";
 import Particle from "../particles/particle.js";
 
 export default class Enemy extends RectangleEntity {
-    constructor(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image) {
+    constructor(game, wave, level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image) {
         super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.wave = wave;
+        this.level = level;
         this.moveInterval = moveInterval;
-        this.speed = speed * this.game.canvas.width / this.game.settings.ENEMY_SPEED_MODIFIER;
-        this.health = health;
-        this.maxHealth = health;
+        this.speed = speed * this.game.canvas.width / this.game.settings.ENEMY_SPEED_MODIFIER * (1 + game.settings.ENEMY_SPEED_INCREASE_PER_LEVEL_PERC / 100 * (this.level - 1));
+        this.health = health * (1 + game.settings.ENEMY_HEALTH_INCREASE_PER_LEVEL_PERC / 100 * (this.level - 1));
+        this.maxHealth = this.health;
         this.damage = damage;
         this.ticksPassed = 0;
         this.healthBar = new HealthBar(game, this);
+        
     }
 
     isAlive() {
