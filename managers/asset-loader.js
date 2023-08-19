@@ -1,18 +1,11 @@
 export default class AssetLoader {
     constructor() {
-        // this.bulletAssets = {};
-        // this.enemyAssets = {}
-        // this.otherAssets = {};
-        // this.audioAssets = {}
         this.enemyImageDataObjects = {};
-        this.playerAsset;
-
         this.loadBulletAssets();
         this.loadEnemyAssets()
         this.loadOtherAssets();
         this.loadEnemyImagesData();
         this.loadAudioAssets();
-
     }
 
     loadBulletAssets() {
@@ -36,11 +29,8 @@ export default class AssetLoader {
             let assetImage = new Image();
             assetImage.src = `./assets/${assetType}/${assetName}`;
             let assetNameBeforeExtension = assetName.split('.')[0]
-            console.log(assetNameBeforeExtension);
-            
             this[assetType][assetNameBeforeExtension] = assetImage;
         });
-        console.log(this);
     }
 
     loadAudioAssets() {
