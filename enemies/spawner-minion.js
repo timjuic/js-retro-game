@@ -14,7 +14,7 @@ export default class SpawnerMinion extends Enemy {
         let speed = 5;
         let health = SpawnerMinion.startingHealth;
         let damage = 10;
-        let image = game.assetLoader.enemyAssets.spawner;
+        let image = game.assetLoader.characters.spawner;
         super(game, wave, SpawnerMinion.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
     }
 }

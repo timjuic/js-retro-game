@@ -18,7 +18,7 @@ export default class Player extends RectangleEntity {
         let velX = 0;
         let velY = 0;
         let color = 'blue'
-        let image = game.assetLoader.enemyAssets.player;
+        let image = game.assetLoader.characters.player;
         super(game, posX, posY, width, height, angle, velX, velY, 0, color, image)
 
         this.nickname = nickname;
@@ -27,7 +27,7 @@ export default class Player extends RectangleEntity {
         this.maxHealth = health;
         this.lastMovedDirection = 1;
         this.addGun();
-        this.bulletImg = this.game.assetLoader.bulletAssets.bullet;
+        this.bulletImg = this.game.assetLoader.bullets.bullet;
 
         this.shootingInterval = null;
 

@@ -16,7 +16,7 @@ export default class GrowingEnemy extends Enemy {
         let speed = 0;
         let health = GrowingEnemy.startingHealth;
         let damage = 10;
-        let image = game.assetLoader.enemyAssets.enemy1;
+        let image = game.assetLoader.characters.enemy1;
         super(game, wave, GrowingEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canvasRef = this.game.getCanvasManager().getCanvas('playerCanvas')
         this.maxSize = maxSize / 100 * this.canvasRef.width;

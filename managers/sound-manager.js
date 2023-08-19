@@ -14,21 +14,14 @@ export default class SoundManager {
             this.toggleSound();
         })
 
-        document.querySelectorAll('.icon').forEach(icon => {
-            icon.addEventListener('mouseover', (e) => {
-                e.stopPropagation();
-            });
-        });
 
         this.menuButtons.forEach(button => {
-            button.addEventListener('mouseover', (e) => {
+            button.addEventListener('mouseenter', (e) => {
                 e.preventDefault();
                 e.stopPropagation();
                 this.playSound('menu_hover.mp3')
             })
         })
-        
-
     }
 
     playSound(soundName) {

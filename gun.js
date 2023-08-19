@@ -18,7 +18,7 @@ export default class Gun {
     addToGame(game) {
         console.log(game);
         this.game = game;
-        this.bulletImg = game.getAssetManager().bulletAssets.bullet
+        this.bulletImg = game.getAssetManager().bullets.bullet
     }
 
     isAutomatic() {

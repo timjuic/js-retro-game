@@ -85,7 +85,7 @@ canvas:hover {
     padding: 15px 30px;
     text-align: center;
     text-transform: uppercase;
-    transition: all 0.3s ease 0s;
+    transition: all 0.1s ease 0s;
     outline: none;
     border-radius: 4px;
     box-shadow: 0 0 10px rgba(128, 0, 128, 0.5);

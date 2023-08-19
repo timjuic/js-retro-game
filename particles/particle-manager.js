@@ -23,7 +23,7 @@ export default class ParticleManager {
         let imagePathParts2 = imagePathParts[imagePathParts.length - 2].split("/")
         let imageName = imagePathParts2[imagePathParts2.length - 1] 
         let data = this.game.assetLoader.enemyImageDataObjects[imageName].data
-        let image = this.game.assetLoader.enemyAssets[imageName];
+        let image = this.game.assetLoader.characters[imageName];
         image.data = data;
         return image;
     }

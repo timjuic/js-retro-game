@@ -23,7 +23,7 @@ import LineWave from "./waves/line-wave.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 import ShooterEnemy from "./enemies/shooting-enemy.js";
-import LevelManager from "./managers/levels-manager.js";
+import LevelManager from "./managers/level-manager.js";
 import SoundManager from "./managers/sound-manager.js";
 import StatsManager from "./managers/stats-manager.js";
 
@@ -59,10 +59,6 @@ export default class Game {
         this.ticksElapsed = 0;
 
         this.canvasManager.scaleEntities()
-
-        this.levelManager.startCurrentLevel();
-
-
         this.play()
         this.activatePauseListener();
     }

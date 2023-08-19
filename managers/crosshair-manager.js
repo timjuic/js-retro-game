@@ -12,7 +12,7 @@ export default class CrosshairManager {
         this.width = this.baseWidth * canvas.width
         this.height = this.baseHeight * canvas.width
         this.color = "blue"
-        this.image = this.game.getAssetManager().otherAssets.crosshair3;
+        this.image = this.game.getAssetManager().other.crosshair3;
 
         let crosshairCanvas = this.game.getCanvasManager().getCanvas("crosshairCanvas")
         window.addEventListener('mousemove', (e) => {
