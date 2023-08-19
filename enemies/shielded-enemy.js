@@ -6,7 +6,7 @@ export default class ShieldedEnemy extends Enemy {
     static baseWidth = 4;
     static baseHeight = 4;
     static startingHealth = 50;
-    static buffness = Enemy.calculateBuffness(ShieldParticle.startingHealth)
+    static buffness = Enemy.calculateBuffness(ShieldedEnemy.startingHealth)
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

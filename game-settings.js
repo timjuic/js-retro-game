@@ -11,7 +11,8 @@ const settings = {
     RESIZE_DELAY_MS: 50,
     INCREASE_ENEMY_LVL_EVERY_X_WAVES_OF_TYPE: 2,
     ENEMY_HEALTH_INCREASE_PER_LEVEL_PERC: 10,
-    ENEMY_SPEED_INCREASE_PER_LEVEL_PERC: 10, 
+    ENEMY_SPEED_INCREASE_PER_LEVEL_PERC: 10,
+    WAVE_DIFFICULTY_PROGRESSION_RATE: 20, // The lower it is, faster wave difficulties progress
 }
 
 export default settings

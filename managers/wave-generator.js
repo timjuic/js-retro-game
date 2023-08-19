@@ -18,7 +18,7 @@ import LineWaveSizes from "../enums/line-wave-sizes.js";
 export default class WaveGenerator {
     constructor(game) {
         this.game = game;
-        this.difficultyManager = new DifficultyManager();
+        this.difficultyManager = new DifficultyManager(game);
     }
 
     pickWaveType() {
@@ -30,6 +30,8 @@ export default class WaveGenerator {
     }
 
     pickEnemy() {
+        this.difficultyManager.pickDifficulty(this.game.getLevelManager().getWavesPassed());
+        console.log(this.difficultyManager.getCurrentDifficulty());
         const currentDifficulty = this.difficultyManager.getCurrentDifficulty();
         const enemyChances = EnemyChances[currentDifficulty];
         

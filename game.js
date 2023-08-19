@@ -76,6 +76,9 @@ export default class Game {
     getStatsManager() {
         return this.statsManager;
     }
+    getLevelManager() {
+        return this.levelManager;
+    }
     getEventEmmiter() {
         return this.events;
     }
