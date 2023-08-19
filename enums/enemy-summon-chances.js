@@ -18,7 +18,7 @@ const EnemyChances = {
         SpawnerEnemy: 0,
         KamikazeEnemy: 0,
         TeleporterEnemy: 0,
-        PufPufEnemy: 0,
+        PufPufEnemy: 1000000,
         ShieldedEnemy: 0,
     },
     [Difficulties.EASY]: {

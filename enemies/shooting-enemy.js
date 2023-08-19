@@ -3,12 +3,12 @@ import MathUtil from "../helpers/math-util.js";
 import Enemy from "./enemy.js";
 
 export default class ShooterEnemy extends Enemy {
-    constructor(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image) {
+    constructor(game, wave, level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, shootTickInterval, accuracy, gunKnockbackMultiplier, color, image) {
         if (new.target === ShooterEnemy) {
             throw new Error("Cannot create an instance of ShooterEnemy. Please choose its child implementation")
         }
 
-        super(game, wave, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
+        super(game, wave, level,  posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canShoot = true;
         this.shootTickInterval = shootTickInterval;
         this.accuracy = accuracy;
