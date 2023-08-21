@@ -1,8 +1,6 @@
 export default class SoundManager {
     constructor(game) {
         this.game = game;
-        this.activeSounds = {}
-        this.maxSoundsPerType = 5;
         this.soundEnabled = false;
         this.toggleButton = document.querySelector('.toggle-sound-button');
         this.menuButtons = document.querySelectorAll(".menu-button");
@@ -13,7 +11,6 @@ export default class SoundManager {
         this.toggleButton.addEventListener('click', () => {
             this.toggleSound();
         })
-
 
         this.menuButtons.forEach(button => {
             button.addEventListener('mouseenter', (e) => {

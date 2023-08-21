@@ -31,7 +31,6 @@ export default class WaveGenerator {
 
     pickEnemy() {
         this.difficultyManager.pickDifficulty(this.game.getLevelManager().getWavesPassed());
-        console.log(this.difficultyManager.getCurrentDifficulty());
         const currentDifficulty = this.difficultyManager.getCurrentDifficulty();
         const enemyChances = EnemyChances[currentDifficulty];
         

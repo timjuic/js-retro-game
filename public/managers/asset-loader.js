@@ -5,7 +5,6 @@ export default class AssetLoader {
         this.loadEnemyAssets()
         this.loadOtherAssets();
         this.loadEnemyImagesData();
-        this.loadAudioAssets();
     }
 
     loadBulletAssets() {
@@ -15,7 +14,7 @@ export default class AssetLoader {
 
     loadEnemyAssets() {
         let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'player.png'];
-        this.loadImages('characters', enemyAssetNames);   
+        this.loadImages('characters', enemyAssetNames);
     }
 
     loadOtherAssets() {
@@ -31,14 +30,6 @@ export default class AssetLoader {
             let assetNameBeforeExtension = assetName.split('.')[0]
             this[assetType][assetNameBeforeExtension] = assetImage;
         });
-    }
-
-    loadAudioAssets() {
-        let audioAssetFileNames = ['enemy_death.wav', 'menu_hover.mp3'];
-        audioAssetFileNames.forEach(fileName => {
-            this.audioAssets = {};
-            this.audioAssets[fileName.split('.')[0]] = new Audio(`./assets/sounds/${fileName}`)
-        })
     }
 
     loadEnemyImagesData() {
