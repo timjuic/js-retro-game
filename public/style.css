@@ -2,6 +2,9 @@
     margin: 0;
     padding: 0;
     box-sizing: content-box;
+    font-family: 'Handjet', cursive;
+    letter-spacing: 0.2vw;
+    font-weight: 400;
     /* cursor:  none; */
 }
 
@@ -58,7 +61,7 @@ canvas:hover {
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 12px;
@@ -165,3 +168,95 @@ canvas:hover {
     background-color: #ff2d6f;
     transform: scale(1.1);
 }
+
+
+
+#start-modal {
+    background-color: black;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 100;
+    left: 0;
+    top: 0;
+}
+
+.title {
+    color: white;
+    font-size: 100px;
+    font-weight: bold;
+    font-family: 'Handjet', cursive;
+    letter-spacing: 1vw;
+    position: absolute;
+    text-align: center;
+    left: 50%;
+    top: 30%;
+    transform: translate(-50%, -50%);
+    /* background-color: #4287f5; */
+    z-index: 1;
+    animation: shake 5s infinite;
+}
+
+.title:nth-of-type(2) {
+
+    color: #30FEFF;
+    z-index: -1;
+    animation-delay: 0.2s; 
+}
+
+.title:nth-of-type(3) {
+
+    color: #FF1816;
+    z-index: -2;
+    animation-delay: 0.4s;
+}
+
+#play-button {
+    background-color: #980ed4;
+    position: absolute;
+    left: 50%;
+    top: 65%;
+    transform: translate(-50%, -50%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 28px;
+    font-weight: 400;
+    letter-spacing: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+  }
+  
+  #play-button:hover {
+    background-color: #b029e9;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+  
+  #play-button:active {
+    background-color: #21618c;
+    transform: scale(0.95) translate(-50%, -50%);
+  }
+
+@keyframes shake {
+    0%, 100% {
+      transform: translate(-50%, -50%);
+    }
+    10%, 30%, 50%, 70%, 90% {
+      transform: translate(-50.5%, -50%);
+    }
+    20%, 40%, 60%, 80% {
+      transform: translate(-49.5%, -50%);
+    }
+}
+
+.game-desc {
+    color: white;
+    font-size: 25px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
