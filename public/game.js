@@ -26,6 +26,7 @@ import ShooterEnemy from "./enemies/shooting-enemy.js";
 import LevelManager from "./managers/level-manager.js";
 import SoundManager from "./managers/sound-manager.js";
 import StatsManager from "./managers/stats-manager.js";
+import Enemy from "./enemies/enemy.js";
 
 const pauseModal = document.querySelector(".pause-modal");
 
@@ -265,7 +266,6 @@ export default class Game {
             if (!successfullyDamaged) return;
             enemy.health -= bullet.damage;
             enemy.isBeingHit = true;
-            console.log('sucessfull damagw');
 
             let tries = 5;
             let newEnemyPosX, newEnemyPosY, validPosition = false;
@@ -312,5 +312,22 @@ export default class Game {
     closeModal() {
         const modal = document.getElementById("death-modal");
         modal.style.display = "none";
+    }
+
+    createEnemy(args) {
+        let newEnemy = new Enemy(
+            ...args
+        );
+
+        for (const enemy of this.enemies) {
+            if (this.getCollisionDetector().collidesWithEntity(newEnemy, enemy)) {
+                return false;
+            }
+        }
+        if (this.getCollisionDetector().collidesWithEntity(newEnemy, this.player)) return false;
+        if (!this.getCollisionDetector().isInsideCanvasBorders(newEnemy)) return false;
+
+        this.enemies.push(newEnemy);
+        return true
     }
 }

@@ -17,12 +17,12 @@ export default class SpawnerEnemy extends Enemy {
         let speed = 5;
         let health = SpawnerEnemy.startingHealth;
         let damage = 100;
-        let spawnIntervalMs = 1000;
+        let spawnIntervalMs = 2000;
         let image = game.assetLoader.characters.spawner;
         super(game, wave, SpawnerEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.enemiesSpawned = 0;
         this.minSpawns = 2;
-        this.maxSpawns = 4;
+        this.maxSpawns = 3;
         this.maxSpawnAttempts = 20;
         this.maxTotalEnemiesSpawned = 8;
 
@@ -51,35 +51,28 @@ export default class SpawnerEnemy extends Enemy {
             let spawnX = this.posX + Math.cos(angle) * distance;
             let spawnY = this.posY + Math.sin(angle) * distance;
 
-            if (this.createEnemy(SpawnerMinion, spawnX, spawnY)) {
+            if (this.game.createEnemy([
+                this.game, 
+                this.wave,
+                this.level,
+                spawnX,
+                spawnY,
+                SpawnerEnemy.baseWidth / 2,
+                SpawnerEnemy.baseHeight / 2,
+                Math.round(this.moveInterval / 2),
+                this.speed,
+                40,
+                this.damage / 4,
+                this.angle,
+                0,
+                0,
+                0,
+                "blue",
+                this.image]
+            )) {
                 this.enemiesSpawned++;
                 enemiesSpawnedInBatch++;
             }
         }
-    }
-
-    createEnemy(enemyType, x, y) {
-        let newEnemy = new enemyType(
-            this.game,
-            this.wave,
-            x,
-            y,
-            0,
-            0,
-            0,
-            0,
-            "blue"
-        );
-
-        for (const enemy of this.game.enemies) {
-            if (this.game.getCollisionDetector().collidesWithEntity(newEnemy, enemy)) {
-                return false;
-            }
-        }
-        if (this.game.getCollisionDetector().collidesWithEntity(newEnemy, this.game.player)) return false;
-        if (!this.game.getCollisionDetector().isInsideCanvasBorders(newEnemy)) return false;
-
-        this.game.enemies.push(newEnemy);
-        return true
     }
 }

@@ -7,6 +7,7 @@ import ReflectorEnemy from "./enemies/reflector-enemy.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
+import SplittingEnemy from "./enemies/splitting-enemy.js";
 import TankEnemy from "./enemies/tank-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
 
@@ -28,6 +29,7 @@ class EnemyRegistry {
         this.registerEnemyClass('SpeedyEnemy', SpeedyEnemy);
         this.registerEnemyClass('TeleporterEnemy', TeleporterEnemy);
         this.registerEnemyClass('ReflectorEnemy', ReflectorEnemy);
+        this.registerEnemyClass('SplittingEnemy', SplittingEnemy);
     }
 
     registerEnemyClass(className, enemyClass) {

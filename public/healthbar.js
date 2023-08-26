@@ -9,7 +9,7 @@ export default class HealthBar {
         this.baseWidth = entity.baseWidth * 0.8;
         this.baseHeight = this.baseWidth / 5;
         this.width = this.baseWidth * this.canvas.width;
-        this.height = this.baseHeight * this.canvas.width;
+        this.height = this.baseWidth * this.canvas.width / 4;
         this.outlineColor = "rgba(128, 0, 0, 0.8)";
         this.fillColor = "rgba(255, 64, 64, 0.6)";
         this.strokeOutlineWidth = this.width / 10;

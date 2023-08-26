@@ -27,7 +27,6 @@ export default class StartCanvasManager {
     }
 
     createDisplayEnemies() {
-        console.log(this);
         this.enemies = [];
         let dummyGameObj = {}
         dummyGameObj.assetLoader = this.assetLoader;
