@@ -6,6 +6,9 @@ import MathUtil from "./helpers/math-util.js";
 import InputType from "./enums/input-type.js";
 import ParticleManager from "./particles/particle-manager.js";
 import HealthBar from "./healthbar.js";
+import IoniserGun from "./guns/Ioniser.js";
+import SolarBurstGun from "./guns/solar-burst.js";
+import QuantumBeamerGun from "./guns/quantum-beamer.js";
 
 export default class Player extends RectangleEntity {
     constructor(game, nickname, health) {
@@ -26,16 +29,28 @@ export default class Player extends RectangleEntity {
         this.health = health;
         this.maxHealth = health;
         this.lastMovedDirection = 1;
-        this.addGun();
-        this.bulletImg = this.game.assetLoader.bullets.bullet;
-
         this.shootingInterval = null;
+        this.createGuns();
+        this.activatePlayerEventHandlers();
+        
+        this.healthBar = new HealthBar(game, this);
+    }
 
+    activatePlayerEventHandlers() {
         this.game.getEventEmmiter().on('playerInput', (control, pressed) => {
             if (control !== InputType.SHOOT) return;
             this.handleShoot(pressed)
         })
-        this.healthBar = new HealthBar(game, this);
+
+        this.game.getEventEmmiter().on('weaponChange', (nextOrPrev) => {
+            if (nextOrPrev === true) {
+                this.gunIndex++
+            } else this.gunIndex--;
+            if (this.gunIndex < 0) this.gunIndex = this.guns.length - 1;
+            if (this.gunIndex > this.guns.length - 1) this.gunIndex = 0;
+            this.gun = this.guns[this.gunIndex]
+            console.log(this.gunIndex);
+        })
     }
 
     handleShoot(pressed) {
@@ -111,9 +126,13 @@ export default class Player extends RectangleEntity {
         }
     }
 
-    addGun(gun) {
-        this.gun = gunsData[1]
-        this.gun.addToGame(this.game);
+    createGuns() {
+        this.guns = [];
+        this.gunIndex = 0;
+        this.guns.push(new IoniserGun(this.game))
+        this.guns.push(new SolarBurstGun(this.game))
+        this.guns.push(new QuantumBeamerGun(this.game))
+        this.gun = this.guns[this.gunIndex]
     }
 
     onDeath() {
@@ -148,7 +167,7 @@ export default class Player extends RectangleEntity {
         let grainVectorX = (grainTargetPointX - centerX) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
         let grainVectorY = (grainTargetPointY - centerY) / (grainDistanceFromCrosshair / entity.game.settings.BULLET_SPEED_MODIFIER);
     
-        let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, 1, 1, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.bulletImg)
+        let bullet = new Bullet(entity.game, centerX - 7, centerY - 7, this.gun.bulletWidth, this.gun.bulletHeight, grainAngle, grainVectorX, grainVectorY, 0, entity.gun.damage, entity.gun.piercing, entity.gun.knockbackMultiplier, "blue", entity.gun.bulletImg)
         entity.game.playerBullets.push(bullet);
     }
 

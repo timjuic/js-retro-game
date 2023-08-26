@@ -13,7 +13,7 @@ export default class Bullet extends RectangleEntity {
         ctx.save();
           
         let centerX = this.posX + this.width / 2;
-        let centerY = this.posY + this.height / 2;
+        let centerY = this.posY + this.width / 2;
           
         ctx.translate(centerX, centerY);
         ctx.rotate(MathUtil.degreesToRadians(this.angle));
@@ -21,15 +21,15 @@ export default class Bullet extends RectangleEntity {
 
         if (this.image !== undefined) {
             let scaledWidth = this.width * this.game.settings.BULLET_SIZE_MODIFIER;
-            let scaledHeight = this.height * this.game.settings.BULLET_SIZE_MODIFIER * 2;
+            let scaledHeight = this.height * this.game.settings.BULLET_SIZE_MODIFIER;
 
             let centerX = this.posX + this.width / 2;
-            let centerY = this.posY + this.height;
+            let centerY = this.posY + this.width;
             let scaledPosX = centerX - scaledWidth / 2;
 
             let scaledPosY = centerY - scaledHeight;
-            if (scaledPosY < this.posY - 10) {
-                scaledPosY = this.posY - 10;
+            if (scaledPosY < this.posY - scaledHeight / 3) {
+                scaledPosY = this.posY - scaledHeight / 3;
             }
 
             ctx.drawImage(this.image, scaledPosX, scaledPosY, scaledWidth, scaledHeight);
@@ -40,7 +40,7 @@ export default class Bullet extends RectangleEntity {
               this.posX,
               this.posY,
               this.width,
-              this.height
+              this.width
             );
         }
          

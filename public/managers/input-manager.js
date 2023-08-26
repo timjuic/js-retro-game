@@ -45,6 +45,15 @@ export default class InputManager {
             this.pressedControls[control] = false;
             this.game.events.emit('playerInput', control, false)
         })
+        window.addEventListener('wheel', (event) => {
+            if (event.wheelDelta > 0) {
+                console.log("UP");
+                this.game.events.emit('weaponChange', true);
+            } else if (event.wheelDelta < 0) {
+                this.game.events.emit('weaponChange', false);
+                console.log("DOWN");
+            }
+        })
     }
 
     #getPressedControl(event) {

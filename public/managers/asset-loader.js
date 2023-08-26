@@ -15,7 +15,7 @@ export default class AssetLoader {
     }
 
     loadBulletAssets() {
-        let bulletAssetNames = ['bullet.png', 'enemybullet.png'];
+        let bulletAssetNames = ['bullet1.png', 'enemybullet.png', 'bullet2.png', 'bullet3.png'];
         this.loadImages('bullets', bulletAssetNames);
     }
 
