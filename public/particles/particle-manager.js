@@ -2,11 +2,12 @@ import MathUtil from "../helpers/math-util.js";
 import Particle from "./particle.js";
 
 export default class ParticleManager {
-    constructor(game, entity, particleBaseSize, pixelGroupingModifier, explosionStrength) {
+    constructor(game, entity, explosionStrength) {
         this.game = game;
         this.entity = entity;
-        this.particleBaseSize = particleBaseSize;
-        this.pixelGroupingModifier = pixelGroupingModifier;
+        this.particleBaseSize = MathUtil.generateRandomNumber(0.3, 0.7);
+        
+        this.pixelGroupingModifier = Math.round(35 * this.particleBaseSize);
         this.explosionStrength = explosionStrength
         this.particles = [];
         this.particleClearTimer = setInterval(() => this.clearParticles(), 500);
@@ -52,13 +53,12 @@ export default class ParticleManager {
               const extraAmplifier = MathUtil.generateRandomInteger(1, 2);
               const velX = ((x / image.width) * this.explosionStrength) - (this.explosionStrength / 2) + xVelAmplifyAmount * extraAmplifier;
               const velY = ((y / image.height) * this.explosionStrength) - (this.explosionStrength / 2) + yVelAmplifyAmount * extraAmplifier;
+              const velRotation = MathUtil.generateRandomInteger(0, 90);
       
-              const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, 90, color, 1);
+              const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, velRotation, color, 1);
               this.particles.push(particle);
             
           }
       }
     }
-
-
 }

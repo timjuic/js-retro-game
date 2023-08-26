@@ -6,7 +6,7 @@ export default class QuantumBeamerGun extends Gun {
         let bulletHeight = 4;
         let fireRate = 150;
         let automatic = true;
-        let damage = 100;
+        let damage = 80;
         let grains = 1;
         let accuracy = 20;
         let piercing = true;

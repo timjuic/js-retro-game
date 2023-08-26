@@ -75,7 +75,7 @@ const RandomEnemySpawnConfig = {
         [SummonAmounts.LARGE]: 15,
     },
     [SplittingEnemy.name]: {
-        [SummonAmounts.SMALL]: 8,
+        [SummonAmounts.SMALL]: 12,
         [SummonAmounts.MEDIUM]: 15,
         [SummonAmounts.LARGE]: 20,
     },

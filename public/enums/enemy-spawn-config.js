@@ -76,50 +76,11 @@ const EnemySpawnConfig = {
         [SummonAmounts.LARGE]: 15,
     },
     [SplittingEnemy.name]: {
-        [SummonAmounts.SMALL]: 3,
+        [SummonAmounts.SMALL]: 6,
         [SummonAmounts.MEDIUM]: 10,
         [SummonAmounts.LARGE]: 15,
     },
 };
 
-
-const CornerWaveSizes = {
-    [SummonAmounts.SMALL]: {
-        [BasicEnemy.name]: 10,
-        [BuffEnemy.name]: 10,
-        [GrowingEnemy.name]: 6,
-        [KamikazeEnemy.name]: 10,
-        [PufPufEnemy.name]: 6,
-        [ShieldedEnemy.name]: 10,
-        [SpawnerEnemy.name]: 3,
-        [SpeedyEnemy.name]: 10,
-        [TankEnemy.name]: 6,
-        [TeleporterEnemy.name]: 6,
-    },
-    [SummonAmounts.MEDIUM]: {
-        [BasicEnemy.name]: 15,
-        [BuffEnemy.name]: 15,
-        [GrowingEnemy.name]: 6,
-        [KamikazeEnemy.name]: 10,
-        [PufPufEnemy.name]: 6,
-        [ShieldedEnemy.name]: 10,
-        [SpawnerEnemy.name]: 6,
-        [SpeedyEnemy.name]: 15,
-        [TankEnemy.name]: 10,
-        [TeleporterEnemy.name]: 15,
-    },
-    [SummonAmounts.LARGE]: {
-        [BasicEnemy.name]: 21,
-        [BuffEnemy.name]: 15,
-        [GrowingEnemy.name]: 10,
-        [KamikazeEnemy.name]: 15,
-        [PufPufEnemy.name]: 10,
-        [ShieldedEnemy.name]: 15,
-        [SpawnerEnemy.name]: 6,
-        [SpeedyEnemy.name]: 21,
-        [TankEnemy.name]: 15,
-        [TeleporterEnemy.name]: 15,
-    },
-};
 
 export default EnemySpawnConfig;

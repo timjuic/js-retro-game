@@ -78,7 +78,7 @@ export default class Enemy extends RectangleEntity {
 
 
       onDeath() {
-        let particleManager = new ParticleManager(this.game, this, 0.4, Math.round(this.game.settings.PARTICLE_AMOUNT_MODIFIER / this.width), this.width / 2);
+        let particleManager = new ParticleManager(this.game, this, this.width / 2);
         this.game.particleManagers.push(particleManager)
         particleManager.createParticleExplosion(); 
         this.game.soundManager.playSound('enemy_death.wav')

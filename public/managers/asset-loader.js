@@ -42,7 +42,7 @@ export default class AssetLoader {
                 loadedCount++;
                 this[assetType][assetNameBeforeExtension] = assetImage;
                 
-                if (loadedCount === assetNames.length && assetType === 'other') {
+                if (loadedCount === assetNames.length && assetType === 'characters') {
                     this.eventEmitter.emit('assetsLoaded');
                 }
             };

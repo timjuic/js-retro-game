@@ -196,7 +196,7 @@ button {
     top: 30%;
     transform: translate(-50%, -50%);
     z-index: 1;
-    animation: shake 6s infinite;
+    /* animation: shake 6s infinite; */
 }
 
 .title:nth-of-type(2) {
