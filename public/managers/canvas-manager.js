@@ -62,7 +62,6 @@ export default class CanvasManager {
     }
 
     resizeCanvas(canvas) {
-        console.log('resizing');
         this.previousCanvasWidth = canvas.width;
         this.previousCanvasHeight = canvas.height;
 

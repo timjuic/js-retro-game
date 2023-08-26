@@ -47,11 +47,9 @@ export default class InputManager {
         })
         window.addEventListener('wheel', (event) => {
             if (event.wheelDelta > 0) {
-                console.log("UP");
                 this.game.events.emit('weaponChange', true);
             } else if (event.wheelDelta < 0) {
                 this.game.events.emit('weaponChange', false);
-                console.log("DOWN");
             }
         })
     }

@@ -22,7 +22,6 @@ export default class Explosion extends CircleEntity {
         }
     
         if (this.isFinished()) {
-            console.log(this.spreadSpeed);
             this.opacity -= this.fadeSpeed / this.maxSize / 4;
         }
 
