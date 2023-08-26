@@ -3,6 +3,7 @@ import BuffEnemy from "./enemies/buff-enemy.js";
 import GrowingEnemy from "./enemies/growing-enemy.js";
 import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
 import PufPufEnemy from "./enemies/pufpuf-enemy.js";
+import ReflectorEnemy from "./enemies/reflector-enemy.js";
 import ShieldedEnemy from "./enemies/shielded-enemy.js";
 import SpawnerEnemy from "./enemies/spawner-enemy.js";
 import SpeedyEnemy from "./enemies/speedy-enemy.js";
@@ -19,14 +20,14 @@ class EnemyRegistry {
         this.registerEnemyClass('BasicEnemy', BasicEnemy);
         this.registerEnemyClass('BuffEnemy', BuffEnemy);
         this.registerEnemyClass('TankEnemy', TankEnemy);
-        // this.registerEnemyClass('BasicEnemy', GrowingEnemy);
+        this.registerEnemyClass('GrowingEnemy', GrowingEnemy);
         this.registerEnemyClass('KamikazeEnemy', KamikazeEnemy);
         this.registerEnemyClass('PufPufEnemy', PufPufEnemy);
         this.registerEnemyClass('ShieldedEnemy', ShieldedEnemy);
         this.registerEnemyClass('SpawnerEnemy', SpawnerEnemy);
         this.registerEnemyClass('SpeedyEnemy', SpeedyEnemy);
-        this.registerEnemyClass('TankEnemy', TankEnemy);
         this.registerEnemyClass('TeleporterEnemy', TeleporterEnemy);
+        this.registerEnemyClass('ReflectorEnemy', ReflectorEnemy);
     }
 
     registerEnemyClass(className, enemyClass) {

@@ -12,11 +12,11 @@ export default class GrowingEnemy extends Enemy {
         let width = 3;
         let height = width;
         let maxSize = 6;
-        let moveInterval = 50;
-        let speed = 0;
+        let moveInterval = 30;
+        let speed = 3;
         let health = GrowingEnemy.startingHealth;
         let damage = 10;
-        let image = game.assetLoader.characters.enemy1;
+        let image = game.assetLoader.characters.growing;
         super(game, wave, GrowingEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canvasRef = this.game.getCanvasManager().getCanvas('playerCanvas')
         this.maxSize = maxSize / 100 * this.canvasRef.width;
@@ -29,10 +29,17 @@ export default class GrowingEnemy extends Enemy {
 
         let sizeIncrease = this.relativeSizeIncrease * this.canvasRef.width / 100;
         if (this.width + sizeIncrease <= this.maxSize) {
-            this.width += sizeIncrease;
-            this.height += sizeIncrease;
-            this.speed *= this.speedDecrease;
-            this.health = GrowingEnemy.startingHealth
+            let tempWidth = this.width + sizeIncrease;
+            let tempHeight = this.height + sizeIncrease;
+            let tempSpeed = this.speed * this.speedDecrease;
+            if (this.game.collidesWithAnEnemy({ posX: this.posX, posY: this.posY, width: tempWidth, height: tempHeight})) {
+                return true;
+            }
+            this.width = tempWidth;
+            this.height = tempHeight;
+            this.speed = tempSpeed;
+            // this.health = GrowingEnemy.startingHealth
+            return false;
         }
         return true;
     }

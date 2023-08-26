@@ -252,18 +252,20 @@ export default class Game {
 
     handleEnemyHit(bullet, enemy, i, j) {
         if (bullet.damage >= enemy.health) {
+            bullet.damage -= enemy.health;
             enemy.health = 0;
             enemy.onDeath();
             this.enemies.splice(j, 1);
-            if (bullet.piercing) {
-                bullet.damage -= enemy.health;
-            } else this.playerBullets.splice(i, 1);
+            if (!bullet.piercing) {
+                this.playerBullets.splice(i, 1);
+            }
         } else {
             this.playerBullets.splice(i, 1);
             let successfullyDamaged = enemy.onDamaged(bullet);
             if (!successfullyDamaged) return;
             enemy.health -= bullet.damage;
             enemy.isBeingHit = true;
+            console.log('sucessfull damagw');
 
             let tries = 5;
             let newEnemyPosX, newEnemyPosY, validPosition = false;
@@ -271,7 +273,7 @@ export default class Game {
             for (let i = 1; i <= tries; i++) {
                 newEnemyPosX = enemy.posX + bullet.velX * bullet.knockbackMultiplier / enemyDiameter / i * this.canvas.width / 100;
                 newEnemyPosY = enemy.posY + bullet.velY * bullet.knockbackMultiplier / enemyDiameter / i * this.canvas.width / 100;
-                if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
+                if (this.collidesWithAnEnemy({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height }, enemy)) {
                     continue;
                 }
                 if (!this.getCollisionDetector().isInsideCanvasBorders({ posX: newEnemyPosX, posY: newEnemyPosY, width: enemy.width, height: enemy.height })) {
@@ -285,10 +287,15 @@ export default class Game {
             enemy.posX = newEnemyPosX;
             enemy.posY = newEnemyPosY
         }
+        bullet.damageDone = true;
     }
 
-    collidesWithAnEnemy(entity) {
+    collidesWithAnEnemy(entity, exclusion) {
         for (let enemy of this.enemies) {
+            if (enemy === exclusion) {
+                continue;
+            }
+            if (enemy.posX === entity.posX && enemy.posY === entity.posY) continue;
             if (this.getCollisionDetector().collidesWithEntity(entity, enemy)) return true;
         }
         return false;

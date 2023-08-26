@@ -20,7 +20,7 @@ export default class AssetLoader {
     }
 
     loadEnemyAssets() {
-        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'player.png'];
+        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'growing.png', 'reflector.png', 'player.png'];
         this.loadImages('characters', enemyAssetNames);
     }
 
@@ -39,6 +39,10 @@ export default class AssetLoader {
             let assetNameBeforeExtension = assetName.split('.')[0]
             
             assetImage.onload = () => {
+                if (assetName === 'reflector.png') {
+                    console.log("LOADED");
+                }
+                // console.log(assetName + " loaded");
                 loadedCount++;
                 this[assetType][assetNameBeforeExtension] = assetImage;
                 

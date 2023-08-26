@@ -6,6 +6,7 @@ export default class Bullet extends RectangleEntity {
         super(game, posX, posY, width, height, angle, velX, velY, velRotation, color, image)
         this.damage = damage;
         this.piercing = piercing;
+        this.damageDone = false;
         this.knockbackMultiplier = knockbackMultiplier;
     }
 

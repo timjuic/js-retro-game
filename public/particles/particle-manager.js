@@ -21,7 +21,7 @@ export default class ParticleManager {
     getEntityImage() {
         let imagePathParts = this.entity.image.src.split('.')
         let imagePathParts2 = imagePathParts[imagePathParts.length - 2].split("/")
-        let imageName = imagePathParts2[imagePathParts2.length - 1] 
+        let imageName = imagePathParts2[imagePathParts2.length - 1]
         let data = this.game.assetLoader.enemyImageDataObjects[imageName].data
         let image = this.game.assetLoader.characters[imageName];
         image.data = data;

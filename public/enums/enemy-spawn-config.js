@@ -11,6 +11,7 @@ import TankEnemy from "../enemies/tank-enemy.js";
 import TeleporterEnemy from "../enemies/teleporter-enemy.js";
 import SummonAmounts from './summon-amounts.js';
 import Enemy from '../enemies/enemy.js';
+import ReflectorEnemy from '../enemies/reflector-enemy.js';
 
 const EnemySpawnConfig = {
     [BasicEnemy.name]: {
@@ -59,6 +60,16 @@ const EnemySpawnConfig = {
         [SummonAmounts.LARGE]: 15,
     },
     [TeleporterEnemy.name]: {
+        [SummonAmounts.SMALL]: 6,
+        [SummonAmounts.MEDIUM]: 15,
+        [SummonAmounts.LARGE]: 15,
+    },
+    [ReflectorEnemy.name]: {
+        [SummonAmounts.SMALL]: 6,
+        [SummonAmounts.MEDIUM]: 15,
+        [SummonAmounts.LARGE]: 15,
+    },
+    [GrowingEnemy.name]: {
         [SummonAmounts.SMALL]: 6,
         [SummonAmounts.MEDIUM]: 15,
         [SummonAmounts.LARGE]: 15,

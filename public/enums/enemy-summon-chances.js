@@ -20,6 +20,8 @@ const EnemyChances = {
         TeleporterEnemy: 0,
         PufPufEnemy: 0,
         ShieldedEnemy: 0,
+        ReflectorEnemy: 10,
+        GrowingEnemy: 10,
     },
     [Difficulties.EASY]: {
         BasicEnemy: 30,
@@ -31,6 +33,8 @@ const EnemyChances = {
         TeleporterEnemy: 0,
         PufPufEnemy: 0,
         ShieldedEnemy: 5,
+        ReflectorEnemy: 1,
+        GrowingEnemy: 10,
     },
     [Difficulties.MEDIUM]: {
         BasicEnemy: 20,
@@ -42,6 +46,8 @@ const EnemyChances = {
         TeleporterEnemy: 5,
         PufPufEnemy: 0,
         ShieldedEnemy: 5,
+        ReflectorEnemy: 5,
+        GrowingEnemy: 15,
     },
     [Difficulties.HARD]: {
         BasicEnemy: 15,
@@ -53,6 +59,8 @@ const EnemyChances = {
         TeleporterEnemy: 10,
         PufPufEnemy: 5,
         ShieldedEnemy: 5,
+        ReflectorEnemy: 10,
+        GrowingEnemy: 15,
     },
     [Difficulties.VERY_HARD]: {
         BasicEnemy: 5,
@@ -64,6 +72,8 @@ const EnemyChances = {
         TeleporterEnemy: 15,
         PufPufEnemy: 10,
         ShieldedEnemy: 5,
+        ReflectorEnemy: 10,
+        GrowingEnemy: 15,
     },
 };
 
