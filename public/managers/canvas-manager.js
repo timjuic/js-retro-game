@@ -1,8 +1,11 @@
+import EventEmmiter from "../helpers/event-emmiter.js";
 import Player from "../player.js";
 
 export default class CanvasManager {
-    constructor(game) {
+    constructor(game, resizeBehavior = 'aspectRatio') {
       this.game = game;
+      this.eventEmmiter = new EventEmmiter();
+      this.resizeBehavior = resizeBehavior;
       this.canvases = {}
       this.contexts = {};
       this.previousCanvasWidth
@@ -21,7 +24,9 @@ export default class CanvasManager {
 
           resizeTimer = setTimeout(() => {
               this.resizeCanvases();
+              this.eventEmmiter.emit('resized')
           }, delay);
+          
       };
 
       window.addEventListener('resize', resizeFunction);
@@ -57,21 +62,27 @@ export default class CanvasManager {
     }
 
     resizeCanvas(canvas) {
-         this.previousCanvasWidth = canvas.width
-         this.previousCanvasHeight = canvas.height
-
-        let widthHeightRatio = 16 / 9;
+        console.log('resizing');
+        this.previousCanvasWidth = canvas.width;
+        this.previousCanvasHeight = canvas.height;
 
         let windowWidth = window.innerWidth;
         let windowHeight = window.innerHeight;
-        
-        let isWidthLarger = windowWidth / windowHeight > 16 / 9
-        if (isWidthLarger) {
-            canvas.width = windowHeight * 16 / 9
-            canvas.height = windowHeight
-        } else {
-            canvas.width = windowWidth
-            canvas.height = windowWidth * 9 / 16
+
+        if (this.resizeBehavior === 'aspectRatio') {
+            let widthHeightRatio = 16 / 9;
+            let isWidthLarger = windowWidth / windowHeight > widthHeightRatio;
+
+            if (isWidthLarger) {
+                canvas.width = windowHeight * widthHeightRatio;
+                canvas.height = windowHeight;
+            } else {
+                canvas.width = windowWidth;
+                canvas.height = windowWidth / widthHeightRatio;
+            }
+        } else if (this.resizeBehavior === 'fullScreen') {
+            canvas.width = windowWidth;
+            canvas.height = windowHeight;
         }
 
         this.newCanvasWidth = canvas.width;
@@ -79,7 +90,6 @@ export default class CanvasManager {
     }
 
     resizeGameElements() {
-      let canvas = this.canvases['playerCanvas']
       if (this.game.player) {
          this.resizeEntity(this.game.player)
       }
@@ -91,9 +101,11 @@ export default class CanvasManager {
         })
       }
 
-      this.game.enemies.forEach(enemy => {
-        this.resizeEntity(enemy);
-      })
+      if (this.game.enemies) {
+        this.game.enemies.forEach(enemy => {
+            this.resizeEntity(enemy);
+          })
+      }
 
       if (this.game.playerBullets) {
         this.game.playerBullets.forEach(bulletEntity => {
@@ -129,28 +141,13 @@ export default class CanvasManager {
         }
     }
 
-    scaleEntities() {
-      let canvas = this.canvases['playerCanvas']
-      this.scaleEntity(canvas, this.game.player)
-      
-      let gameBorders = this.game.borderManager.getBorders()
-      Array.from(Object.values(gameBorders)).forEach(border => {
-        this.scaleEntity(canvas, border)
-      })      
-    }
-
-    scaleEntity(canvas, entity) {
-        entity.width = entity.baseWidth * canvas.width;
-        entity.height = entity.baseHeight * canvas.width
-    }
-
     resizeCanvases() {
-      this.game.pause();
+    //   this.game.pause();
         Array.from(Object.values(this.canvases)).forEach(canvas => {
             this.resizeCanvas(canvas)
         })
-        this.game.drawGameElements();
         this.resizeGameElements()
+        // this.game.drawGameElements();
     }
 
     clearCanvases() {

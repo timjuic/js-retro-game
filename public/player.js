@@ -1,7 +1,7 @@
 import Bullet from "./bullet.js";
-import Gun from "./gun.js";
+import Gun from "./guns/gun.js";
 import { CircleEntity, RectangleEntity } from "./entity.js";
-import gunsData from "./guns-data.js";
+import gunsData from "./guns/guns-data.js";
 import MathUtil from "./helpers/math-util.js";
 import InputType from "./enums/input-type.js";
 import ParticleManager from "./particles/particle-manager.js";
@@ -152,8 +152,8 @@ export default class Player extends RectangleEntity {
         entity.game.playerBullets.push(bullet);
     }
 
-    draw() {
-        super.draw();
-        this.healthBar.draw();
+    draw(ctx) {
+        super.draw(ctx);
+        this.healthBar.draw(ctx);
     }
 }

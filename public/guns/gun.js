@@ -1,4 +1,4 @@
-import { RectangleEntity } from "./entity.js"
+import { RectangleEntity } from "../entity.js"
 
 export default class Gun {
     constructor(name, fireRate, maxAmmo, automatic, damage, grainsAmount, accuracy, piercing, knockbackMultiplier) {
@@ -16,7 +16,6 @@ export default class Gun {
     }
 
     addToGame(game) {
-        console.log(game);
         this.game = game;
         this.bulletImg = game.getAssetManager().bullets.bullet
     }

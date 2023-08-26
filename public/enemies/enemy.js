@@ -92,8 +92,8 @@ export default class Enemy extends RectangleEntity {
         return health / 4;
       }
 
-      draw() {
-        super.draw();
+      draw(ctx) {
+        super.draw(ctx);
         if (!this.healthBar) return;
         this.healthBar.draw();
       }

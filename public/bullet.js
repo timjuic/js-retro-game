@@ -9,9 +9,7 @@ export default class Bullet extends RectangleEntity {
         this.knockbackMultiplier = knockbackMultiplier;
     }
 
-    draw(canvasName) {
-        let ctx = this.game.getCanvasManager().getContext(canvasName);
-      
+    draw(ctx) {      
         ctx.save();
           
         let centerX = this.posX + this.width / 2;

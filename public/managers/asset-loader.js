@@ -1,8 +1,15 @@
+import EventEmmiter from "../helpers/event-emmiter.js";
+
 export default class AssetLoader {
     constructor() {
         this.enemyImageDataObjects = {};
+        this.eventEmitter = new EventEmmiter;
+        this.loadAssets();
+    }
+
+    loadAssets() {
         this.loadBulletAssets();
-        this.loadEnemyAssets()
+        this.loadEnemyAssets();
         this.loadOtherAssets();
         this.loadEnemyImagesData();
     }
@@ -23,26 +30,36 @@ export default class AssetLoader {
     }
 
     loadImages(assetType, assetNames) {
-        this[assetType] = {}
+        this[assetType] = {};
+        let loadedCount = 0;
+        
         assetNames.forEach(assetName => {
             let assetImage = new Image();
             assetImage.src = `./assets/${assetType}/${assetName}`;
             let assetNameBeforeExtension = assetName.split('.')[0]
-            this[assetType][assetNameBeforeExtension] = assetImage;
+            
+            assetImage.onload = () => {
+                loadedCount++;
+                this[assetType][assetNameBeforeExtension] = assetImage;
+                
+                if (loadedCount === assetNames.length && assetType === 'other') {
+                    this.eventEmitter.emit('assetsLoaded');
+                }
+            };
         });
     }
 
     loadEnemyImagesData() {
-        let testCanvas = document.createElement('canvas');
-        let testContext = testCanvas.getContext('2d');
-        Array.from(Object.keys(this.characters)).forEach(enemyAssetName => {
-            let img = this.characters[enemyAssetName];
-            img.onload = () => {
+        this.eventEmitter.on('assetsLoaded', () => {
+            let testCanvas = document.createElement('canvas');
+            let testContext = testCanvas.getContext('2d');
+            Array.from(Object.keys(this.characters)).forEach(enemyAssetName => {
+                let img = this.characters[enemyAssetName];
                 testCanvas.width = img.width;
                 testCanvas.height = img.height;
                 testContext.drawImage(img, 0, 0, img.width, img.height);
                 this.enemyImageDataObjects[enemyAssetName] = testContext.getImageData(0, 0, img.width, img.height)
-            }
+            })
         })
     }
 }

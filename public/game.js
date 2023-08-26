@@ -31,13 +31,13 @@ const pauseModal = document.querySelector(".pause-modal");
 
 
 export default class Game {
-    constructor() {
+    constructor(assetLoader) {
         this.settings = settings
         this.events = new EventEmmiter();
         this.canvasManager = new CanvasManager(this);
         this.generateCanvases()
         this.canvasManager.loadContexts();
-        this.assetLoader = new AssetLoader();
+        this.assetLoader = assetLoader;
         this.borderManager = new BorderManager(this, settings.BORDER_SIZE);
         this.crosshairManager = new CrosshairManager(this)
         this.inputManager = new InputManager(this);
@@ -53,12 +53,11 @@ export default class Game {
         this.particleManagers = [];
         this.particles = [];
         this.explosions = [];
-        this.player.draw('playerCanvas');
         this.isPaused = false;
         this.loopId = null;
         this.ticksElapsed = 0;
+        this.player.draw(this.canvasManager.contexts.playerCanvas);
 
-        this.canvasManager.scaleEntities()
         this.play()
         this.activatePauseListener();
     }
@@ -124,15 +123,15 @@ export default class Game {
     }
 
     drawGameElements() {
-        this.player.draw('playerCanvas')
-        this.enemies.forEach(enemy => enemy.draw('playerCanvas'))
+        this.player.draw(this.canvasManager.contexts.playerCanvas)
+        this.enemies.forEach(enemy => enemy.draw(this.canvasManager.contexts.playerCanvas))
 
         this.playerBullets.forEach((bullet, i) => {
             if (!this.collisionDetector.isInsideCanvas(bullet)) {
                 this.playerBullets.splice(i, 1);
                 return;
             }
-            bullet.draw("projectileCanvas");
+            bullet.draw(this.canvasManager.contexts.projectileCanvas);
         })
 
         this.enemyBullets.forEach((bullet, i) => {
@@ -140,14 +139,14 @@ export default class Game {
                 this.enemyBullets.splice(i, 1);
                 return;
             }
-            bullet.draw("projectileCanvas");
+            bullet.draw(this.canvasManager.contexts.projectileCanvas);
         })
 
         this.explosions.forEach(explosion => explosion.draw(this.canvasManager.contexts.projectileCanvas))
         this.particles.forEach(particle => particle.draw(this.canvasManager.contexts.playerCanvas))
 
         this.particleManagers.forEach(pm => {
-            pm.particles.forEach(particle => particle.draw('playerCanvas'));
+            pm.particles.forEach(particle => particle.draw(this.canvasManager.contexts.playerCanvas));
         })
         this.statsManager.displaySurvivedTime()
     }

@@ -5,21 +5,16 @@
     font-family: 'Handjet', cursive;
     letter-spacing: 0.2vw;
     font-weight: 400;
-    /* cursor:  none; */
 }
 
 #game-container {
     position: relative;
-    background-color: gray;
+    background-color: black;
     width: 100%;
     height: 100vh;
 }
 
-canvas {
-    image-rendering: optimizeQuality;
-}
-
-canvas:hover {
+#game-container:hover {
     cursor: none;
 }
 
@@ -33,7 +28,7 @@ canvas:hover {
 }
 
 .game-canvas:first-of-type {
-   background-color: black;
+    background-color: black;
 }
 
 
@@ -44,20 +39,20 @@ canvas:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.7);
-    display: flex;
+    display: none;
     align-items: center;
     justify-content: center;
     flex-direction: column;
     user-select: none;
-  }
-  
-  .button-container {
+}
+
+.button-container {
     display: flex;
     flex-direction: column;
     align-items: center;
-  }
-  
-  button {
+}
+
+button {
     padding: 12px 24px;
     border: none;
     border-radius: 6px;
@@ -65,21 +60,22 @@ canvas:hover {
     font-weight: bold;
     cursor: pointer;
     margin-bottom: 12px;
-    width: 200px; /* Adjust the width as desired */
-  }
-  
-  .resume-button {
+    width: 200px;
+    /* Adjust the width as desired */
+}
+
+.resume-button {
     background-color: #4287f5;
     color: #fff;
-  }
-  
-  .quit-button {
+}
+
+.quit-button {
     background-color: #f54242;
     color: #fff;
-  }
-  
+}
 
-  .menu-button {
+
+.menu-button {
     background: rgba(128, 0, 128, 0.7);
     border: 2px solid rgba(128, 0, 128, 0.9);
     color: #f8e4ff;
@@ -122,7 +118,7 @@ canvas:hover {
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgba(0,0,0,0.9);
+    background-color: rgba(0, 0, 0, 0.9);
 }
 
 #start-modal {
@@ -172,13 +168,20 @@ canvas:hover {
 
 
 #start-modal {
-    background-color: black;
     position: absolute;
     width: 100%;
     height: 100%;
     z-index: 100;
     left: 0;
     top: 0;
+}
+
+#start-canvas {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-color: black;
+    z-index: -5;
 }
 
 .title {
@@ -192,16 +195,15 @@ canvas:hover {
     left: 50%;
     top: 30%;
     transform: translate(-50%, -50%);
-    /* background-color: #4287f5; */
     z-index: 1;
-    animation: shake 5s infinite;
+    animation: shake 6s infinite;
 }
 
 .title:nth-of-type(2) {
 
     color: #30FEFF;
     z-index: -1;
-    animation-delay: 0.2s; 
+    animation-delay: 0.2s;
 }
 
 .title:nth-of-type(3) {
@@ -212,7 +214,6 @@ canvas:hover {
 }
 
 #play-button {
-    background-color: #980ed4;
     position: absolute;
     left: 50%;
     top: 65%;
@@ -226,27 +227,61 @@ canvas:hover {
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.2s;
-  }
-  
-  #play-button:hover {
+    
+}
+
+#play-button:not(:disabled) {
+    background-color: #980ed4;
+}
+
+#play-button:disabled {
+    cursor: not-allowed;
+}
+
+#play-button:hover:not(:disabled) {
     background-color: #b029e9;
     transform: translate(-50%, -50%) scale(1.05);
-  }
-  
-  #play-button:active {
+}
+
+#play-button:active:not(:disabled) {
     background-color: #21618c;
     transform: scale(0.95) translate(-50%, -50%);
-  }
+}
 
 @keyframes shake {
-    0%, 100% {
-      transform: translate(-50%, -50%);
+    0%,
+    100% {
+        transform: translate(-50%, -50%);
     }
-    10%, 30%, 50%, 70%, 90% {
-      transform: translate(-50.5%, -50%);
+
+    10%,
+    30%,
+    50%,
+    70%,
+    90% {
+        transform: translate(-50.5%, -50%);
     }
-    20%, 40%, 60%, 80% {
-      transform: translate(-49.5%, -50%);
+
+    20%,
+    40%,
+    60%,
+    80% {
+        transform: translate(-49.5%, -50%);
+    }
+
+    15%,
+    35%,
+    55%,
+    75%,
+    95% {
+        transform: translate(-50.25%, -50%);
+    }
+
+    25%,
+    45%,
+    65%,
+    85% {
+        transform: translate(-49.75%, -50%);
     }
 }
 
@@ -259,4 +294,3 @@ canvas:hover {
     transform: translate(-50%, -50%);
     text-align: center;
 }
-

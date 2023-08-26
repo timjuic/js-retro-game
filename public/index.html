@@ -3,12 +3,12 @@
 
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Handjet:wght@500;900&display=swap" rel="stylesheet">
     <script src="https://kit.fontawesome.com/cc3805986b.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="style.css">
-    <script src="app.js" defer type="module"></script>
+    <script src="app.js"  type="module"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>2D Retro Shooter Game</title>
@@ -36,13 +36,15 @@
     </div> -->
 
     <div id="start-modal">
+        <canvas id="start-canvas"></canvas>
+
         <span class="title">DISINTEGRATOR</span>
         <span class="title">DISINTEGRATOR</span>
         <span class="title">DISINTEGRATOR</span>
 
         <span class="game-desc">Survive the increasingly hard waves of aliens as long as you can</span>
 
-        <button id="play-button">Play</button>
+        <button id="play-button" disabled="true">Play</button>
     </div>
     
 
