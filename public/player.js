@@ -49,6 +49,7 @@ export default class Player extends RectangleEntity {
             if (this.gunIndex < 0) this.gunIndex = this.guns.length - 1;
             if (this.gunIndex > this.guns.length - 1) this.gunIndex = 0;
             this.gun = this.guns[this.gunIndex]
+            this.stopShooting()
         })
     }
 
