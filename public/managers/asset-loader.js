@@ -59,7 +59,6 @@ export default class AssetLoader {
                 testCanvas.height = img.height;
                 testContext.drawImage(img, 0, 0, img.width, img.height);
                 this.enemyImageDataObjects[enemyAssetName] = testContext.getImageData(0, 0, img.width, img.height)
-                console.log(this.enemyImageDataObjects);
             })
         })
     }

@@ -1,9 +1,10 @@
 import BasicEnemy from "../enemies/basic-enemy.js";
 import Enemy from "../enemies/enemy.js";
+import MathUtil from "../helpers/math-util.js";
 import RandomWave from "./random-wave.js";
 
 export default class Wave {
-    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs) {
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, durationInTicks) {
         this.game = game;
         this.startSummoningTicks = startSummoningTicks;
         this.waveSize = waveSize;
@@ -14,7 +15,7 @@ export default class Wave {
         this.spawnQueue = [];
         this.delayBetweenSummonsMs = delayBetweenSummonsMs;
         this.spawningFinished = false;
-        this.tickDuration;
+        this.tickDuration = durationInTicks;
     }
 
     createEnemy(x, y, wave) {
@@ -54,16 +55,17 @@ export default class Wave {
     }
 
 
-    calculateDuration(amountOfEnemies) {
-        let spawnDurationTicks, buffnessExtra;
-        if (this instanceof RandomWave) {
-            spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
-            buffnessExtra = amountOfEnemies / this.delayBetweenSummonsMs * this.enemyType.buffness;
-        } else {
-            spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
-            buffnessExtra = amountOfEnemies * this.enemyType.buffness;
-        }
+    // calculateDuration(amountOfEnemies) {
+    //     let spawnDurationTicks, buffnessExtra;
+    //     if (this instanceof RandomWave) {
+    //         spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
+    //         buffnessExtra = amountOfEnemies / this.delayBetweenSummonsMs * this.enemyType.buffness;
+    //     } else {
+    //         spawnDurationTicks = Math.ceil(this.delayBetweenSummonsMs * amountOfEnemies / this.game.settings.TICK_DURATION_MS);
+    //         buffnessExtra = amountOfEnemies * this.enemyType.buffness;
+    //     }
 
-        this.tickDuration = spawnDurationTicks + buffnessExtra + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
-    }
+
+    //     this.tickDuration = spawnDurationTicks + buffnessExtra + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
+    // }
 }

@@ -4,7 +4,7 @@ export default class BuffEnemy extends Enemy {
     static baseWidth = 4;
     static baseHeight = 4;
     static startingHealth = 80;
-    static buffness = Enemy.calculateBuffness(BuffEnemy.startingHealth)
+    static threatRating = 2
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

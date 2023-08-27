@@ -5,7 +5,7 @@ export default class WandererEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 4;
     static startingHealth = 60;
-    static buffness = Enemy.calculateBuffness(WandererEnemy.startingHealth)
+    static threatRating = 2
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

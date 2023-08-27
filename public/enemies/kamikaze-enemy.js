@@ -5,7 +5,7 @@ export default class KamikazeEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
     static startingHealth = 50;
-    static buffness = Enemy.calculateBuffness(KamikazeEnemy.startingHealth)
+    static threatRating = 4
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

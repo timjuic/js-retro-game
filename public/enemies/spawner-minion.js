@@ -4,7 +4,7 @@ export default class SpawnerMinion extends Enemy {
     static baseWidth = 2;
     static baseHeight = 2;
     static startingHealth = 40;
-    static buffness = Enemy.calculateBuffness(SpawnerMinion.startingHealth)
+    static threatRating = 2
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

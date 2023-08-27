@@ -3,9 +3,9 @@ import Sides from "../enums/sides.js";
 import Wave from "./wave.js";
 
 export default class LineWave extends Wave {
-    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition) {
-        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition);
-        this.calculateDuration(this.getTotalEnemies());
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, durationInTicks, summoningPosition) {
+        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, durationInTicks);
+        // this.calculateDuration(this.getTotalEnemies());
         this.summoningPosition = summoningPosition;
     }
 

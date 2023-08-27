@@ -3,12 +3,12 @@ import Corners from "../enums/corners.js";
 import Wave from "./wave.js";
 
 export default class CornerWave extends Wave {
-    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition) {
-        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, summoningPosition);
+    constructor(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, durationInTicks, summoningPosition) {
+        super(game, startSummoningTicks, waveSize, enemyType, delayBetweenSummonsMs, durationInTicks);
         this.borderWidth = this.game.getBorderManager().getLeftBorder();
         this.gapFromBorder = playerCanvas.width / 150
         this.summoningPosition = summoningPosition
-        this.calculateDuration(this.getTotalEnemies());
+        // this.calculateDuration(this.getTotalEnemies());
     }
 
     startSummoningEnemies() {

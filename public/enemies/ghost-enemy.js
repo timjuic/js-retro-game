@@ -1,11 +1,13 @@
+import WaveTypes from "../enums/wave-types.js";
 import Enemy from "./enemy.js";
 
 export default class GhostEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
     static startingHealth = 40;
-    static buffness = Enemy.calculateBuffness(GhostEnemy.startingHealth)
+    static threatRating = 2
     static level = 1;
+    static possibleWaveTypes = [WaveTypes.RANDOM_WAVE]
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
         let width = 3;

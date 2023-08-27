@@ -93,8 +93,8 @@ export default class Enemy extends RectangleEntity {
         return true;
       }
 
-      static calculateBuffness(health) {
-        return health / 4;
+      static scaleThreatRating() {
+        return this.threatRating * 100;
       }
 
       draw(ctx) {

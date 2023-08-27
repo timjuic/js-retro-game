@@ -19,13 +19,18 @@ export default class WaveGenerator {
     constructor(game) {
         this.game = game;
         this.difficultyManager = new DifficultyManager(game);
+        this.previousWaveDuration;
     }
 
-    pickWaveType() {
+    pickWaveType(enemyType) {
+        if (enemyType.possibleWaveTypes && enemyType.possibleWaveTypes.length > 0) {
+            return enemyType.possibleWaveTypes[Math.floor(Math.random() * enemyType.possibleWaveTypes.length)];
+        }
+
         const waveTypeKeys = Object.keys(WaveTypes);
         const randomIndex = Math.floor(Math.random() * waveTypeKeys.length);
-        const randomWaveTypeKey = waveTypeKeys[randomIndex];
-        
+        var randomWaveTypeKey = waveTypeKeys[randomIndex];
+
         return WaveTypes[randomWaveTypeKey];
     }
 
@@ -62,13 +67,11 @@ export default class WaveGenerator {
         }
     }
 
-    getEnemySpawnDelay(waveType, enemyAmount) {
+    getEnemySpawnDelay(waveType, enemyAmount, enemyType) {
         if (waveType === CornerWave || waveType === SquareWave || waveType === LineWave) {
             return 50;
         } else if (waveType === RandomWave) {
-            if (enemyAmount > 10) {
-                return 500;
-            } else return 10;
+            return enemyType.scaleThreatRating();
         }
         return 50;
     }
@@ -85,13 +88,31 @@ export default class WaveGenerator {
         }
     }
 
-    generateNextWave() {
-        let waveType = this.pickWaveType();
-        let enemyType = this.pickEnemy();
-        let enemyAmount = this.getEnemySpawnAmount(waveType, enemyType);
-        let summonDelay = this.getEnemySpawnDelay(waveType, enemyAmount);
-        let summonPosition = this.getSummonPosition(waveType);
+    calculateWaveDuration(waveType, enemyType, enemyAmount, summonDelay) {
+        let spawnDurationTicks;
+        if (waveType === RandomWave && this.previousWaveDuration !== 0) {
+            spawnDurationTicks = Math.ceil(2 * summonDelay * enemyAmount / this.game.settings.TICK_DURATION_MS);
+            return spawnDurationTicks;
+        } else {
+            let doubleWaveRandomNumber = MathUtil.generateRandomNumber(0, 1);
+            if (doubleWaveRandomNumber > 0.8) return 0;
+            spawnDurationTicks = Math.ceil(summonDelay * enemyAmount / this.game.settings.TICK_DURATION_MS);
+        }
 
-        return [waveType, enemyAmount, enemyType, summonDelay, summonPosition]
+        console.log(spawnDurationTicks, this.game.settings.TICK_DURATION_MS, enemyType.name, enemyAmount);
+        return spawnDurationTicks + this.game.settings.INITIAL_DELAY_BETWEEN_WAVES_TICKS;
+    }
+
+    generateNextWave() {
+        let enemyType = this.pickEnemy();
+        let waveType = this.pickWaveType(enemyType);
+        let enemyAmount = this.getEnemySpawnAmount(waveType, enemyType);
+        let summonDelay = this.getEnemySpawnDelay(waveType, enemyAmount, enemyType);
+        let waveDurationTicks = this.calculateWaveDuration(waveType, enemyType, enemyAmount, summonDelay);
+        let summonPosition = this.getSummonPosition(waveType);
+        this.previousWaveDuration = waveDurationTicks;
+        console.log(waveDurationTicks);
+
+        return [waveType, enemyAmount, enemyType, summonDelay, waveDurationTicks, summonPosition]
     }
 }

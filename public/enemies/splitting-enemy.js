@@ -5,7 +5,7 @@ export default class SplittingEnemy extends Enemy {
     static baseWidth = 5;
     static baseHeight = 5;
     static startingHealth = 100;
-    static buffness = Enemy.calculateBuffness(SplittingEnemy.startingHealth)
+    static threatRating = 2
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color, canSplit) {

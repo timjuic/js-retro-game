@@ -7,7 +7,7 @@ export default class SpawnerEnemy extends Enemy {
     static baseWidth = 6;
     static baseHeight = 6;
     static startingHealth = 400;
-    static buffness = Enemy.calculateBuffness(SpawnerEnemy.startingHealth)
+    static threatRating = 4
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

@@ -10,7 +10,7 @@ export default class SolarBurstGun extends Gun {
         let grains = 5;
         let accuracy = 180;
         let piercing = false;
-        let knockbackMultiplier = 5;
+        let knockbackMultiplier = 8;
         let bulletImage = game.getAssetManager().bullets.bullet2;
         super(game, bulletWidth, bulletHeight, fireRate, automatic, damage, grains, accuracy,piercing, knockbackMultiplier, bulletImage) 
     }

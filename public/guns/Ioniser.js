@@ -4,7 +4,7 @@ export default class IoniserGun extends Gun {
     constructor(game) {
         let bulletWidth = 1;
         let bulletHeight = 2;
-        let fireRate = 80;
+        let fireRate = 60;
         let automatic = true;
         let damage = 20;
         let grains = 1;

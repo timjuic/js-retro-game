@@ -5,7 +5,7 @@ export default class PufPufEnemy extends ShooterEnemy {
     static baseWidth = 5;
     static baseHeight = 5;
     static startingHealth = 100;
-    static buffness = Enemy.calculateBuffness(PufPufEnemy.startingHealth)
+    static threatRating = 5
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {

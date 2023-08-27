@@ -6,7 +6,7 @@ export default class TeleporterEnemy extends Enemy {
     static baseWidth = 3;
     static baseHeight = 3;
     static startingHealth = 50;
-    static buffness = Enemy.calculateBuffness(TeleporterEnemy.startingHealth)
+    static threatRating = 5
     static level = 1;
 
     constructor(game, wave, posX, posY, angle, velX, velY, velRotation, color) {
