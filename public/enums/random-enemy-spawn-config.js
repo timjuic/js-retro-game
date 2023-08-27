@@ -12,6 +12,7 @@ import TeleporterEnemy from "../enemies/teleporter-enemy.js";
 import SummonAmounts from './summon-amounts.js';
 import ReflectorEnemy from '../enemies/reflector-enemy.js';
 import SplittingEnemy from '../enemies/splitting-enemy.js';
+import WandererEnemy from '../enemies/wanderer-enemy.js';
 
 const RandomEnemySpawnConfig = {
     [BasicEnemy.name]: {
@@ -76,6 +77,11 @@ const RandomEnemySpawnConfig = {
     },
     [SplittingEnemy.name]: {
         [SummonAmounts.SMALL]: 12,
+        [SummonAmounts.MEDIUM]: 15,
+        [SummonAmounts.LARGE]: 20,
+    },
+    [WandererEnemy.name]: {
+        [SummonAmounts.SMALL]: 6,
         [SummonAmounts.MEDIUM]: 15,
         [SummonAmounts.LARGE]: 20,
     },

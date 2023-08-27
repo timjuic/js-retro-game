@@ -20,7 +20,7 @@ export default class AssetLoader {
     }
 
     loadEnemyAssets() {
-        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'growing.png', 'reflector.png', 'splitting.png', 'player.png'];
+        let enemyAssetNames = ['basic.png', 'buff.png', 'tank.png', 'pufpuf.png', 'kamikaze.png', 'shielded.png', 'spawner.png', 'speedy.png', 'teleporter.png', 'growing.png', 'reflector.png', 'splitting.png', 'wanderer.png', 'player.png'];
         this.loadImages('characters', enemyAssetNames);
     }
 
@@ -59,6 +59,7 @@ export default class AssetLoader {
                 testCanvas.height = img.height;
                 testContext.drawImage(img, 0, 0, img.width, img.height);
                 this.enemyImageDataObjects[enemyAssetName] = testContext.getImageData(0, 0, img.width, img.height)
+                console.log(this.enemyImageDataObjects);
             })
         })
     }

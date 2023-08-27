@@ -6,8 +6,8 @@ export default class ParticleManager {
         this.game = game;
         this.entity = entity;
         this.particleBaseSize = MathUtil.generateRandomNumber(0.3, 0.7);
-        
-        this.pixelGroupingModifier = Math.round(35 * this.particleBaseSize);
+
+        this.pixelGroupingModifier = Math.round(this.game.settings.PARTICLE_GROUPING_MODIFIER * this.particleBaseSize);
         this.explosionStrength = explosionStrength
         this.particles = [];
         this.particleClearTimer = setInterval(() => this.clearParticles(), 500);
@@ -32,33 +32,31 @@ export default class ParticleManager {
     createParticleExplosion() {
         let image = this.getEntityImage();
         let data = image.data;
-        
+
         let centerX = this.entity.posX + this.entity.width / 2;
         let centerY = this.entity.posY + this.entity.height / 2;
         let imageHalfX = image.width * this.particleBaseSize / this.pixelGroupingModifier / 2;
         let imageHalfY = image.height * this.particleBaseSize / this.pixelGroupingModifier / 2;
         for (let y = 0; y < image.height; y += this.pixelGroupingModifier) {
-          for (let x = 0; x < image.width; x += this.pixelGroupingModifier) {
-              const i = (x + y * image.width) * 4;
-              const color = `rgba(${data[i]}, ${data[i+1]}, ${data[i+2]}, ${data[i+3] / 255})`;
+            for (let x = 0; x < image.width; x += this.pixelGroupingModifier) {
+                const i = (x + y * image.width) * 4;
+                if (data[i + 3] === 0) continue;
+                const color = `rgba(${data[i]}, ${data[i + 1]}, ${data[i + 2]}, ${data[i + 3] / 255})`;
 
-              const particlePosX = centerX + x * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfX;
-              const particlePosY = centerY + y * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfY;
+                const particlePosX = centerX + x * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfX;
+                const particlePosY = centerY + y * (this.particleBaseSize / this.pixelGroupingModifier) - imageHalfY;
+                const sizeRandomizer = MathUtil.generateRandomNumber(-this.particleBaseSize, this.particleBaseSize)
+                const finalParticleSize = this.particleBaseSize + sizeRandomizer
+                const xVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
+                const yVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
+                const extraAmplifier = MathUtil.generateRandomInteger(1, 2);
+                const velX = ((x / image.width) * this.explosionStrength) - (this.explosionStrength / 2) + xVelAmplifyAmount * extraAmplifier;
+                const velY = ((y / image.height) * this.explosionStrength) - (this.explosionStrength / 2) + yVelAmplifyAmount * extraAmplifier;
+                const velRotation = MathUtil.generateRandomInteger(0, 90);
 
-              const sizeRandomizer = MathUtil.generateRandomNumber(-this.particleBaseSize, this.particleBaseSize)
-              const finalParticleSize = this.particleBaseSize + sizeRandomizer
-
-              const xVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
-              const yVelAmplifyAmount = MathUtil.generateRandomNumber(-1, 1);
-              const extraAmplifier = MathUtil.generateRandomInteger(1, 2);
-              const velX = ((x / image.width) * this.explosionStrength) - (this.explosionStrength / 2) + xVelAmplifyAmount * extraAmplifier;
-              const velY = ((y / image.height) * this.explosionStrength) - (this.explosionStrength / 2) + yVelAmplifyAmount * extraAmplifier;
-              const velRotation = MathUtil.generateRandomInteger(0, 90);
-      
-              const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, velRotation, color, 1);
-              this.particles.push(particle);
-            
-          }
-      }
+                const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, velRotation, color, 1);
+                this.particles.push(particle);
+            }
+        }
     }
 }

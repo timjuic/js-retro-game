@@ -23,7 +23,7 @@ export default class Enemy extends RectangleEntity {
       return this.health > 0;
     }
 
-    move() {
+    move(targetLocation) {
         this.ticksPassed++;
         if (!this.wave.spawningFinished) return;
         const randomOffset = Math.floor(Math.random() * this.moveInterval);
@@ -32,11 +32,16 @@ export default class Enemy extends RectangleEntity {
             return;
         }
 
-        const playerX = this.game.player.posX;
-        const playerY = this.game.player.posY;
-
-        const dx = playerX - this.posX;
-        const dy = playerY - this.posY;
+        if (targetLocation !== undefined) {
+            var targetX = targetLocation.posX;
+            var targetY = targetLocation.posY;
+        } else {
+            var targetX = this.game.player.posX;
+            var targetY = this.game.player.posY;
+        }
+        
+        const dx = targetX - this.posX;
+        const dy = targetY - this.posY;
 
         const distance = Math.sqrt(dx * dx + dy * dy);
 

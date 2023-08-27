@@ -23,6 +23,7 @@ const EnemyChances = {
         ReflectorEnemy: 10,
         GrowingEnemy: 10,
         SplittingEnemy: 10,
+        WandererEnemy: 5000,
     },
     [Difficulties.EASY]: {
         BasicEnemy: 20,
@@ -37,6 +38,7 @@ const EnemyChances = {
         ReflectorEnemy: 1,
         GrowingEnemy: 10,
         SplittingEnemy: 20,
+        WandererEnemy: 10,
     },
     [Difficulties.MEDIUM]: {
         BasicEnemy: 10,
@@ -51,6 +53,7 @@ const EnemyChances = {
         ReflectorEnemy: 5,
         GrowingEnemy: 15,
         SplittingEnemy: 25,
+        WandererEnemy: 5,
     },
     [Difficulties.HARD]: {
         BasicEnemy: 5,
@@ -65,6 +68,7 @@ const EnemyChances = {
         ReflectorEnemy: 10,
         GrowingEnemy: 15,
         SplittingEnemy: 20,
+        WandererEnemy: 5,
     },
     [Difficulties.VERY_HARD]: {
         BasicEnemy: 0,
@@ -79,6 +83,7 @@ const EnemyChances = {
         ReflectorEnemy: 10,
         GrowingEnemy: 15,
         SplittingEnemy: 10,
+        WandererEnemy: 5,
     },
 };
 

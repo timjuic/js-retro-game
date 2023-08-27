@@ -10,6 +10,7 @@ import SpeedyEnemy from "./enemies/speedy-enemy.js";
 import SplittingEnemy from "./enemies/splitting-enemy.js";
 import TankEnemy from "./enemies/tank-enemy.js";
 import TeleporterEnemy from "./enemies/teleporter-enemy.js";
+import WandererEnemy from "./enemies/wanderer-enemy.js";
 
 class EnemyRegistry {
     constructor() {
@@ -30,6 +31,7 @@ class EnemyRegistry {
         this.registerEnemyClass('TeleporterEnemy', TeleporterEnemy);
         this.registerEnemyClass('ReflectorEnemy', ReflectorEnemy);
         this.registerEnemyClass('SplittingEnemy', SplittingEnemy);
+        this.registerEnemyClass('WandererEnemy', WandererEnemy)
     }
 
     registerEnemyClass(className, enemyClass) {
