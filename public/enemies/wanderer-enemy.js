@@ -44,6 +44,4 @@ export default class WandererEnemy extends Enemy {
         if (Math.abs(this.posX - this.movingTargetX) < reachedDestinationX && Math.abs(this.posY - this.movingTargetY) < reachedDestinationY) return;;
         super.move({ posX: this.movingTargetX, posY: this.movingTargetY });
     }
-
-
 }

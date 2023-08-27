@@ -6,7 +6,7 @@ import MathUtil from "./helpers/math-util.js";
 import InputType from "./enums/input-type.js";
 import ParticleManager from "./particles/particle-manager.js";
 import HealthBar from "./healthbar.js";
-import IoniserGun from "./guns/Ioniser.js";
+import IoniserGun from "./guns/ioniser.js";
 import SolarBurstGun from "./guns/solar-burst.js";
 import QuantumBeamerGun from "./guns/quantum-beamer.js";
 

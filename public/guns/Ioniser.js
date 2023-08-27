@@ -8,7 +8,7 @@ export default class IoniserGun extends Gun {
         let automatic = true;
         let damage = 20;
         let grains = 1;
-        let accuracy = 50;
+        let accuracy = 70;
         let piercing = false;
         let knockbackMultiplier = 0.5;
         let bulletImage = game.getAssetManager().bullets.bullet1;

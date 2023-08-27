@@ -1,5 +1,6 @@
 import BasicEnemy from "./enemies/basic-enemy.js";
 import BuffEnemy from "./enemies/buff-enemy.js";
+import GhostEnemy from "./enemies/ghost-enemy.js";
 import GrowingEnemy from "./enemies/growing-enemy.js";
 import KamikazeEnemy from "./enemies/kamikaze-enemy.js";
 import PufPufEnemy from "./enemies/pufpuf-enemy.js";
@@ -32,6 +33,7 @@ class EnemyRegistry {
         this.registerEnemyClass('ReflectorEnemy', ReflectorEnemy);
         this.registerEnemyClass('SplittingEnemy', SplittingEnemy);
         this.registerEnemyClass('WandererEnemy', WandererEnemy)
+        this.registerEnemyClass('GhostEnemy', GhostEnemy)
     }
 
     registerEnemyClass(className, enemyClass) {

@@ -13,6 +13,7 @@ import SummonAmounts from './summon-amounts.js';
 import ReflectorEnemy from '../enemies/reflector-enemy.js';
 import SplittingEnemy from '../enemies/splitting-enemy.js';
 import WandererEnemy from '../enemies/wanderer-enemy.js';
+import GhostEnemy from '../enemies/ghost-enemy.js';
 
 const RandomEnemySpawnConfig = {
     [BasicEnemy.name]: {
@@ -84,6 +85,11 @@ const RandomEnemySpawnConfig = {
         [SummonAmounts.SMALL]: 6,
         [SummonAmounts.MEDIUM]: 15,
         [SummonAmounts.LARGE]: 20,
+    },
+    [GhostEnemy.name]: {
+        [SummonAmounts.SMALL]: 6,
+        [SummonAmounts.MEDIUM]: 10,
+        [SummonAmounts.LARGE]: 15,
     },
 };
 

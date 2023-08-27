@@ -28,8 +28,8 @@ export default class ReflectorEnemy extends Enemy {
             if (entity.reflected) return;
             entity.reflected = true;
             let reflectedBullet = entity;
-            reflectedBullet.velX = -entity.velX / 2;
-            reflectedBullet.velY = -entity.velY / 2;
+            reflectedBullet.velX = -entity.velX / 3;
+            reflectedBullet.velY = -entity.velY / 3;
 
             reflectedBullet.angle += 180;
             if (reflectedBullet.angle >= 360) reflectedBullet.angle -= 360;

@@ -38,8 +38,8 @@ class RectangleEntity extends Entity {
     }
 
     draw(ctx) {
-        ctx.globalAlpha = this.opacity;
         ctx.save();
+        ctx.globalAlpha = this.opacity;
 
         let centerX = this.posX + this.width / 2;
         let centerY = this.posY + this.height / 2;
