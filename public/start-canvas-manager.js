@@ -67,7 +67,7 @@ class StartScreenEntity {
         this.width = width;
         this.height = height;
         this.angle = angle;
-        this.movingModifier = MathUtil.generateRandomNumber(0.001, 0.2);
+        this.movingModifier = MathUtil.generateRandomNumber(0.001, 0.03);
         this.movingDirection = MathUtil.getRandomSign();
         this.image = image;
     }

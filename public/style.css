@@ -61,6 +61,7 @@ button {
     cursor: pointer;
     margin-bottom: 12px;
     width: 200px;
+    transition: 0.2s;
     /* Adjust the width as desired */
 }
 
@@ -121,11 +122,11 @@ button {
     background-color: rgba(0, 0, 0, 0.9);
 }
 
-#start-modal {
+#landing-page {
     display: block;
 }
 
-.modal-content {
+.modal-content1 {
     position: absolute;
     top: 50%;
     left: 50%;
@@ -167,11 +168,11 @@ button {
 
 
 
-#start-modal {
+#landing-page {
     position: absolute;
     width: 100%;
     height: 100%;
-    z-index: 100;
+    z-index: 1;
     left: 0;
     top: 0;
 }
@@ -184,74 +185,71 @@ button {
     z-index: -5;
 }
 
-.title {
-    color: white;
-    font-size: 100px;
-    font-weight: bold;
-    font-family: 'Handjet', cursive;
-    letter-spacing: 1vw;
-    position: absolute;
+.container {
+    position: relative;
+    top: 50%;
     text-align: center;
+    transform: translateY(-50%);
+}
+
+.title {
+    font-size: 8vw;
+    color: white;
+    font-weight: bold;
+    position: relative;
+    letter-spacing: 1vw;
+}
+
+span.title {
+    position: absolute;
+    top: 0;
     left: 50%;
-    top: 30%;
-    transform: translate(-50%, -50%);
-    z-index: 1;
-    /* animation: shake 6s infinite; */
+    transform: translateX(-50%);
 }
 
-.title:nth-of-type(2) {
-
-    color: #30FEFF;
+span.title:nth-last-of-type(1) {
+    color: #FF0000;
     z-index: -1;
-    animation-delay: 0.2s;
 }
 
-.title:nth-of-type(3) {
-
-    color: #FF1816;
+span.title:nth-last-of-type(2) {
+    color: #01FFFF;
     z-index: -2;
-    animation-delay: 0.4s;
+}
+
+.game-desc {
+    position: relative;
+    padding: 3vh;
+    color: white;
+    font-size: 1.5em;
+}
+
+.button-container {
+    padding: 10px;
 }
 
 #play-button {
-    position: absolute;
-    left: 50%;
-    top: 65%;
-    transform: translate(-50%, -50%);
     color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 28px;
-    font-weight: 400;
-    letter-spacing: 3px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s, transform 0.2s;
-    
+    transition: 0.2s;
 }
 
 #play-button:not(:disabled) {
-    background-color: #980ed4;
+    background-color: rgb(192, 27, 230);
 }
 
-#play-button:disabled {
-    cursor: not-allowed;
+#play-button:not(:disabled):hover {
+    transform: scale(1.08);
+    background-color: rgb(208, 0, 255);
 }
 
-#play-button:hover:not(:disabled) {
-    background-color: #b029e9;
-    transform: translate(-50%, -50%) scale(1.05);
-}
-
-#play-button:active:not(:disabled) {
-    background-color: #21618c;
-    transform: scale(0.95) translate(-50%, -50%);
+#how-to-play-btn:hover {
+    transform: scale(1.08);
 }
 
 @keyframes shake {
     0%,
     100% {
-        transform: translate(-50%, -50%);
+        transform: translateX(-50%);
     }
 
     10%,
@@ -259,14 +257,14 @@ button {
     50%,
     70%,
     90% {
-        transform: translate(-50.5%, -50%);
+        transform: translateX(-50.5%);
     }
 
     20%,
     40%,
     60%,
     80% {
-        transform: translate(-49.5%, -50%);
+        transform: translateX(-49.5%);
     }
 
     15%,
@@ -274,23 +272,81 @@ button {
     55%,
     75%,
     95% {
-        transform: translate(-50.25%, -50%);
+        transform: translateX(-50.25%);
     }
 
     25%,
     45%,
     65%,
     85% {
-        transform: translate(-49.75%, -50%);
+        transform: translateX(-49.75%);
     }
 }
 
-.game-desc {
-    color: white;
-    font-size: 25px;
+
+
+#how-to-play-modal {
+    z-index: 10;
     position: absolute;
-    top: 45%;
     left: 50%;
+    top: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
+    display: none;
+    color: white;
 }
+
+#how-to-play-modal .modal-content {
+    position: relative;
+    background-color: #333;
+    padding: 30px;
+    border: 3px solid #d100d1;
+    text-align: center;
+    width: 70%;
+    max-width: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+#how-to-play-modal h2 {
+    padding: 20px;
+}
+
+#how-to-play-modal table {
+    padding: 20px;
+    background-color: #272727;
+}
+
+#how-to-play-modal table th {
+    font-weight: bold;
+    letter-spacing: 0.5vw;
+    font-size: 20px;
+}
+
+#how-to-play-modal table td, #how-to-play-modal table th {
+    padding: 10px;
+}
+
+#how-to-play-modal table td {
+    font-size: light;
+}
+
+
+#how-to-play-modal .close {
+    font-size: 50px;
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 50px;
+    width: 50px;
+    line-height: 50px;
+    cursor: pointer;
+}
+
+#how-to-play-modal .close:hover {
+    transform: scale(1.2);
+}
+
+#how-to-play-modal .close:active {
+    color: rgb(214, 0, 0);
+}
+

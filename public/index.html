@@ -27,34 +27,77 @@
         <i class="fa-solid fa-volume-high"></i>
     </div>
 
-    <!-- <div id="start-modal" class="modal">
-        <div class="modal-content">
-            <h1 class="title">DISINTEGRATOR</h1>
-            <p>Survive the increasingly hard waves of aliens as long as you can.</p>
-            <button id="play-button">Play</button>
-        </div>
-    </div> -->
 
-    <div id="start-modal">
+    <div id="landing-page">
         <canvas id="start-canvas"></canvas>
-
-        <span class="title">DISINTEGRATOR</span>
-        <span class="title">DISINTEGRATOR</span>
-        <span class="title">DISINTEGRATOR</span>
-
-        <span class="game-desc">Survive the increasingly hard waves of aliens as long as you can</span>
-
-        <button id="play-button" disabled="true">Play</button>
+        <div class="container">
+            <h1 class="title">DISINTEGRATOR
+                <span class="title">DISINTEGRATOR</span>
+                <span class="title">DISINTEGRATOR</span>
+            </h1>
+            
+            <div class="game-desc">Survive the increasingly hard waves of aliens as long as you can</div>
+    
+            <div class="button-container">
+                <button id="play-button" disabled="true">Play</button>
+                <button id="how-to-play-btn">How to play</button>
+            </div>
+        </div>
     </div>
+    
+    <div id="how-to-play-modal">
+        <div class="modal-content">
+            <span class="close" id="close-how-to-play-btn">&times;</span>
+            <h2>Controls</h2>
+            <table>
+                <tr>
+                    <th>Action</th>
+                    <th>Key</th>
+                </tr>
+                <tr>
+                    <td>Move Up</td>
+                    <td>W</td>
+                </tr>
+                <tr>
+                    <td>Move Down</td>
+                    <td>S</td>
+                </tr>
+                <tr>
+                    <td>Move Left</td>
+                    <td>A</td>
+                </tr>
+                <tr>
+                    <td>Move Right</td>
+                    <td>D</td>
+                </tr>
+                <tr>
+                    <td>Shoot</td>
+                    <td>Left Mouse Btn</td>
+                </tr>
+                <tr>
+                    <td>Switch Weapon</td>
+                    <td>Scroll</td>
+                </tr>
+                <tr>
+                    <td>Pause</td>
+                    <td>ESC</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
     
 
     <div id="death-modal" class="modal">
-        <div class="modal-content">
+        <div class="modal-content1">
             <h1>Galactic Termination</h1>
             <p id="survival-time">You held on for: <span></span></p>
             <button id="try-again">Try Again</button>
         </div>
     </div>
+
+
+
 </body>
 
 </html>
