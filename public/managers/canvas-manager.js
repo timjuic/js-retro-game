@@ -151,8 +151,12 @@ export default class CanvasManager {
 
     clearCanvases() {
         for (let [name, ctx] of Object.entries(this.contexts)) {
-          if (name === "crosshairCanvas") continue;
+          if (name === "crosshairCanvas" || name === 'backgroundCanvas') continue;
             ctx.clearRect(0, 0, this.canvases[name].width, this.canvases[name].height)
         }
+    }
+
+    drawBackground() {
+        this.contexts['backgroundCanvas'].drawImage(this.game.getAssetManager().other.background, 0, 0, this.game.canvas.width, this.game.canvas.height);
     }
 }

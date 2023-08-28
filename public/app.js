@@ -18,7 +18,7 @@ let start = Date.now();
 window.onload = () => {
     let end = Date.now();
     console.log('page loaded in', end - start);
-    playButton.innerHTML = 'Loading...'
+    playButton.innerHTML = 'Loading Assets...'
     assetLoader = new AssetLoader();
     assetLoader.eventEmitter.on('assetsLoaded', () => {
         startCanvasManager = new StartCanvasManager(assetLoader); 

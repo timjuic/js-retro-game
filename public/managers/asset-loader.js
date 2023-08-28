@@ -25,7 +25,7 @@ export default class AssetLoader {
     }
 
     loadOtherAssets() {
-        let otherAssets = ['crosshair3.png'];
+        let otherAssets = ['crosshair3.png', 'background.jpeg'];
         this.loadImages('other', otherAssets);
     }
 

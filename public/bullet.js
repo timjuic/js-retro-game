@@ -16,9 +16,9 @@ export default class Bullet extends RectangleEntity {
         let centerX = this.posX + this.width / 2;
         let centerY = this.posY + this.width / 2;
           
-        ctx.translate(centerX, centerY);
-        ctx.rotate(MathUtil.degreesToRadians(this.angle));
-        ctx.translate(-centerX, -centerY);
+        // ctx.translate(centerX, centerY);
+        // ctx.rotate(MathUtil.degreesToRadians(this.angle));
+        // ctx.translate(-centerX, -centerY);
 
         if (this.image !== undefined) {
             let scaledWidth = this.width * this.game.settings.BULLET_SIZE_MODIFIER;
@@ -44,6 +44,14 @@ export default class Bullet extends RectangleEntity {
               this.width
             );
         }
+
+        ctx.fillStyle = this.color;
+            ctx.fillRect(
+              this.posX,
+              this.posY,
+              this.width,
+              this.width
+            );
          
         ctx.restore();
       }

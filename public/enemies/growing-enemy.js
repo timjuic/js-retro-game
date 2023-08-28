@@ -20,7 +20,7 @@ export default class GrowingEnemy extends Enemy {
         super(game, wave, GrowingEnemy.level, posX, posY, width, height, moveInterval, speed, health, damage, angle, velX, velY, velRotation, color, image);
         this.canvasRef = this.game.getCanvasManager().getCanvas('playerCanvas')
         this.maxSize = this.width * 2;
-        this.relativeSizeIncrease = 0.2;
+        this.relativeSizeIncrease = 0.5;
         this.speedDecrease = 0.98;
     }
 

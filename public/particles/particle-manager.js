@@ -52,7 +52,7 @@ export default class ParticleManager {
                 const extraAmplifier = MathUtil.generateRandomInteger(1, 2);
                 const velX = ((x / image.width) * this.explosionStrength) - (this.explosionStrength / 2) + xVelAmplifyAmount * extraAmplifier;
                 const velY = ((y / image.height) * this.explosionStrength) - (this.explosionStrength / 2) + yVelAmplifyAmount * extraAmplifier;
-                const velRotation = MathUtil.generateRandomInteger(0, 90);
+                const velRotation = MathUtil.generateRandomInteger(0, 0);
 
                 const particle = new Particle(this.game, particlePosX, particlePosY, finalParticleSize, finalParticleSize, 0, velX, velY, velRotation, color, 1);
                 this.particles.push(particle);

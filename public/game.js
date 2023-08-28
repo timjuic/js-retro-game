@@ -57,8 +57,9 @@ export default class Game {
         this.isPaused = false;
         this.loopId = null;
         this.ticksElapsed = 0;
-        this.player.draw(this.canvasManager.contexts.playerCanvas);
 
+        this.canvasManager.drawBackground();
+        this.player.draw(this.canvasManager.contexts.playerCanvas);
         this.play()
         this.activatePauseListener();
     }
@@ -93,6 +94,7 @@ export default class Game {
 
 
     generateCanvases() {
+        this.canvasManager.generateCanvas('backgroundCanvas')
         this.canvasManager.generateCanvas('projectileCanvas')
         this.canvasManager.generateCanvas('playerCanvas')
         this.canvasManager.generateCanvas('crosshairCanvas')
