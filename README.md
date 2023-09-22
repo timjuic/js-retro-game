@@ -4,4 +4,4 @@ This is a simple two-dimensional survival shooter game where the player faces en
 
 > The game is playable via the following link: https://alien-invasion-2a9d4.web.app/
 
-
+<img width="1347" alt="Screenshot 2023-09-22 at 14 27 19" src="https://github.com/timjuic/js-retro-game/assets/70685646/56fe7313-b648-4c65-a253-9476fede662f">
